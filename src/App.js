@@ -19,6 +19,7 @@ import NavbarM from "./components/NavbarM";
 import Footer from "./components/Footer";
 import RegisterDonor from "./pages/RegisterDonor";
 import RegisterFundraiser from "./pages/RegisterFundraiser";
+import Login from "./pages/Login";
 
 
 
@@ -30,6 +31,9 @@ function App() {
           <NavbarM />
           <div>
             <Switch>
+              <Route path="/login">
+                <Login/>
+              </Route>
               <Route path="/registerdonor">
                 <RegisterDonor />
               </Route>

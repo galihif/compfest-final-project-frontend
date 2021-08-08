@@ -36,8 +36,8 @@ const NavbarM = () => {
                             <Nav.Link href="/">Home</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Button variant="outline-primary mx-2">Login</Button>
-                            <Button variant="primary">Register</Button>
+                            <Button variant="outline-primary mx-2" href="/login">Login</Button>
+                            <Button variant="primary" href="registerdonor" >Register</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
