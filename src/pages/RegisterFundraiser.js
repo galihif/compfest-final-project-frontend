@@ -22,7 +22,7 @@ import authImage from '../assets/authImage.svg'
 const RegisterFundraiser = () => {
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <Container className="login-container m-5 p-5" style={{ width: "48em", backgroundColor: "white", borderRadius: "1em" }}>
+            <Container className="login-container m-5 p-5" style={{ width: "60em", backgroundColor: "white", borderRadius: "1em" }}>
 
                 <Row className="">
                     <Col lg={5}>
@@ -43,6 +43,10 @@ const RegisterFundraiser = () => {
                             <Form.Group className="mb-3" controlId="password">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Password" />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="reason">
+                                <Form.Label>Why do you want to be a fundraiser?</Form.Label>
+                                <Form.Control type="text" as="textarea" placeholder="Add Reason" />
                             </Form.Group>
                             <div className="d-grid">
                                 <Button variant="primary" type="submit">
