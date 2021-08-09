@@ -41,3 +41,7 @@ button.btn-primary,a.btn-primary {
 button.btn-primary:hover, a.btn-primary:hover {
   background-color: #05628a;
 }
+
+div.progress-bar{
+  background-color: #0673A1 !important;
+}
