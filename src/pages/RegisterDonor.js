@@ -22,7 +22,7 @@ import authImage from '../assets/authImage.svg'
 const RegisterDonor = () => {
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <Container className="login-container m-5 p-5" style={{ width: "48em", backgroundColor: "white", borderRadius: "1em" }}>
+            <Container className="login-container m-5 p-5" style={{ width: "60em", backgroundColor: "white", borderRadius: "1em" }}>
 
                 <Row className="">
                     <Col lg={5}>
