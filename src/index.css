@@ -45,3 +45,7 @@ button.btn-primary:hover, a.btn-primary:hover {
 div.progress-bar{
   background-color: #0673A1 !important;
 }
+
+nav.path a{
+  color: #0673A1 !important;
+}

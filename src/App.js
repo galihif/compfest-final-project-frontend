@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 import RegisterDonor from "./pages/RegisterDonor";
 import RegisterFundraiser from "./pages/RegisterFundraiser";
 import Login from "./pages/Login";
+import CampaignDetails from "./pages/CampaignDetails";
 
 
 
@@ -33,6 +34,9 @@ function App() {
             <Switch>
               <Route path="/login">
                 <Login/>
+              </Route>
+              <Route path="/campaign">
+                <CampaignDetails/>
               </Route>
               <Route path="/registerdonor">
                 <RegisterDonor />
