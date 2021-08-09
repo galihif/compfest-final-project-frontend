@@ -17,16 +17,15 @@ import {
 
 
 //Assets
-import headerImage from '../assets/headerImage.svg'
+import authImage from '../assets/authImage.svg'
 
 const Login = () => {
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <Container className="login-container m-5 p-5" style={{ width:"42em",backgroundColor:"white",borderRadius: "1em" }}>
-                
+            <Container className="login-container m-5 p-5" style={{ width:"48em",backgroundColor:"white",borderRadius: "1em" }}>
                 <Row className="">
-                    <Col lg={6}>
-                        <h5 className="title text-start">Login</h5>
+                    <Col lg={5}>
+                        <h5 className="title text-start mb-4">Login</h5>
                         <Form>
                             <Form.Group className="mb-3" controlId="email">
                                 <Form.Label>Email address</Form.Label>
@@ -47,8 +46,8 @@ const Login = () => {
                             </div>
                         </Form>
                     </Col>
-                    <Col lg={6} className="d-flex justify-content-center">
-                        <Image src={headerImage} style={{width: "16em"}} />
+                    <Col lg={7} className="d-flex justify-content-center">
+                        <Image src={authImage}  />
                     </Col>
                 </Row>
             </Container>
