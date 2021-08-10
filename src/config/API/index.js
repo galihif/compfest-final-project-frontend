@@ -1,21 +1,21 @@
 import Post from './Post'
-import {GetOnly,GetWithData} from './Get'
+import { GetHeadersOnly, GetWithData } from './Get'
 import Put from './Put'
 import Delete from './Delete'
 
 // POST
-const register = (body) => Post("register", body)
-const login = (data) => Post("login", data) 
+const register = (body, headers) => Post("register", body, headers)
+const login = (data) => Post("login", data)
 const refresh = (data) => Post("refresh", data)
-const createCampaign = (data,headers) => Post('campaigns', data, headers)
+const createCampaign = (data, headers) => Post('campaigns', data, headers)
 
 // GET
-const getCurrentUser = (data) => GetOnly('me')
-const getAllCampaign = () => GetOnly('campaigns')
-const getCampaignById = (data) => GetWithData('campaigns',data)
-const getCampaignProposal = () => GetOnly('admin/proposals')
-const getExampleById = (data) => GetWithData('todos',data)
-const getExampleAll = () => GetOnly('todos')
+const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
+const getAllCampaign = () => GetHeadersOnly('campaigns')
+const getCampaignById = (data) => GetWithData('campaigns', data)
+const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
+const getExampleById = (data) => GetWithData('todos', data)
+const getExampleAll = () => GetHeadersOnly('todos')
 
 // PUT
 
