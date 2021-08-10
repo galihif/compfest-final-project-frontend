@@ -21,6 +21,7 @@ import RegisterDonor from "./pages/RegisterDonor";
 import RegisterFundraiser from "./pages/RegisterFundraiser";
 import Login from "./pages/Login";
 import CampaignDetails from "./pages/CampaignDetails";
+import DashboardDonor from "./pages/DashboardDonor";
 
 
 
@@ -32,11 +33,14 @@ function App() {
           <NavbarM />
           <div>
             <Switch>
-              <Route path="/login">
-                <Login/>
+              <Route path="/dashboard/donor">
+                <DashboardDonor/>
               </Route>
               <Route path="/campaign">
                 <CampaignDetails/>
+              </Route>
+              <Route path="/login">
+                <Login />
               </Route>
               <Route path="/registerdonor">
                 <RegisterDonor />

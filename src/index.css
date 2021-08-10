@@ -49,3 +49,8 @@ div.progress-bar{
 nav.path a{
   color: #0673A1 !important;
 }
+
+.nav-tabs button.nav-link.active {
+  background-color: #F5F5F5 !important;
+  border-bottom-color: #F5F5F5 !important;
+}

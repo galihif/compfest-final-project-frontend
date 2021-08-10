@@ -1,5 +1,6 @@
 //Library
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 //Styles
 import './CampaignCard.scss'
@@ -13,8 +14,9 @@ import {
 } from 'react-bootstrap';
 
 const CampaignCard = () => {
+    const history = useHistory()
     return(
-        <Card className="campaign-card" style={{ width: "20em" }}>
+        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push('/campaign')} >
             <Card.Img variant="top" src="https://www.islamic-relief.org/wp-content/uploads/2021/04/original--1024x683.jpg" style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>Help Poor People in India</Card.Title>
