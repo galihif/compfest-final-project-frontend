@@ -13,14 +13,80 @@ import {
     ProgressBar,
     Form,
     Image,
-    Breadcrumb
+    Breadcrumb,
+    Modal
 } from 'react-bootstrap';
 
 
 //Assets
-import authImage from '../assets/authImage.svg'
 
 const CampaignDetails = () => {
+    //State
+    const history = useHistory()
+    const [show, setShow] = useState(false)
+    const [walletAmount, setWalletAmount] = useState(10000)
+    const [donateAmount, setDonateAmount] = useState(0)
+    const [isLogged, setLogged] = useState(true)
+
+    //Method
+    const toggleDialog = () => setShow(!show)
+
+    const handleChange = (e) => {
+        switch(e.target.id){
+            case "donateAmount":
+                setDonateAmount(e.target.value)
+            default:
+                break
+        }
+    }
+
+    const handleClickPay = () => {
+        if (donateAmount <= walletAmount){
+            alert("Donate Successful")
+        } else{
+            alert("E-waller ga cukup bos")
+        }
+    }
+
+    //Component
+    const dialogLogged =
+        <Modal show={show}>
+            <Modal.Header >
+                <Modal.Title>Donate To This Campaign</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form.Group className="mb-3" controlId="donateAmount" onChange={handleChange}>
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control type="number" placeholder="Enter Amount (Rp)" />
+                </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={toggleDialog}>
+                    Cancel
+                </Button>
+                <Button variant="primary" onClick={handleClickPay}>
+                    Pay with E-Wallet
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
+    const dialogNotLogged = 
+        <Modal show={show}>
+            <Modal.Header >
+                <Modal.Title>Donate To This Campaign</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>You have to login if you want to donate</p>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={toggleDialog}>
+                    Cancel
+                </Button>
+                <Button variant="primary" onClick={()=> history.push('/login')}>
+                    Login
+                </Button>
+            </Modal.Footer>
+        </Modal>
     return (
         <div className="d-flex justify-content-center align-items-center">
             <div className="m-5">
@@ -62,12 +128,15 @@ const CampaignDetails = () => {
                             electronic typesetting, remaining essentially unchanged. It was popularised in th.
                         </p>
                         <Row className="d-grid my-2">
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
                                 DONATE
                             </Button>
                         </Row>
                     </Container>
                 </Container>
+                {
+                    isLogged ? dialogLogged : dialogNotLogged
+                }
             </div>
         </div>
     )
