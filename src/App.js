@@ -37,7 +37,7 @@ function App() {
               <Route path="/dashboard/fundraiser">
                 <DashboardFundraiser/>
               </Route>
-              <Route path="/dashboard/donor">
+              <Route path="/dashboarddonor">
                 <DashboardDonor/>
               </Route>
               <Route path="/campaign">
