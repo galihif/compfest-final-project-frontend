@@ -35,6 +35,7 @@ const CampaignDetails = () => {
         switch(e.target.id){
             case "donateAmount":
                 setDonateAmount(e.target.value)
+                break
             default:
                 break
         }
