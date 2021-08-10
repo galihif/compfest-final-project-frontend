@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { endpoint } from './Endpoint'
+import { root } from './Root'
 
-const Get = (path,data,headers) => {
+export const GetWithData = (path,data,headers) => {
     const promise = new Promise((resolve, reject) => {
-        axios.get(`${endpoint}/${path}`, { headers: headers })
+        axios.get(`${root}/${path}/${data}`,{ headers: headers })
             .then((result) => {
                 resolve(result.data)
             }, (error) => {
@@ -13,4 +13,14 @@ const Get = (path,data,headers) => {
     return promise
 }
 
-export default Get;
+export const GetOnly = (path,headers) => {
+    const promise = new Promise((resolve, reject) => {
+        axios.get(`${root}/${path}`,{ headers: headers })
+            .then((result) => {
+                resolve(result.data)
+            }, (error) => {
+                reject(error)
+            })
+    })
+    return promise
+}

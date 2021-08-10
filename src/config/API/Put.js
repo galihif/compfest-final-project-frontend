@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { endpoint } from './Endpoint'
+import { root } from './Root'
 
 const Put = (path, data) => {
     const promise = new Promise((resolve, reject) => {
-        axios.put(`${endpoint}/${path}/${data.id}`, data)
+        axios.put(`${root}/${path}/${data.id}`, data)
             .then((result) => {
                 resolve(result.data)
             }, (error) => {
