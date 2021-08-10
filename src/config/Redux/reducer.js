@@ -1,18 +1,29 @@
 const initialState = {
     isLogged: false,
-    userData: {},
+    userToken: {},
 }
 
 const rootReducer = (state = initialState, action) => {
-    switch(action.type){
-        case "LOGIN":
+    switch (action.type) {
+        case "REGISTER":
             return {
                 ...state,
                 isLogged: true,
-                userData: action.userData,
+                userToken: action.userToken
             }
-        default: 
-        return state
+        case "REFRESH":
+            return {
+                ...state,
+                userToken: action.userToken
+            }
+        case "LOGOUT":
+            return {
+                ...state,
+                isLogged: false,
+                userToken: {}
+            }
+        default:
+            return state
     }
 }
 
