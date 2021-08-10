@@ -20,9 +20,16 @@ import {
 import authImage from '../assets/authImage.svg'
 
 const Login = () => {
+    //State
+    const state = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    console.log(state.userToken, "login")
+
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <Container className="login-container m-5 p-5" style={{ width:"48em",backgroundColor:"white",borderRadius: "1em" }}>
+            <Container className="login-container m-5 p-5" style={{ width: "48em", backgroundColor: "white", borderRadius: "1em" }}>
                 <Row className="">
                     <Col lg={5}>
                         <h5 className="title text-start mb-4">Login</h5>
@@ -47,7 +54,7 @@ const Login = () => {
                         </Form>
                     </Col>
                     <Col lg={7} className="d-flex justify-content-center">
-                        <Image src={authImage}  />
+                        <Image src={authImage} />
                     </Col>
                 </Row>
             </Container>
