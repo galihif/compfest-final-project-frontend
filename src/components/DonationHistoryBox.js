@@ -16,7 +16,7 @@ import {
 
 const DonationHistoryBox = () => {
     return (
-        <Container className="donation-history-box  p-3 my-2" style={{ width: "32em", backgroundColor: "white", borderRadius: "0.8em", border: "1px solid #DFDFDF" }}>
+        <Container className="donation-history-box  p-3 my-2" style={{ backgroundColor: "white", borderRadius: "0.8em", border: "1px solid #DFDFDF" }}>
             <Container>
                 <Row>
                     <Col lg={6}>

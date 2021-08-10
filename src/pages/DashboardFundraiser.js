@@ -19,8 +19,11 @@ import {
 //Assets
 import DonationHistoryBox from '../components/DonationHistoryBox';
 import TopUpHistoryBox from '../components/TopUpHistoryBox';
+import CampaignCard from '../components/CampaignCard';
+import CardCampaignRequest from '../components/CardCampaignRequest';
+import BoxWithdrawRequest from '../components/BoxWithdrawRequest';
 
-const DashboardDonor = () => {
+const DashboardFundraiser = () => {
     return (
         <div className="d-flex justify-content-center align-items-center">
             <div className="m-5">
@@ -28,27 +31,21 @@ const DashboardDonor = () => {
                     <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
-                <Container className="dashboard-box  p-3" style={{ width: "32em", backgroundColor: "white", borderRadius: "1em" }}>
+                <Container className="dashboard-box  p-3" style={{ width: "64em" }}>
                     <Container  >
                         <Row>
                             <Col className="d-flex align-items-center justify-content-center">
-                                <h5 className="my-0 mx-2">Donor Dashboard</h5>
-                                <Button variant="danger" size="sm" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0">
-                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
-                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                    </svg>
-                                </Button>
+                                <h5 className="my-0 mx-2">Fundraiser Dashboard</h5>
                             </Col>
                         </Row>
                         <Row className="my-3">
                             <Col className="d-flex justify-content-center">
-                                <Gravatar email="tony@stark.com" size="120" style={{ borderRadius: "20em" }} />
+                                <Gravatar email="jokowi@pdip.com" size="120" style={{ borderRadius: "20em" }} />
                             </Col>
                         </Row>
                         <Row className="my-3">
                             <Col className="d-flex justify-content-center align-items-center">
-                                <p className="my-0 me-1 fs-5" >Tony Stark</p>
+                                <p className="my-0 me-1 fs-5" >Joko Widodo</p>
                             </Col>
                         </Row>
                         <Row className="my-3 d-flex justify-content-center">
@@ -58,20 +55,56 @@ const DashboardDonor = () => {
                                 </svg>
                             </Col>
                             <Col lg="auto" className="d-flex align-items-center" >Rp. 100.000</Col>
-                            <Col lg="auto" className="d-flex align-items-center" >
-                                <Button variant="outline-primary" size="sm" >Top Up</Button>
+                        </Row>
+                        <Row className="my-3">
+                            <Col className="d-flex justify-content-center">
+                                <Button variant="primary" size="sm">Make a Campaign</Button>
                             </Col>
                         </Row>
                     </Container>
                 </Container>
                 <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
                     <Tab eventKey="home" title="Donation History">
-                        <DonationHistoryBox/>
-                        <DonationHistoryBox/>
-                        <DonationHistoryBox/>
+                        <Row className="d-flex justify-content-start px-2">
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
+                                <CampaignCard/>
+                            </Col>
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
+                                <CampaignCard/>
+                            </Col>
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
+                                <CampaignCard/>
+                            </Col>
+                        </Row>
                     </Tab>
-                    <Tab eventKey="profile" title="Top Up History">
-                        <TopUpHistoryBox/>
+                    <Tab eventKey="campaignRequest" title="Campaign Request">
+                        <Row className="d-flex justify-content-start px-2">
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
+                                <CardCampaignRequest />
+                            </Col>
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
+                                <CardCampaignRequest />
+                            </Col>
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
+                                <CardCampaignRequest />
+                            </Col>
+                        </Row>
+                    </Tab>
+                    <Tab eventKey="withdrawRequest" title="Withdrawal Request">
+                        <Row className="d-flex justify-content-start px-2">
+                            <Col lg={3} className="d-flex justify-content-center mb-2">
+                                <BoxWithdrawRequest/>
+                            </Col>
+                            <Col lg={3} className="d-flex justify-content-center mb-2">
+                                <BoxWithdrawRequest/>
+                            </Col>
+                            <Col lg={3} className="d-flex justify-content-center mb-2">
+                                <BoxWithdrawRequest/>
+                            </Col>
+                            <Col lg={3} className="d-flex justify-content-center mb-2">
+                                <BoxWithdrawRequest/>
+                            </Col>
+                        </Row>
                     </Tab>
                 </Tabs>
             </div>
@@ -79,4 +112,4 @@ const DashboardDonor = () => {
     )
 }
 
-export default DashboardDonor
+export default DashboardFundraiser
