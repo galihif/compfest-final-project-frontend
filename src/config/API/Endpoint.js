@@ -1,1 +1,1 @@
-export  const endpoint = "localhost:300"
+export const endpoint = "donatur.herokuapp.com"
