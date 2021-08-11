@@ -1,19 +1,19 @@
 import Post from './Post'
-import Get from './Get'
+import { GetHeadersOnly, GetWithData } from './Get'
 import Put from './Put'
 import Delete from './Delete'
 
 // POST
-const register = (data) => Post("register", data) 
-const login = (data) => Post("login", data) 
+const register = (body, headers) => Post("register", body, headers)
+const login = (body, headers) => Post("login", body)
 const refresh = (data) => Post("refresh", data)
-const createCampaign = (data,headers) => Post('campaigns', data, headers)
+const createCampaign = (data, headers) => Post('campaigns', data, headers)
 
 // GET
-const getUser = (data) => Get('me')
-const getAllCampaign = () => Get('campaigns')
-const getCampaignById = (data) => Get('campaigns',data)
-const getCampaignProposal = () => Get('admin/proposals')
+const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
+const getAllCampaign = () => GetHeadersOnly('campaigns')
+const getCampaignById = (data) => GetWithData('campaigns', data)
+const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
 
 // PUT
 
@@ -23,10 +23,10 @@ const API = {
     register,
     login,
     refresh,
-    getUser,
+    getCurrentUser,
     getAllCampaign,
     getCampaignById,
-    getCampaignProposal
+    getCampaignProposal,
 }
 
 export default API;

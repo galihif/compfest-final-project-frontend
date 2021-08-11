@@ -20,6 +20,9 @@ import Footer from "./components/Footer";
 import RegisterDonor from "./pages/RegisterDonor";
 import RegisterFundraiser from "./pages/RegisterFundraiser";
 import Login from "./pages/Login";
+import CampaignDetails from "./pages/CampaignDetails";
+import DashboardDonor from "./pages/DashboardDonor";
+import DashboardFundraiser from "./pages/DashboardFundraiser";
 
 
 
@@ -31,8 +34,17 @@ function App() {
           <NavbarM />
           <div>
             <Switch>
+              <Route path="/dashboardfundraiser">
+                <DashboardFundraiser/>
+              </Route>
+              <Route path="/dashboarddonor">
+                <DashboardDonor/>
+              </Route>
+              <Route path="/campaign">
+                <CampaignDetails/>
+              </Route>
               <Route path="/login">
-                <Login/>
+                <Login />
               </Route>
               <Route path="/registerdonor">
                 <RegisterDonor />

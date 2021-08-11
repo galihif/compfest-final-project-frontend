@@ -18,34 +18,95 @@ import {
 
 //Assets
 import authImage from '../assets/authImage.svg'
+import API from '../config/API';
 
 const RegisterFundraiser = () => {
+    //State
+    const history = useHistory()
+    const state = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const [firstName, setFirstName] = useState()
+    const [lastName, setLastName] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const [proposalText, setProposalText] = useState()
+
+    //Method
+    const handleChange = (e) => {
+        switch (e.target.id) {
+            case "firstName":
+                setFirstName(e.target.value)
+                break
+            case "lastName":
+                setLastName(e.target.value)
+                break
+            case "email":
+                setEmail(e.target.value)
+                break
+            case "password":
+                setPassword(e.target.value)
+                break
+            case "proposalText":
+                setProposalText(e.target.value)
+                break
+            default:
+                break
+        }
+    }
+
+    const handleRegisterFundraiser = () => {
+        const body = {
+            first_name: firstName,
+            last_name: lastName,
+            password: password,
+            email: email,
+            role: "FUNDRAISER",
+            proposal_text: proposalText
+        }
+        const headers = {
+            Accept: "application/json",
+        }
+        API.register(body,headers)
+            .then((res) => {
+                dispatch({ type: 'LOGIN', userToken: res.data })
+                history.push('/dashboardfundraiser')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <Container className="login-container m-5 p-5" style={{ width: "48em", backgroundColor: "white", borderRadius: "1em" }}>
+            <Container className="login-container m-5 p-5" style={{ width: "60em", backgroundColor: "white", borderRadius: "1em" }}>
 
                 <Row className="">
                     <Col lg={5}>
                         <h5 className="title text-start mb-4">Register To Make Campaign</h5>
                         <Form>
-                            <Form.Group className="mb-3" controlId="first_name">
+                            <Form.Group className="mb-3" controlId="firstName" onChange={handleChange}>
                                 <Form.Label>First Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter First Name" />
+                                <Form.Control type="text" placeholder="Enter First Name"/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="last_name">
+                            <Form.Group className="mb-3" controlId="lastName" onChange={handleChange}>
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control type="text" placeholder="Enter Last Name" />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="email">
+                            <Form.Group className="mb-3" controlId="email" onChange={handleChange}>
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email" />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="password">
+                            <Form.Group className="mb-3" controlId="password" onChange={handleChange}>
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Password" />
                             </Form.Group>
+                            <Form.Group className="mb-3" controlId="proposalText" onChange={handleChange}>
+                                <Form.Label>Why do you want to be a fundraiser?</Form.Label>
+                                <Form.Control type="text" as="textarea" placeholder="Add Reason" />
+                            </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="" onClick={handleRegisterFundraiser}>
                                     Register as Fundraiser
                                 </Button>
                                 <Nav.Link className="text-center" href="/login">Login</Nav.Link>

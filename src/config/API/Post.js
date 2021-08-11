@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { endpoint } from './Endpoint'
+import { root } from './Root'
 
-const Post = (path, data,headers) => {
+const Post = (path, body, headers) => {
     const promise = new Promise((resolve, reject) => {
-        axios.post(`${endpoint}/${path}`, data, {headers:headers})
+        axios.post(`${root}/${path}/`, body, { headers: headers })
             .then((result) => {
-                resolve(result.data)
+                resolve(result)
             }, (error) => {
                 reject(error)
             })
