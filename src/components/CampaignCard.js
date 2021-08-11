@@ -4,11 +4,9 @@ import React from 'react'
 //Styles
 import './Card.scss'
 import {
-    Button,
     ProgressBar,
     Row,
     Col,
-    Container,
     Card
 } from 'react-bootstrap';
 
