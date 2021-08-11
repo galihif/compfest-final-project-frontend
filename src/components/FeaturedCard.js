@@ -3,19 +3,11 @@ import React from 'react'
 
 //Styles
 import { 
-    Button,
-    ProgressBar,
     Row,
     Col,
-    Container,
-    Card
+    Container
  } from 'react-bootstrap';
 
-//Assets
-import headerImage from '../assets/headerImage.svg'
-
-//Component
-import CampaignCard from './CampaignCard';
 
 
 const FeaturedCard = (props) => {
