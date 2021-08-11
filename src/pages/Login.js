@@ -78,7 +78,7 @@ const Login = () => {
                             history.push('/dashboarddonor')
                             break
                         case "FUNDRAISER":
-                            history.push('/dashboarddonor')
+                            history.push('/dashboardfundraiser')
                             break
                         default:
                             break
