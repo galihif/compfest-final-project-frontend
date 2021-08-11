@@ -5,18 +5,13 @@ import Header from "../components/Header"
 import CampaignCard from "../components/CampaignCard"
 import AdminFundraiserCard from "../components/AdminFundraiserCard"
 import AdminWithdrawCard from "../components/AdminWithdrawCard"
+import AdminUserCard from "../components/AdminUserPaymentCard"
 
 const Home = () => {
     return (
         <div>
             <Header/>
-            <FeaturedCard>
-                <AdminWithdrawCard/>
-            </FeaturedCard>
-            <FeaturedCard>
-                <AdminFundraiserCard />
-            </FeaturedCard>
-            <FeaturedCard>
+            <FeaturedCard title={'Featured Campaigns'}>
                 <CampaignCard />
             </FeaturedCard>
         </div>

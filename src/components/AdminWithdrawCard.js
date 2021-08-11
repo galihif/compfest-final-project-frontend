@@ -57,7 +57,7 @@ const AdminWithdrawCard = () => {
                     </Col>
 
                     <Col sm={7}>
-                        <a href='#'>tets</a>
+                        <a href='/'>tets</a>
                     </Col>
                 </Row>
                 <Row>

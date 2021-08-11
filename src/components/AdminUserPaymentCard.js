@@ -7,7 +7,7 @@ import "./Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import profileImage from "../assets/profileImage.svg";
 
-const AdminWithdrawCard = () => {
+const AdminUserCard = () => {
     const normalFont = { fontSize: "12px" };
     return (
         <Card className="campaign-card" style={{ width: "20em" }}>
@@ -25,9 +25,6 @@ const AdminWithdrawCard = () => {
                             Amount
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
-                            Email
-                        </p>
-                        <p className="text-start fw-bold" style={normalFont}>
                             Bank Name
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
@@ -39,9 +36,6 @@ const AdminWithdrawCard = () => {
                             Rp.100.000
                         </p>
                         <p className="text-start" style={normalFont}>
-                            lrore@gmail.com
-                        </p>
-                        <p className="text-start" style={normalFont}>
                             BCA
                         </p>
                         <p className="text-start" style={normalFont}>
@@ -50,15 +44,6 @@ const AdminWithdrawCard = () => {
 
                     </Col>
 
-                    <Col lg={5}>
-                        <p className="text-start fw-bold" style={normalFont}>
-                            Campaign
-                        </p>
-                    </Col>
-
-                    <Col sm={7}>
-                        <a href='#'>tets</a>
-                    </Col>
                 </Row>
                 <Row>
                     <Col lg={4}>
@@ -78,4 +63,4 @@ const AdminWithdrawCard = () => {
     );
 };
 
-export default AdminWithdrawCard;
+export default AdminUserCard;
