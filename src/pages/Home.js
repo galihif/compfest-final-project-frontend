@@ -1,15 +1,24 @@
 
 //Component
-import FeaturedCampaign from "../components/FeaturedCampaign"
+import FeaturedCard from "../components/FeaturedCard"
 import Header from "../components/Header"
-import AdminFundraiser from "../components/AdminFundraiser"
+import CampaignCard from "../components/CampaignCard"
+import AdminFundraiserCard from "../components/AdminFundraiserCard"
+import AdminWithdrawCard from "../components/AdminWithdrawCard"
 
 const Home = () => {
     return (
         <div>
             <Header/>
-            <AdminFundraiser/>
-            {/* <FeaturedCampaign/> */}
+            <FeaturedCard>
+                <AdminWithdrawCard/>
+            </FeaturedCard>
+            <FeaturedCard>
+                <AdminFundraiserCard />
+            </FeaturedCard>
+            <FeaturedCard>
+                <CampaignCard />
+            </FeaturedCard>
         </div>
     )
 }

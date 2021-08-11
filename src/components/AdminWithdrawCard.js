@@ -1,3 +1,4 @@
+
 //Library
 import React from "react";
 
@@ -6,7 +7,7 @@ import "./Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import profileImage from "../assets/profileImage.svg";
 
-const AdminFundraiserCard = () => {
+const AdminWithdrawCard = () => {
     const normalFont = { fontSize: "12px" };
     return (
         <Card className="campaign-card" style={{ width: "20em" }}>
@@ -14,27 +15,49 @@ const AdminFundraiserCard = () => {
                 className="m-auto mt-3 mb-1"
                 variant="top"
                 src={profileImage}
-                style={{ width: "7em", objectFit: "cover" }}
+                style={{  width: "7em", objectFit: "cover" }}
             />
             <Card.Body>
                 <Card.Title className="text-center">Joko Widodo</Card.Title>
                 <Row>
                     <Col lg={5}>
                         <p className="text-start fw-bold" style={normalFont}>
+                            Amount
+                        </p>
+                        <p className="text-start fw-bold" style={normalFont}>
                             Email
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
-                            Description
+                            Bank Name
+                        </p>
+                        <p className="text-start fw-bold" style={normalFont}>
+                            Account Number
                         </p>
                     </Col>
                     <Col lg={7}>
                         <p className="text-start" style={normalFont}>
+                            Rp.100.000
+                        </p>
+                        <p className="text-start" style={normalFont}>
                             lrore@gmail.com
                         </p>
                         <p className="text-start" style={normalFont}>
-                            In publishing and graphic design, Lorem ipsum is a placeholder
-                            text commonly used demonstrate the visual ...
+                            BCA
                         </p>
+                        <p className="text-start" style={normalFont}>
+                            4390821948291
+                        </p>
+
+                    </Col>
+
+                    <Col lg={5}>
+                        <p className="text-start fw-bold" style={normalFont}>
+                            Campaign
+                        </p>
+                    </Col>
+
+                    <Col sm={7}>
+                        <a href='#'>tets</a>
                     </Col>
                 </Row>
                 <Row>
@@ -43,11 +66,7 @@ const AdminFundraiserCard = () => {
                             Accept
                         </Button>
                     </Col>
-                    <Col lg={4}>
-                        <Button variant="outline-primary" style={normalFont}>
-                            Details
-                        </Button>
-                    </Col>
+                    <Col lg={4}/>
                     <Col lg={4}>
                         <Button variant="danger" style={normalFont}>
                             Reject
@@ -59,4 +78,4 @@ const AdminFundraiserCard = () => {
     );
 };
 
-export default AdminFundraiserCard;
+export default AdminWithdrawCard;

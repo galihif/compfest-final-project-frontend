@@ -2,7 +2,7 @@
 import React from 'react'
 
 //Styles
-import './CampaignCard.scss'
+import './Card.scss'
 import {
     Button,
     ProgressBar,
