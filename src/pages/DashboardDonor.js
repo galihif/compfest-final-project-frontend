@@ -1,5 +1,5 @@
 //Library
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Gravatar from 'react-gravatar'
@@ -12,7 +12,9 @@ import {
     Col,
     Tabs,
     Tab,
-    Breadcrumb
+    Breadcrumb,
+    Modal,
+    Form
 } from 'react-bootstrap';
 
 
@@ -29,11 +31,22 @@ const DashboardDonor = () => {
     const userToken = state.userToken
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
+
+    const [show, setShow] = useState(false)
+
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [walletAmount, setWalletAmount] = useState("")
     const [id, setId] = useState("")
+
+    const [bankName, setBankName] = useState("")
+    const [bankAccountName, setBankAccountName] = useState("")
+    const [bankAccountNumber, setBankAccountNumber] = useState("")
+    const [amount, setAmount] = useState()
+
+    const [topUpHistoryList, setTopUpHistoryList] = useState([])
+
 
     const headers = {
         Accept: "application/json",
@@ -43,7 +56,70 @@ const DashboardDonor = () => {
     //Method
     useEffect(() => {
         getUserData()
+        getTopUpHistory()
     }, []);
+
+    const toggleDialog = () => setShow(!show)
+
+    const handleChange = useCallback (e =>{
+        switch (e.target.id) {
+            case "bankName":
+                setBankName(e.target.value)
+                break
+            case "bankAccountName":
+                setBankAccountName(e.target.value)
+                break
+            case "bankAccountNumber":
+                setBankAccountNumber(e.target.value)
+                break
+            case "amount":
+                setAmount(e.target.value)
+                break
+            default:
+                break
+        }
+    })
+
+    const handleConfirmTopUp = () => {
+        const body = {
+            amount: amount,
+            bank_name: bankName,
+            bank_account: bankAccountName,
+            bank_account_number: bankAccountNumber.toString()
+        }
+
+        if (bankName === "" || bankAccountName === "" || bankAccountNumber.toString() === "" || amount.toString() === ""){
+            alert("Isi semuanya bos")
+        } else if (amount < 5000) {
+            alert("Minimum Top Up 5000")
+        } else {
+            //TODO top up
+            API.topUp(body,headers)
+                .then((res) => {
+                    console.log(res.data)
+                    toggleDialog()
+                    alert("Top Up Request Success. Check Your Top Up History")
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+    }
+
+    const getTopUpHistory = () => {
+        API.getUserTopUpList(headers)
+            .then((res) => {
+                const snapshot = res.data
+                const items = []
+                snapshot.forEach((data) => {
+                    items.push(data)
+                })
+                setTopUpHistoryList(items)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" })
@@ -53,7 +129,6 @@ const DashboardDonor = () => {
     const getUserData = () => {
         API.getCurrentUser(headers)
             .then((res) => {
-                console.log(res)
                 const userData = res.data
                 setFirstName(userData.first_name)
                 setLastName(userData.last_name)
@@ -115,7 +190,7 @@ const DashboardDonor = () => {
                             </Col>
                             <Col lg="auto" className="d-flex align-items-center" >Rp. {walletAmount}</Col>
                             <Col lg="auto" className="d-flex align-items-center" >
-                                <Button variant="outline-primary" size="sm" >Top Up</Button>
+                                <Button variant="outline-primary" size="sm" onClick={()=>toggleDialog()}>Top Up</Button>
                             </Col>
                         </Row>
                     </Container>
@@ -127,10 +202,51 @@ const DashboardDonor = () => {
                         <DonationHistoryBox />
                     </Tab>
                     <Tab eventKey="profile" title="Top Up History">
-                        <TopUpHistoryBox />
+                        {
+                            topUpHistoryList.map((topup) => {
+                                console.log(topup)
+                                return(
+                                    <TopUpHistoryBox
+                                        amount={topup.amount}
+                                        date={topup.date}
+                                        status={topup.status} />
+                                )
+                            })
+                        }
                     </Tab>
                 </Tabs>
             </div>
+            <Modal show={show}>
+                <Modal.Header >
+                    <Modal.Title>Top Up E-Wallet</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group className="mb-3" controlId="bankName" onChange={handleChange}>
+                        <Form.Label>Bank Name</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Bank Name" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="bankAccountName" onChange={handleChange}>
+                        <Form.Label>Bank Account Name</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Bank Account Name" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="bankAccountNumber" onChange={handleChange}>
+                        <Form.Label>Bank Account Number</Form.Label>
+                        <Form.Control type="number" placeholder="Enter Bank Account Number" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="amount" onChange={handleChange}>
+                        <Form.Label>Amount</Form.Label>
+                        <Form.Control type="number" placeholder="Enter Amount (Minimum Rp 5000)" />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={toggleDialog}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirmTopUp}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

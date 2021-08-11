@@ -44,7 +44,7 @@ const NavbarM = (props) => {
     //Method
     useEffect(() => {
         
-    }, [isLogged])
+    })
 
     const getUserData = () => {
         API.getCurrentUser(headers)
@@ -69,7 +69,7 @@ const NavbarM = (props) => {
         }
         API.refresh(body)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
                 setLogged(true)
             })
@@ -77,9 +77,13 @@ const NavbarM = (props) => {
                 setLogged(false)
             })
     }
-
-    if (state.isLogged) {
+    
+    if(state.isLogged){
         getUserData()
+        // console.log(state.isLogged, "nav")
+    } else {
+        // console.log(state.isLogged,"nav")
+        // setLogged(false)
     }
 
     const navLogged = 

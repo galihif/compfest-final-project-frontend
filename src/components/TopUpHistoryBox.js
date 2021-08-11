@@ -14,18 +14,26 @@ import {
 //Assets
 
 
-const TopUpHistoryBox = () => {
+const TopUpHistoryBox = (props) => {
     return (
         <Container className="topup-history-box  p-3 my-2" style={{backgroundColor: "white", borderRadius: "0.8em", border: "1px solid #DFDFDF" }}>
             <Container>
                 <Row>
                     <Col lg={6}>
-                        <h6>+Rp 900.000</h6>
-                        <p className="m-0">22/02/2022</p>
+                        <h6>+Rp {props.amount}</h6>
+                        <p className="m-0">{props.date}</p>
                     </Col>
                     <Col lg={6} className="justify-content-end d-flex">
                         <div>
-                            <Badge bg="secondary">Pending</Badge>
+                            {
+                                props.status === "PENDING" ? (
+                                        <Badge bg="secondary">Pending</Badge>
+                                    ) : props.status === "VERIFIED" ? (
+                                        <Badge bg="success">Verified</Badge>
+                                    ) : (
+                                        <Badge bg="danger">Rejected</Badge>
+                                    )
+                            }
                         </div>
                     </Col>
                 </Row>
