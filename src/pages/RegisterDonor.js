@@ -66,7 +66,7 @@ const RegisterDonor = () => {
         }
         API.register(body, headers)
             .then((res) => {
-                dispatch({ type: 'REGISTER', userToken: res.data })
+                dispatch({ type: 'LOGIN', userToken: res.data })
                 history.push('/dashboarddonor')
             })
             .catch((err) => {

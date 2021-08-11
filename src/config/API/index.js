@@ -5,7 +5,7 @@ import Delete from './Delete'
 
 // POST
 const register = (body, headers) => Post("register", body, headers)
-const login = (data) => Post("login", data)
+const login = (body, headers) => Post("login", body)
 const refresh = (data) => Post("refresh", data)
 const createCampaign = (data, headers) => Post('campaigns', data, headers)
 
@@ -14,8 +14,6 @@ const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
 const getAllCampaign = () => GetHeadersOnly('campaigns')
 const getCampaignById = (data) => GetWithData('campaigns', data)
 const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
-const getExampleById = (data) => GetWithData('todos', data)
-const getExampleAll = () => GetHeadersOnly('todos')
 
 // PUT
 
@@ -29,8 +27,6 @@ const API = {
     getAllCampaign,
     getCampaignById,
     getCampaignProposal,
-    getExampleById,
-    getExampleAll
 }
 
 export default API;

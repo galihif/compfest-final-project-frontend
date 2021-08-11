@@ -5,7 +5,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "REGISTER":
+        case "LOGIN":
             return {
                 ...state,
                 isLogged: true,
