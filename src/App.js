@@ -34,7 +34,7 @@ function App() {
           <NavbarM />
           <div>
             <Switch>
-              <Route path="/dashboard/fundraiser">
+              <Route path="/dashboardfundraiser">
                 <DashboardFundraiser/>
               </Route>
               <Route path="/dashboarddonor">
