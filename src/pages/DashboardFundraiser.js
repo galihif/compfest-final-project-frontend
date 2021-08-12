@@ -55,6 +55,9 @@ const DashboardFundraiser = () => {
     const [targetAmount, setTargetAmount] = useState("")
     const [imageURL, setImageURL] = useState("")
 
+    const [activeCampaignList,setActiveCampaignList] = useState([])
+    const [requestedCampaignList,setRequestedCampaignList] = useState([])
+
     const headers = {
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`
@@ -63,7 +66,8 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-    }, [])
+        getCampaignList()
+    }, [show])
 
     const toggleDialog = () => setShow(!show)
 
@@ -86,7 +90,7 @@ const DashboardFundraiser = () => {
         }
     })
 
-    const handleConfirm = () => {
+    const handleCreateCampaign = () => {
         const body = {
             title: title,
             description: description,
@@ -105,6 +109,28 @@ const DashboardFundraiser = () => {
                 .catch((err) => console.log(err))
         }
     }
+
+    const getCampaignList = useCallback((e) => {
+        API.getUserCampaignList(headers)
+            .then((res) => {
+                const snapshot = res.data
+                const activeCampaigns = []
+                const requestedCampaigns = []
+                snapshot.forEach((campaign) => {
+                    if(campaign.status === "VERIFIED"){
+                        activeCampaigns.push(campaign)
+                    } else {
+                        requestedCampaigns.push(campaign)
+                    }
+                })
+                setActiveCampaignList(activeCampaigns)
+                setRequestedCampaignList(requestedCampaigns)
+            })
+            .catch((err) => {
+                console.log(err)
+                refreshUserToken()
+            })
+    }, [activeCampaignList,requestedCampaignList])
 
     const getUserData = useCallback((e) => {
         API.getCurrentUser(headers)
@@ -228,15 +254,21 @@ const DashboardFundraiser = () => {
                     </Tab>
                     <Tab eventKey="campaignRequest" title="Campaign Request">
                         <Row className="d-flex justify-content-start px-2">
-                            <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CardCampaignRequest />
-                            </Col>
-                            <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CardCampaignRequest />
-                            </Col>
-                            <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CardCampaignRequest />
-                            </Col>
+                            {
+                                requestedCampaignList.map((campaign)=>{
+                                    return(
+                                        <Col lg={4} className="d-flex justify-content-center mb-4">
+                                            <CardCampaignRequest
+                                                id={campaign.id}
+                                                title={campaign.title}
+                                                imageURL={campaign.image_url}
+                                                targetAmount={campaign.target_amount}
+                                                status={campaign.status} 
+                                                />
+                                        </Col>
+                                    )
+                                })
+                            }
                         </Row>
                     </Tab>
                     <Tab eventKey="withdrawRequest" title="Withdrawal Request">
@@ -283,8 +315,8 @@ const DashboardFundraiser = () => {
                     <Button variant="secondary" onClick={toggleDialog}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleConfirm}>
-                        Confirm
+                    <Button variant="primary" onClick={handleCreateCampaign}>
+                        Create Campaign
                     </Button>
                 </Modal.Footer>
             </Modal>

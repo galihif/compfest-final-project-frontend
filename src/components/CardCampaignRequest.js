@@ -1,6 +1,7 @@
 //Library
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 //Styles
 import './Card.scss'
@@ -13,22 +14,37 @@ import {
     Card
 } from 'react-bootstrap';
 
-const CardCampaignRequest = () => {
+const CardCampaignRequest = (props) => {
+    //State
+    const state = useSelector((state) => state)
+    const dispatch = useDispatch()
     const history = useHistory()
+    const userToken = state.userToken
+    const accessToken = userToken.access
+    const refreshToken = userToken.refresh
+
     return(
-        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push('/campaign')} >
-            <Card.Img variant="top" src="https://www.islamic-relief.org/wp-content/uploads/2021/04/original--1024x683.jpg" style={{ height: "10em", objectFit: "cover" }} />
+        <Card className="" style={{ width: "20em" }}>
+            <Card.Img variant="top" src={props.imageURL} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
-                <Card.Title>Help Poor People in India</Card.Title>
+                <Card.Title>{props.title}</Card.Title>
                 <Row>
-                    <p><b>Target</b> : Rp 100.000.000</p>
+                    <p><b>Target</b> : Rp {props.targetAmount}</p>
                 </Row>
                 <Row>
                     <Col lg="auto">
                         <Button variant="outline-danger" size="sm">Delete</Button>
                     </Col>
                     <Col>
-                        <Badge bg="secondary">Pending</Badge>
+                        {
+                            props.status === "PENDING" ? (
+                                <Badge bg="secondary">Pending</Badge>
+                            ) : props.status === "VERIFIED" ? (
+                                <Badge bg="success">Verified</Badge>
+                            ) : (
+                                <Badge bg="danger">Rejected</Badge>
+                            )
+                        }
                     </Col>
                 </Row>
             </Card.Body>

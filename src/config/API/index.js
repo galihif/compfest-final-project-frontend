@@ -13,13 +13,16 @@ const createCampaign = (body, headers) => Post('fundraiser/campaigns', body, hea
 // GET
 const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
 const getUserTopUpList = (headers) => GetHeadersOnly('topup', headers)
+const getUserCampaignList = (headers) => GetHeadersOnly('fundraiser/campaigns', headers)
 const getAllCampaign = () => GetHeadersOnly('campaigns')
-const getCampaignById = (data) => GetWithData('campaigns', data)
 const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
+
+const getCampaignById = (data) => GetWithData('campaigns', data)
 
 // PUT
 
 // DELETE
+
 const API = {
     createCampaign,
     register,
@@ -30,7 +33,8 @@ const API = {
     getCampaignById,
     getCampaignProposal,
     topUp,
-    getUserTopUpList
+    getUserTopUpList,
+    getUserCampaignList
 }
 
 export default API;
