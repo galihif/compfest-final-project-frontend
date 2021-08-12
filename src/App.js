@@ -40,7 +40,7 @@ function App() {
               <Route path="/dashboarddonor">
                 <DashboardDonor/>
               </Route>
-              <Route path="/campaign">
+              <Route path="/campaign/:id">
                 <CampaignDetails/>
               </Route>
               <Route path="/login">
