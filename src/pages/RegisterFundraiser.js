@@ -69,6 +69,21 @@ const RegisterFundraiser = () => {
         API.register(body,headers)
             .then((res) => {
                 dispatch({ type: 'LOGIN', userToken: res.data })
+                getUserData(res.data.access)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const getUserData = (accessToken) => {
+        const headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`
+        }
+        API.getCurrentUser(headers)
+            .then((res) => {
+                dispatch({ type: 'SETUSERDATA', userData: res.data })
                 history.push('/dashboardfundraiser')
             })
             .catch((err) => {
