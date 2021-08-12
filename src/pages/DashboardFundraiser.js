@@ -63,7 +63,7 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-    }, [show])
+    }, [])
 
     const toggleDialog = () => setShow(!show)
 
@@ -106,7 +106,7 @@ const DashboardFundraiser = () => {
         }
     }
 
-    const getUserData = () => {
+    const getUserData = useCallback((e) => {
         API.getCurrentUser(headers)
             .then((res) => {
                 const userData = res.data
@@ -118,10 +118,10 @@ const DashboardFundraiser = () => {
                 setId(userData.id)
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err,"getuser")
                 refreshUserToken()
             })
-    }
+    },[firstName,lastName,email,walletAmount,verified,id])
 
     const refreshUserToken = () => {
         const body = {
@@ -132,7 +132,7 @@ const DashboardFundraiser = () => {
                 dispatch({ type: 'REFRESH', userToken: res.data })
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err,"ref")
             })
     }
 
@@ -171,13 +171,13 @@ const DashboardFundraiser = () => {
                                 </Button>
                             </Col>
                         </Row>
-                        <Row className="p-5">
+                        {/* <Row className="p-5">
                             <Col className="d-flex justify-content-center p-5">
                                 <Spinner animation="border" role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </Spinner>
                             </Col>
-                        </Row>
+                        </Row> */}
                         <Row className="my-3">
                             <Col className="d-flex justify-content-center">
                                 <Gravatar email={email} size="120" style={{ borderRadius: "20em" }} />
