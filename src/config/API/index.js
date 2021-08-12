@@ -8,7 +8,7 @@ const register = (body, headers) => Post("register", body, headers)
 const topUp = (body, headers) => Post("topup", body, headers)
 const login = (body, headers) => Post("login", body)
 const refresh = (data) => Post("refresh", data)
-const createCampaign = (data, headers) => Post('campaigns', data, headers)
+const createCampaign = (body, headers) => Post('fundraiser/campaigns', body, headers)
 
 // GET
 const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
