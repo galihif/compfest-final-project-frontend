@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { root } from './Root'
 
-export const GetWithData = (path, data, headers) => {
+export const GetWithId = (path, id, headers) => {
     const promise = new Promise((resolve, reject) => {
-        axios.get(`${root}/${path}/${data}/`, { headers: headers })
+        axios.get(`${root}/${path}/${id}/`, { headers: headers })
             .then((result) => {
                 resolve(result)
             }, (error) => {

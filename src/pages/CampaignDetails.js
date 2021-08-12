@@ -1,5 +1,5 @@
 //Library
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Gravatar from 'react-gravatar'
@@ -16,22 +16,75 @@ import {
     Breadcrumb,
     Modal
 } from 'react-bootstrap';
+import API from '../config/API';
+import axios from 'axios';
 
 
 //Assets
 
 const CampaignDetails = () => {
     //State
+    const state = useSelector((state) => state)
+    const dispatch = useDispatch()
     const history = useHistory()
+    const userToken = state.userToken
+    const accessToken = userToken.access
+    const refreshToken = userToken.refresh
+
     const {id} = useParams()
 
     const [show, setShow] = useState(false)
+    const [isLogged, setLogged] = useState(true)
 
     const [walletAmount, setWalletAmount] = useState(10000)
     const [donateAmount, setDonateAmount] = useState(0)
-    const [isLogged, setLogged] = useState(true)
+
+    const [title, setTitle] = useState("Loading")
+    const [description, setDescription] = useState("")
+    const [imageURL, setImage] = useState("")
+    const [amount, setAmount] = useState("")
+    const [targetAmount, setTargetAmount] = useState("")
+    const [fundraiser, setFundraiser] = useState("")
+
+    const headers = {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`
+    }
 
     //Method
+    useEffect(() => {
+        getCampaignData()
+    }, []);
+
+    const getCampaignData = useCallback((e) => {
+        // API.getCampaignById(id,headers)
+        //     .then((res) => {
+        //         console.log(res.data)
+        //     })
+        axios.get(`https://donatur.herokuapp.com/api/campaigns/${id}/`,{headers:headers})
+            .then((res)=>{
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err)
+                // refreshUserToken()
+            })
+    },[])
+
+    const refreshUserToken = () => {
+        const body = {
+            refresh: refreshToken
+        }
+        API.refresh(body)
+            .then((res) => {
+                console.log(res.data)
+                dispatch({ type: 'REFRESH', userToken: res.data })
+            })
+            .catch((err) => {
+                console.log(err, "ref")
+            })
+    }
+
     const toggleDialog = () => setShow(!show)
 
     const handleChange = (e) => {

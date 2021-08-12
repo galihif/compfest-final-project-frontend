@@ -1,5 +1,5 @@
 import Post from './Post'
-import { GetHeadersOnly, GetWithData } from './Get'
+import { GetHeadersOnly, GetWithId } from './Get'
 import Put from './Put'
 import Delete from './Delete'
 
@@ -17,7 +17,7 @@ const getUserCampaignList = (headers) => GetHeadersOnly('fundraiser/campaigns', 
 const getAllCampaign = () => GetHeadersOnly('campaigns')
 const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
 
-const getCampaignById = (data) => GetWithData('campaigns', data)
+const getCampaignById = (id, headers) => GetWithId('campaigns', id,headers)
 
 // PUT
 
