@@ -1,6 +1,6 @@
 //Library
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Gravatar from 'react-gravatar'
 
@@ -23,7 +23,10 @@ import {
 const CampaignDetails = () => {
     //State
     const history = useHistory()
+    const {id} = useParams()
+
     const [show, setShow] = useState(false)
+
     const [walletAmount, setWalletAmount] = useState(10000)
     const [donateAmount, setDonateAmount] = useState(0)
     const [isLogged, setLogged] = useState(true)
