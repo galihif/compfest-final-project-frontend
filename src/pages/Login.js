@@ -68,6 +68,7 @@ const Login = () => {
         }
         API.getCurrentUser(headers)
             .then((res) => {
+                dispatch({ type: 'SETUSERDATA', userData: res.data })
                 const role = res.data.role
                 const isStaff = res.data.isStaff
                 if(isStaff){
