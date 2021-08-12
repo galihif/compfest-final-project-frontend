@@ -67,12 +67,28 @@ const RegisterDonor = () => {
         API.register(body, headers)
             .then((res) => {
                 dispatch({ type: 'LOGIN', userToken: res.data })
+                getUserData(res.data.access)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const getUserData = (accessToken) => {
+        const headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`
+        }
+        API.getCurrentUser(headers)
+            .then((res) => {
+                dispatch({ type: 'SETUSERDATA', userData: res.data })
                 history.push('/dashboarddonor')
             })
             .catch((err) => {
                 console.log(err)
             })
     }
+
     return (
         <div className="d-flex justify-content-center align-items-center">
             <Container className="login-container m-5 p-5" style={{ width: "60em", backgroundColor: "white", borderRadius: "1em" }}>
