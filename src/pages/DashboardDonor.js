@@ -209,7 +209,6 @@ const DashboardDonor = () => {
                     <Tab eventKey="profile" title="Top Up History">
                         {
                             topUpHistoryList.map((topup) => {
-                                console.log(topup)
                                 return(
                                     <TopUpHistoryBox
                                         amount={topup.amount}
