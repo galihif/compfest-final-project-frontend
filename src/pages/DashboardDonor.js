@@ -33,6 +33,8 @@ const DashboardDonor = () => {
     const refreshToken = userToken.refresh
 
     const [show, setShow] = useState(false)
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -57,7 +59,7 @@ const DashboardDonor = () => {
     useEffect(() => {
         getUserData()
         getTopUpHistory()
-    }, []);
+    }, [show]);
 
     const toggleDialog = () => setShow(!show)
 
@@ -137,7 +139,7 @@ const DashboardDonor = () => {
                 setId(userData.id)
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err,"get")
                 refreshUserToken()
             })
     }
@@ -150,6 +152,9 @@ const DashboardDonor = () => {
             .then((res) => {
                 console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+            })
+            .catch((err) => {
+                console.log(err,"ref")
             })
     }
     return (

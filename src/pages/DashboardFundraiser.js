@@ -1,5 +1,5 @@
 //Library
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Gravatar from 'react-gravatar'
@@ -17,7 +17,10 @@ import {
     Tab,
     Breadcrumb,
     Tooltip,
-    OverlayTrigger
+    OverlayTrigger,
+    Modal,
+    Form,
+    Spinner
 } from 'react-bootstrap';
 
 
@@ -25,21 +28,32 @@ import {
 import CampaignCard from '../components/CampaignCard';
 import CardCampaignRequest from '../components/CardCampaignRequest';
 import BoxWithdrawRequest from '../components/BoxWithdrawRequest';
+import axios from 'axios';
 
 const DashboardFundraiser = () => {
     //State
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const history = useHistory()
+
     const userToken = state.userToken
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
+
+    const [show, setShow] = useState(false)
+    const [loading, setLoading] = useState(true)
+
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [walletAmount, setWalletAmount] = useState("")
     const [verified, setVerified] = useState(false)
     const [id, setId] = useState("")
+
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [targetAmount, setTargetAmount] = useState("")
+    const [imageURL, setImageURL] = useState("")
 
     const headers = {
         Accept: "application/json",
@@ -49,12 +63,52 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-    }, [])
+    }, [show])
+
+    const toggleDialog = () => setShow(!show)
+
+    const handleChange = useCallback(e => {
+        switch (e.target.id) {
+            case "title":
+                setTitle(e.target.value)
+                break
+            case "description":
+                setDescription(e.target.value)
+                break
+            case "targetAmount":
+                setTargetAmount(e.target.value)
+                break
+            case "imageURL":
+                setImageURL(e.target.value)
+                break
+            default:
+                break
+        }
+    })
+
+    const handleConfirm = () => {
+        const body = {
+            title: title,
+            description: description,
+            target_amount: targetAmount,
+            image_url: imageURL
+        }
+        if (title==="" || description==="" || targetAmount.toString()==="" || imageURL===""){
+            alert("isi semuanya bos")
+        } else {
+            API.createCampaign(body,headers)
+                .then((res) => {
+                    console.log(res) 
+                    toggleDialog()
+                    alert("Campaign Proposal Requested. Check Your Campaign Request Tab")
+                })
+                .catch((err) => console.log(err))
+        }
+    }
 
     const getUserData = () => {
         API.getCurrentUser(headers)
             .then((res) => {
-                console.log(res)
                 const userData = res.data
                 setFirstName(userData.first_name)
                 setLastName(userData.last_name)
@@ -75,8 +129,10 @@ const DashboardFundraiser = () => {
         }
         API.refresh(body)
             .then((res) => {
-                console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
 
@@ -115,6 +171,13 @@ const DashboardFundraiser = () => {
                                 </Button>
                             </Col>
                         </Row>
+                        <Row className="p-5">
+                            <Col className="d-flex justify-content-center p-5">
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            </Col>
+                        </Row>
                         <Row className="my-3">
                             <Col className="d-flex justify-content-center">
                                 <Gravatar email={email} size="120" style={{ borderRadius: "20em" }} />
@@ -144,13 +207,13 @@ const DashboardFundraiser = () => {
                         </Row>
                         <Row className="my-3">
                             <Col className="d-flex justify-content-center">
-                                <Button variant="primary" size="sm">Make a Campaign</Button>
+                                <Button variant="primary" size="sm" onClick={toggleDialog} >Make a Campaign</Button>
                             </Col>
                         </Row>
                     </Container>
                 </Container>
                 <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
-                    <Tab eventKey="home" title="Donation History">
+                    <Tab eventKey="home" title="Active Campaign">
                         <Row className="d-flex justify-content-start px-2">
                             <Col lg={4} className="d-flex justify-content-center mb-2">
                                 <CampaignCard/>
@@ -194,6 +257,37 @@ const DashboardFundraiser = () => {
                     </Tab>
                 </Tabs>
             </div>
+            <Modal show={show}>
+                <Modal.Header >
+                    <Modal.Title>Make a Campaign</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group className="mb-3" controlId="title" onChange={handleChange}>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control type="text" placeholder="Add Title" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="description" onChange={handleChange}>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control type="text" placeholder="Add Description" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="targetAmount" onChange={handleChange}>
+                        <Form.Label>Target</Form.Label>
+                        <Form.Control type="number" placeholder="Add Target (Rp)" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="imageURL" onChange={handleChange}>
+                        <Form.Label>Image URL</Form.Label>
+                        <Form.Control type="text" placeholder="Add Image URL" />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={toggleDialog}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirm}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
