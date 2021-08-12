@@ -1,6 +1,7 @@
 const initialState = {
     isLogged: false,
     userToken: {},
+    userData: {}
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -9,7 +10,12 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLogged: true,
-                userToken: action.userToken
+                userToken: action.userToken,
+            }
+        case "SETUSERDATA":
+            return {
+                ...state,
+                userData: action.userData,
             }
         case "REFRESH":
             return {
@@ -20,7 +26,8 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLogged: false,
-                userToken: {}
+                userToken: {},
+                userData: {}
             }
         default:
             return state
