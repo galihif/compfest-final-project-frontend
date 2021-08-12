@@ -25,14 +25,17 @@ const NavbarM = (props) => {
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const history = useHistory()
+
     const userToken = state.userToken
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
-    const [isLogged, setLogged] = useState(state.isLogged)
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [email, setEmail] = useState("")
-    const [role, setRole] = useState("")
+
+
+    const userData = props.userData
+    const [firstName, setFirstName] = useState(userData.first_name)
+    const [lastName, setLastName] = useState(userData.last_name)
+    const [email, setEmail] = useState(userData.email)
+    const [role, setRole] = useState(userData.role)
     const dashboardPath = role === 'DONATUR' ? "/dashboarddonor" : "/dashboardfundraiser"
 
     const headers = {
@@ -40,63 +43,25 @@ const NavbarM = (props) => {
         Authorization: `Bearer ${accessToken}`
     }
 
+    
 
     //Method
     useEffect(() => {
-        
+        console.log(props.userData, "nav")
+        console.log(state.userData, "nav2")
     })
-
-    const getUserData = () => {
-        API.getCurrentUser(headers)
-            .then((res) => {
-                const userData = res.data
-                setFirstName(userData.first_name)
-                setLastName(userData.last_name)
-                setEmail(userData.email)
-                setRole(userData.role)
-                setLogged(true)
-            })
-            .catch((err) => {
-                console.log(err)
-                setLogged(false)
-                refreshUserToken()
-            })
-    }
-
-    const refreshUserToken = () => {
-        const body = {
-            refresh: refreshToken
-        }
-        API.refresh(body)
-            .then((res) => {
-                // console.log(res.data)
-                dispatch({ type: 'REFRESH', userToken: res.data })
-                setLogged(true)
-            })
-            .catch((err) => {
-                setLogged(false)
-            })
-    }
-    
-    if(state.isLogged){
-        getUserData()
-        // console.log(state.isLogged, "nav")
-    } else {
-        // console.log(state.isLogged,"nav")
-        // setLogged(false)
-    }
 
     const navLogged = 
     <Row>
         <Col className="d-flex nav-user" onClick={() => history.push(dashboardPath)}>
-            <Gravatar email={email} size="30" style={{ borderRadius: "20em" }} />
-            <p className="my-0 ms-2 fs-5" >{firstName} {lastName}</p>
+            <Gravatar email={props.userData.email} size="30" style={{ borderRadius: "20em" }} />
+            <p className="my-0 ms-2 fs-5" >{props.userData.first_name} {props.userData.last_name}</p>
         </Col>
     </Row>
     const navNotLogged = 
     <div>
         <Button variant="outline-primary mx-2" href="/login">Login</Button>
-        <Button variant="primary" href="registerdonor" >Register</Button>
+        <Button variant="primary" href="/registerdonor" >Register</Button>
     </div>
 
     return (
@@ -111,7 +76,7 @@ const NavbarM = (props) => {
                         </Nav>
                         <Nav>
                             {
-                                isLogged ? navLogged : navNotLogged
+                                props.isLogged ? navLogged : navNotLogged
                             }
                         </Nav>
                     </Navbar.Collapse>
@@ -136,4 +101,11 @@ const NavbarM = (props) => {
     )
 }
 
-export default NavbarM
+function mapStateToProps(state, ownProps) {
+    return {
+        isLogged: state.isLogged,
+        userData: state.userData
+    };
+}
+
+export default connect(mapStateToProps)(NavbarM)
