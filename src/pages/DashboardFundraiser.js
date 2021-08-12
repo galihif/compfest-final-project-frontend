@@ -25,7 +25,7 @@ import {
 
 
 //Assets
-import CampaignCard from '../components/CampaignCard';
+import CardCampaignActive from '../components/CardCampaignActive';
 import CardCampaignRequest from '../components/CardCampaignRequest';
 import BoxWithdrawRequest from '../components/BoxWithdrawRequest';
 import axios from 'axios';
@@ -241,15 +241,21 @@ const DashboardFundraiser = () => {
                 <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
                     <Tab eventKey="home" title="Active Campaign">
                         <Row className="d-flex justify-content-start px-2">
-                            <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CampaignCard/>
-                            </Col>
-                            <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CampaignCard/>
-                            </Col>
-                            <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CampaignCard/>
-                            </Col>
+                            {
+                                activeCampaignList.map((campaign)=>{
+                                    return(
+                                        <Col lg={4} className="d-flex justify-content-center mb-2">
+                                            <CardCampaignActive 
+                                                id={campaign.id}
+                                                title={campaign.title}
+                                                imageURL={campaign.image_url}
+                                                amount={campaign.amount}
+                                                targetAmount={campaign.target_amount}
+                                                />
+                                        </Col>
+                                    )
+                                })
+                            }
                         </Row>
                     </Tab>
                     <Tab eventKey="campaignRequest" title="Campaign Request">
