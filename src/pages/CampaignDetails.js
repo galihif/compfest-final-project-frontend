@@ -54,6 +54,7 @@ const CampaignDetails = () => {
     //Method
     useEffect(() => {
         getCampaignData()
+        console.log(id)
     }, []);
 
     const getCampaignData = useCallback((e) => {
@@ -67,7 +68,6 @@ const CampaignDetails = () => {
             })
             .catch((err)=>{
                 console.log(err)
-                // refreshUserToken()
             })
     },[])
 

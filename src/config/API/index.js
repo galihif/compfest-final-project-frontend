@@ -14,7 +14,7 @@ const createCampaign = (body, headers) => Post('fundraiser/campaigns', body, hea
 const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
 const getUserTopUpList = (headers) => GetHeadersOnly('topup', headers)
 const getUserCampaignList = (headers) => GetHeadersOnly('fundraiser/campaigns', headers)
-const getAllCampaign = () => GetHeadersOnly('campaigns')
+const getAllCampaign = (headers) => GetHeadersOnly('campaigns', headers)
 const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
 
 const getCampaignById = (id, headers) => GetWithId('campaigns', id,headers)

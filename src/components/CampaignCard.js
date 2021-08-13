@@ -15,8 +15,8 @@ const CampaignCard = (props) => {
     const history = useHistory()
     const percentage = (props.amount / props.targetAmount) * 100
     return(
-        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push('/campaign')} >
-            <Card.Img variant="top" src="https://www.islamic-relief.org/wp-content/uploads/2021/04/original--1024x683.jpg" style={{ height: "10em", objectFit: "cover" }} />
+        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push(`/campaign/${props.id}`)} >
+            <Card.Img variant="top" src={props.imageURL} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{props.title}</Card.Title>
                 <ProgressBar now={percentage} style={{ height: "0.8em" }} />
