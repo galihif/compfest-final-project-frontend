@@ -3,7 +3,6 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
 import {shallow, configure} from "enzyme";
-import {cleanup, fireEvent, render} from '@testing-library/react';
 import AdminFundraiserCard from "../AdminFundraiserCard";
 import Gravatar from "react-gravatar";
 import {Button, Card} from "react-bootstrap";
@@ -25,11 +24,6 @@ describe("<AdminFundraserCard />", () => {
 
 	it('have a gravatar',() => {
 		expect(card.find(Gravatar)).toBeTruthy();
-	});
-
-	it('have 3 buttons',() => {
-		expect(card.find(Button)).toBeTruthy();
-		expect(card.find(Button)).toHaveLength(3);
 	});
 
 	it('is a card',() => {

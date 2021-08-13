@@ -5,9 +5,11 @@ import React from "react";
 import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import Gravatar from "react-gravatar";
+import { useHistory } from "react-router-dom";
 
 const AdminFundraiserCard = (props) => {
     const normalFont = { fontSize: "12px" };
+    const history = useHistory();
     // data
     const { email, 
             title, 
@@ -32,7 +34,7 @@ const AdminFundraiserCard = (props) => {
             )
         }
     return (
-        <Card className="campaign-card" style={{ width: "20em" }}>
+        <Card className="campaign-card" style={{ width: "20em" }} onClick={()=> history.push('/adminfundraiser')}>
             
             <Gravatar email={email} size={100} className="m-auto mt-2" style={{ borderRadius: "20em" }} />
             
@@ -46,23 +48,6 @@ const AdminFundraiserCard = (props) => {
                     title='Description'
                     data={description}
                 />
-                <Row>
-                    <Col lg={4}>
-                        <Button variant="primary" style={normalFont}>
-                            Accept
-                        </Button>
-                    </Col>
-                    <Col lg={4}>
-                        <Button variant="outline-primary" style={normalFont}>
-                            Details
-                        </Button>
-                    </Col>
-                    <Col lg={4}>
-                        <Button variant="danger" style={normalFont}>
-                            Reject
-                        </Button>
-                    </Col>
-                </Row>
             </Card.Body>
         </Card>
     );
