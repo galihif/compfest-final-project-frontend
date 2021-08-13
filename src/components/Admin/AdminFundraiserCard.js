@@ -2,41 +2,42 @@
 import React from "react";
 
 //Styles
-import "./Card.scss";
+import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
-import profileImage from "../assets/profileImage.svg";
+import Gravatar from "react-gravatar";
 
-const AdminFundraiserCard = () => {
+const AdminFundraiserCard = (props) => {
     const normalFont = { fontSize: "12px" };
+    // data
+    const { email, 
+            title, 
+            description} = props;
+
+    // Component
+    const makeRowWithText = (title,data) =>(
+            <Row>
+                <Col lg={5}> 
+                    <p className="text-start fw-bold" style={normalFont}>
+                        {title}
+                    </p>
+                </Col>
+                <Col lg={7}> 
+                    <p className="text-start" style={normalFont}>
+                        {data}
+                    </p>
+                </Col>
+            </Row>
+        )
     return (
         <Card className="campaign-card" style={{ width: "20em" }}>
-            <Card.Img
-                className="m-auto mt-3 mb-1"
-                variant="top"
-                src={profileImage}
-                style={{ width: "7em", objectFit: "cover" }}
-            />
+            
+            <Gravatar email={email} size={100} className="m-auto mt-2" style={{ borderRadius: "20em" }} />
+            
             <Card.Body>
-                <Card.Title className="text-center">Joko Widodo</Card.Title>
-                <Row>
-                    <Col lg={5}>
-                        <p className="text-start fw-bold" style={normalFont}>
-                            Email
-                        </p>
-                        <p className="text-start fw-bold" style={normalFont}>
-                            Description
-                        </p>
-                    </Col>
-                    <Col lg={7}>
-                        <p className="text-start" style={normalFont}>
-                            lrore@gmail.com
-                        </p>
-                        <p className="text-start" style={normalFont}>
-                            In publishing and graphic design, Lorem ipsum is a placeholder
-                            text commonly used demonstrate the visual ...
-                        </p>
-                    </Col>
-                </Row>
+                <Card.Title className="text-center">{title}</Card.Title>
+
+                {makeRowWithText('Email',email)}
+                {makeRowWithText('Description',description)}
                 <Row>
                     <Col lg={4}>
                         <Button variant="primary" style={normalFont}>

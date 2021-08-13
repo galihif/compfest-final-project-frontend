@@ -22,12 +22,11 @@ import {
 
 const CampaignDetails = () => {
     //State
-    
     const history = useHistory()
     const [show, setShow] = useState(false)
     const [walletAmount, setWalletAmount] = useState(10000)
     const [donateAmount, setDonateAmount] = useState(0)
-    const [isLogged, setLogged] = useState(true)
+    const [isAdmin, setAdmin] = useState(true)
 
     //Method
     const toggleDialog = () => setShow(!show)
@@ -130,14 +129,22 @@ const CampaignDetails = () => {
                             electronic typesetting, remaining essentially unchanged. It was popularised in th.
                         </p>
                         <Row className="d-grid my-2">
-                            <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
-                                DONATE
-                            </Button>
+                            <Col lg={6}>
+                                <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
+                                    Accept
+                                </Button>
+                            </Col>
+                            
+                            <Col lg={6}>
+                                <Button variant="danger" type="submit" onClick={() => toggleDialog()}>
+                                    Reject
+                                </Button>
+                            </Col>
                         </Row>
                     </Container>
                 </Container>
                 {
-                    isLogged ? dialogLogged : dialogNotLogged
+                    isAdmin ? dialogLogged : dialogNotLogged
                 }
             </div>
         </div>
