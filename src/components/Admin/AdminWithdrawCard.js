@@ -3,7 +3,7 @@
 import React from "react";
 
 //Styles
-import "./Card.scss";
+import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import profileImage from "../assets/profileImage.svg";
 
