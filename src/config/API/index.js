@@ -1,5 +1,5 @@
 import Post from './Post'
-import { GetHeadersOnly, GetWithId } from './Get'
+import { Get } from './Get'
 import Put from './Put'
 import Delete from './Delete'
 
@@ -9,16 +9,17 @@ const topUp = (body, headers) => Post("topup", body, headers)
 const login = (body, headers) => Post("login", body)
 const refresh = (data) => Post("refresh", data)
 const createCampaign = (body, headers) => Post('fundraiser/campaigns', body, headers)
+const donateCampaignById = (id,body, headers) => Post(`donor/campaigns/${id}`, body, headers)
 
 // GET
-const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
-const getUserTopUpList = (headers) => GetHeadersOnly('topup', headers)
-const getUserCampaignList = (headers) => GetHeadersOnly('fundraiser/campaigns', headers)
-const getAllCampaign = (headers) => GetHeadersOnly('campaigns', headers)
-const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
+const getCurrentUser = (headers) => Get('me', headers)
+const getUserTopUpList = (headers) => Get('topup', headers)
+const getUserCampaignList = (headers) => Get('fundraiser/campaigns', headers)
+const getAllCampaign = (headers) => Get('campaigns', headers)
+const getCampaignProposal = () => Get('admin/proposals')
 
-const getCampaignByIdFundraiser = (id, headers) => GetWithId('fundraiser/campaigns', id,headers)
-const getCampaignByIdDonor = (id, headers) => GetWithId('donor/campaigns', id,headers)
+const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${id}`,headers)
+const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
 
 // PUT
 
@@ -36,7 +37,8 @@ const API = {
     getCampaignProposal,
     topUp,
     getUserTopUpList,
-    getUserCampaignList
+    getUserCampaignList,
+    donateCampaignById
 }
 
 export default API;

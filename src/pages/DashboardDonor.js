@@ -137,6 +137,7 @@ const DashboardDonor = () => {
                 setEmail(userData.email)
                 setWalletAmount(userData.wallet_amount)
                 setId(userData.id)
+                dispatch({type:"SETUSERDATA", userData:userData})
             })
             .catch((err) => {
                 console.log(err,"get")

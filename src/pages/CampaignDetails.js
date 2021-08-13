@@ -125,8 +125,18 @@ const CampaignDetails = (props) => {
     }
 
     const handleClickPay = () => {
+        const body = {
+            amount: donateAmount,
+            password: password
+        }
         if (donateAmount <= walletAmount){
-            alert("Donate Successful")
+            API.donateCampaignById(id,body,headers)
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
         } else{
             alert("Your E-wallet balance is not enough")
         }
