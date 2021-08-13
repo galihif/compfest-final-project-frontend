@@ -57,7 +57,7 @@ const CampaignDetails = (props) => {
     //Method
     useEffect(() => {
         getCampaignData()
-    }, []);
+    }, [show]);
 
     const getCampaignData = useCallback((e) => {
         if (userRole === "FUNDRAISER") {
@@ -126,19 +126,24 @@ const CampaignDetails = (props) => {
 
     const handleClickPay = () => {
         const body = {
-            amount: donateAmount,
+            amount: parseInt(donateAmount),
             password: password
         }
-        if (donateAmount <= walletAmount){
+        if (donateAmount <= walletAmount && donateAmount>=5000){
             API.donateCampaignById(id,body,headers)
                 .then((res) => {
                     console.log(res)
+                    toggleDialog()
+                    alert(res.data.status)
                 })
                 .catch((err)=>{
-                    console.log(err)
+                    console.log(err.response)
+                    alert(err.response.data)
                 })
-        } else{
+        } else if (walletAmount <= donateAmount){
             alert("Your E-wallet balance is not enough")
+        } else if (parseInt(donateAmount) < 5000){
+            alert("Minimum amount is Rp 5000")
         }
     }
 
