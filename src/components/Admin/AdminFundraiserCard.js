@@ -14,20 +14,23 @@ const AdminFundraiserCard = (props) => {
             description} = props;
 
     // Component
-    const makeRowWithText = (title,data) =>(
-            <Row>
-                <Col lg={5}> 
-                    <p className="text-start fw-bold" style={normalFont}>
-                        {title}
-                    </p>
-                </Col>
-                <Col lg={7}> 
-                    <p className="text-start" style={normalFont}>
-                        {data}
-                    </p>
-                </Col>
-            </Row>
-        )
+    const CardRow = (props) =>{
+            const {title,data} = props;
+            return (
+                <Row className="card-row">
+                    <Col lg={5}> 
+                        <p className="text-start fw-bold" style={normalFont}>
+                            {title}
+                        </p>
+                    </Col>
+                    <Col lg={7}> 
+                        <p className="text-start" style={normalFont}>
+                            {data}
+                        </p>
+                    </Col>
+                </Row>
+            )
+        }
     return (
         <Card className="campaign-card" style={{ width: "20em" }}>
             
@@ -35,9 +38,14 @@ const AdminFundraiserCard = (props) => {
             
             <Card.Body>
                 <Card.Title className="text-center">{title}</Card.Title>
-
-                {makeRowWithText('Email',email)}
-                {makeRowWithText('Description',description)}
+                <CardRow 
+                    title='Email'
+                    data={email}
+                />
+                <CardRow 
+                    title='Description'
+                    data={description}
+                />
                 <Row>
                     <Col lg={4}>
                         <Button variant="primary" style={normalFont}>

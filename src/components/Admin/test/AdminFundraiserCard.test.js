@@ -3,6 +3,7 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
 import {shallow, configure} from "enzyme";
+import {cleanup, fireEvent, render} from '@testing-library/react';
 import AdminFundraiserCard from "../AdminFundraiserCard";
 import Gravatar from "react-gravatar";
 import {Button, Card} from "react-bootstrap";
@@ -12,12 +13,14 @@ describe("<AdminFundraserCard />", () => {
 	const name = "jokowiddod";
 	const email = "jokowiddo@gmail.com";
 	const description = "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used demonstrate the visual ...";
-	const card = shallow(
+	const component = 
 		<AdminFundraiserCard
 			title={name}
 			email={email}
 			description={description}
 		/>
+	const card = shallow(
+		component
 	);
 
 	it('have a gravatar',() => {
@@ -39,11 +42,8 @@ describe("<AdminFundraserCard />", () => {
 		expect(card.text()).toMatch(new RegExp(name));
 	});
 
-	it('contains email',() => {
-		expect(card.text()).toMatch(new RegExp(email));
+	it('contains 2 cardrow',() => {
+		expect(card.find("CardRow")).toHaveLength(2);
 	});
 
-	it('contains description',() => {
-		expect(card.text()).toMatch(new RegExp(description));
-	});
 });
