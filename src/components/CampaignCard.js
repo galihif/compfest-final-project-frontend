@@ -1,6 +1,7 @@
 //Library
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch, connect } from 'react-redux'
 
 //Styles
 import './Card.scss'
@@ -14,8 +15,16 @@ import {
 const CampaignCard = (props) => {
     const history = useHistory()
     const percentage = (props.amount / props.targetAmount) * 100
+
+    const handleCardClicked = () => {
+        if(props.isLogged){
+            history.push(`/campaign/${props.id}`)
+        } else {
+            alert("Login to see the campaign details")
+        }
+    }
     return(
-        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push(`/campaign/${props.id}`)} >
+        <Card className="campaign-card" style={{ width: "20em" }} onClick={handleCardClicked} >
             <Card.Img variant="top" src={props.imageURL} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{props.title}</Card.Title>
@@ -35,4 +44,10 @@ const CampaignCard = (props) => {
     )
 }
 
-export default CampaignCard
+function mapStateToProps(state, ownProps) {
+    return {
+        isLogged: state.isLogged,
+    };
+}
+
+export default connect(mapStateToProps)(CampaignCard)
