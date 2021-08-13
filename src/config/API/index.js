@@ -17,7 +17,8 @@ const getUserCampaignList = (headers) => GetHeadersOnly('fundraiser/campaigns', 
 const getAllCampaign = (headers) => GetHeadersOnly('campaigns', headers)
 const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
 
-const getCampaignById = (id, headers) => GetWithId('campaigns', id,headers)
+const getCampaignByIdFundraiser = (id, headers) => GetWithId('fundraiser/campaigns', id,headers)
+const getCampaignByIdDonor = (id, headers) => GetWithId('donor/campaigns', id,headers)
 
 // PUT
 
@@ -30,7 +31,8 @@ const API = {
     refresh,
     getCurrentUser,
     getAllCampaign,
-    getCampaignById,
+    getCampaignByIdFundraiser,
+    getCampaignByIdDonor,
     getCampaignProposal,
     topUp,
     getUserTopUpList,
