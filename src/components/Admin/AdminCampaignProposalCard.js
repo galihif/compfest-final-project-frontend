@@ -20,7 +20,7 @@ const AdminCampaignProposalCard = (props) => {
             imageLink} = props;
     const history = useHistory();
     return(
-        <Card className="campaign-card" style={{ width: "20em" }}>
+        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push('/adminproposal')}>
             <Card.Img variant="top" src={imageLink} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
@@ -35,7 +35,6 @@ const AdminCampaignProposalCard = (props) => {
                         <p style={{fontSize:"12px"}}>{name}</p>
                         <p style={{fontSize:"12px"}}>{email}</p>
                     </Col>
-
                 </Row>
             </Card.Body>
         </Card>

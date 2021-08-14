@@ -1,7 +1,6 @@
 //Library
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
 import Gravatar from 'react-gravatar'
 
 //Styles
@@ -10,11 +9,7 @@ import {
     Container,
     Row,
     Col,
-    ProgressBar,
-    Form,
-    Image,
     Breadcrumb,
-    Modal
 } from 'react-bootstrap';
 
 
@@ -23,17 +18,10 @@ import {
 const AdminFundraiserDetails = () => {
     //State
     const history = useHistory()
-    const [show, setShow] = useState(false)
-    const [walletAmount, setWalletAmount] = useState(10000)
-    const [donateAmount, setDonateAmount] = useState(0)
     const [isAdmin, setAdmin] = useState(true);
 
 
     //Method
-    const toggleDialog = () => {
-        setShow(!show)
-    }
-
     const handleAccept = () =>{
         
     }
