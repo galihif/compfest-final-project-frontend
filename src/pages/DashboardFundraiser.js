@@ -233,7 +233,7 @@ const DashboardFundraiser = () => {
                         </Row>
                         <Row className="my-3">
                             <Col className="d-flex justify-content-center">
-                                <Button variant="primary" size="sm" onClick={toggleDialog} >Make a Campaign</Button>
+                                <Button variant="primary" size="sm" onClick={()=>verified?toggleDialog():alert("You can't make a campaign if not verified")} >Make a Campaign</Button>
                             </Col>
                         </Row>
                     </Container>
