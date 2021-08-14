@@ -17,7 +17,7 @@ const CampaignCard = (props) => {
     const percentage = (props.amount / props.targetAmount) * 100
 
     const handleCardClicked = () => {
-        if(props.isLogged){
+        if(props.isLogged && props.userData.role ==="DONATUR"){
             history.push(`/campaign/${props.id}`)
         } else {
             alert("Login to see the campaign details")
@@ -47,6 +47,7 @@ const CampaignCard = (props) => {
 function mapStateToProps(state, ownProps) {
     return {
         isLogged: state.isLogged,
+        userData: state.userData
     };
 }
 

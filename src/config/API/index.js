@@ -10,6 +10,7 @@ const login = (body, headers) => Post("login", body)
 const refresh = (data) => Post("refresh", data)
 const createCampaign = (body, headers) => Post('fundraiser/campaigns', body, headers)
 const donateCampaignById = (id,body, headers) => Post(`donor/campaigns/${id}`, body, headers)
+const withdrawCampaignById = (id,body, headers) => Post(`fundraiser/campaigns/${id}`, body, headers)
 
 // GET
 const getCurrentUser = (headers) => Get('me', headers)
@@ -39,7 +40,8 @@ const API = {
     topUp,
     getUserTopUpList,
     getUserCampaignList,
-    donateCampaignById
+    donateCampaignById,
+    withdrawCampaignById,
 }
 
 export default API;

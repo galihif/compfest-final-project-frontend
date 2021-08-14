@@ -40,6 +40,7 @@ const CampaignDetails = (props) => {
     const [walletAmount, setWalletAmount] = useState(props.userData.wallet_amount)
     const [donateAmount, setDonateAmount] = useState(0)
     const [password, setPassword] = useState("")
+    const [withdrawAmount, setWithdrawAmount] = useState(0)
 
     const [title, setTitle] = useState("Loading")
     const [description, setDescription] = useState("")
@@ -116,6 +117,9 @@ const CampaignDetails = (props) => {
             case "donateAmount":
                 setDonateAmount(e.target.value)
                 break
+            case "withdrawAmount":
+                setWithdrawAmount(e.target.value)
+                break
             case "password":
                 setPassword(e.target.value)
                 break
@@ -147,6 +151,19 @@ const CampaignDetails = (props) => {
         }
     }
 
+    const handleClickWithdraw = () => {
+        const body = {
+            amount: parseInt(withdrawAmount)
+        }
+        if (withdrawAmount <= amount && withdrawAmount !== 0) {
+           //TODO withdraw
+        } else if (withdrawAmount>amount){
+            alert("amount is too high")
+        } else if (withdrawAmount === "undefined") {
+            alert("Fill the amount")
+        }
+    }
+
     //Component
 
     const dialogNotLogged = 
@@ -166,6 +183,53 @@ const CampaignDetails = (props) => {
                 </Button>
             </Modal.Footer>
         </Modal>
+
+    const dialogDonor =
+        <Modal show={show}>
+            <Modal.Header >
+                <Modal.Title>Donate To This Campaign</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form.Group className="mb-3" controlId="donateAmount" onChange={handleChange}>
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control type="number" placeholder="Enter Amount (Rp)" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="password" onChange={handleChange}>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Enter Your Password" />
+                </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={toggleDialog}>
+                    Cancel
+                </Button>
+                <Button variant="primary" onClick={handleClickPay}>
+                    Pay with E-Wallet
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
+    const dialogFundraiser =
+        <Modal show={show}>
+            <Modal.Header >
+                <Modal.Title>Withdraw This Campaign</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form.Group className="mb-3" controlId="withdrawAmount" onChange={handleChange}>
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control type="number" placeholder="Enter Amount (Rp)" />
+                </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={toggleDialog}>
+                    Cancel
+                </Button>
+                <Button variant="primary" onClick={handleClickWithdraw}>
+                    Make Request
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
 
     return (
         <div className="d-flex justify-content-center align-items-center">
@@ -205,35 +269,25 @@ const CampaignDetails = (props) => {
                             {description}
                         </p>
                         <Row className="d-grid my-2">
-                            <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
-                                DONATE
-                            </Button>
+                            {
+                                props.userData.role === "DONATUR" ? (
+                                    <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
+                                        DONATE
+                                    </Button>
+                                ) : (
+                                    <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
+                                        WITHDRAW
+                                    </Button>
+                                )
+                            }
                         </Row>
                     </Container>
                 </Container>
-                <Modal show={show}>
-                    <Modal.Header >
-                        <Modal.Title>Donate To This Campaign</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form.Group className="mb-3" controlId="donateAmount" onChange={handleChange}>
-                            <Form.Label>Amount</Form.Label>
-                            <Form.Control type="number" placeholder="Enter Amount (Rp)" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="password" onChange={handleChange}>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Your Password" />
-                        </Form.Group>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={toggleDialog}>
-                            Cancel
-                        </Button>
-                        <Button variant="primary" onClick={handleClickPay}>
-                            Pay with E-Wallet
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                {
+                    props.userData.role === "DONATUR" ? (
+                        dialogDonor
+                    ) : (dialogFundraiser)
+                }
             </div>
         </div>
     )
