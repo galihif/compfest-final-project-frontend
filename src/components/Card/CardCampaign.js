@@ -17,14 +17,10 @@ const CampaignCard = (props) => {
     const percentage = (props.amount / props.targetAmount) * 100
 
     const handleCardClicked = () => {
-        if(props.isLogged && props.userData.role ==="DONATUR"){
-            history.push(`/campaign/${props.id}`)
-        } else {
-            alert("Login to see the campaign details")
-        }
+        history.push(`/campaign/${props.id}`)
     }
     return(
-        <Card className="campaign-card" style={{ width: "20em" }} onClick={handleCardClicked} >
+        <Card className="card-campaign" style={{ width: "20em" }} onClick={handleCardClicked} >
             <Card.Img variant="top" src={props.imageURL} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{props.title}</Card.Title>

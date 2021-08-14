@@ -12,7 +12,7 @@ import {
  } from 'react-bootstrap';
 
 //Assets
-import headerImage from '../assets/headerImage.svg'
+import headerImage from '../../assets/headerImage.svg'
 
 
 const Header = () => {

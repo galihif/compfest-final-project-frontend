@@ -3,14 +3,14 @@
 import React from "react";
 
 //Styles
-import "./Card.scss";
+import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import profileImage from "../assets/profileImage.svg";
 
-const AdminUserCard = () => {
+const AdminWithdrawCard = () => {
     const normalFont = { fontSize: "12px" };
     return (
-        <Card className="campaign-card" style={{ width: "20em" }}>
+        <Card className="card-campaign" style={{ width: "20em" }}>
             <Card.Img
                 className="m-auto mt-3 mb-1"
                 variant="top"
@@ -25,6 +25,9 @@ const AdminUserCard = () => {
                             Amount
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
+                            Email
+                        </p>
+                        <p className="text-start fw-bold" style={normalFont}>
                             Bank Name
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
@@ -36,6 +39,9 @@ const AdminUserCard = () => {
                             Rp.100.000
                         </p>
                         <p className="text-start" style={normalFont}>
+                            lrore@gmail.com
+                        </p>
+                        <p className="text-start" style={normalFont}>
                             BCA
                         </p>
                         <p className="text-start" style={normalFont}>
@@ -44,6 +50,15 @@ const AdminUserCard = () => {
 
                     </Col>
 
+                    <Col lg={5}>
+                        <p className="text-start fw-bold" style={normalFont}>
+                            Campaign
+                        </p>
+                    </Col>
+
+                    <Col sm={7}>
+                        <a href='/'>tets</a>
+                    </Col>
                 </Row>
                 <Row>
                     <Col lg={4}>
@@ -63,4 +78,4 @@ const AdminUserCard = () => {
     );
 };
 
-export default AdminUserCard;
+export default AdminWithdrawCard;

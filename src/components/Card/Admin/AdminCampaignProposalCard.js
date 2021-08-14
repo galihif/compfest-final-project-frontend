@@ -2,7 +2,7 @@
 import React from 'react'
 
 //Styles
-import './Card.scss'
+import '../Card.scss'
 import {
     Button,
     Row,
@@ -13,7 +13,7 @@ import {
 const AdminCampaignProposalCard = () => {
     const normalFont = { fontSize: "12px" };
     return(
-        <Card className="campaign-card" style={{ width: "20em" }}>
+        <Card className="card-campaign" style={{ width: "20em" }}>
             <Card.Img variant="top" src="https://www.islamic-relief.org/wp-content/uploads/2021/04/original--1024x683.jpg" style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>Help Poor People in India</Card.Title>

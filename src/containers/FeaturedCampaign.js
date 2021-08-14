@@ -8,7 +8,7 @@ import {
     Container
  } from 'react-bootstrap';
 import API from '../config/API';
-import CampaignCard from './CampaignCard';
+import CardCampaign from '../components/Card/CardCampaign';
 
 
 
@@ -48,7 +48,7 @@ const FeaturedCampaign = (props) => {
                     campaignList.map((campaign)=>{
                         return(
                             <Col lg={3} className="d-flex justify-content-center mb-3">
-                                <CampaignCard
+                                <CardCampaign
                                     id={campaign.id}
                                     imageURL={campaign.image_url}
                                     title={campaign.title}

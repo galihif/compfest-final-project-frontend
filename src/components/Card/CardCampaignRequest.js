@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 //Styles
-import '../Card.scss'
+import './Card.scss'
 import {
     Button,
     ProgressBar,
@@ -24,7 +24,7 @@ const CardCampaignRequest = (props) => {
     const refreshToken = userToken.refresh
 
     return(
-        <Card className="" style={{ width: "20em" }}>
+        <Card className="card-campaign" style={{ width: "20em" }}>
             <Card.Img variant="top" src={props.imageURL} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{props.title}</Card.Title>

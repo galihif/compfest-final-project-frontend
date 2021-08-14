@@ -25,10 +25,9 @@ import {
 
 
 //Assets
-import CardCampaignActive from '../components/Fundraiser/CardCampaignActive';
-import CardCampaignRequest from '../components/Fundraiser/CardCampaignRequest';
-import BoxWithdrawRequest from '../components/Fundraiser/BoxWithdrawRequest';
-import axios from 'axios';
+import CardCampaign from '../components/Card/CardCampaign';
+import CardCampaignRequest from '../components/Card/CardCampaignRequest';
+import BoxWithdrawRequest from '../components/Box/BoxWithdrawRequest';
 
 const DashboardFundraiser = () => {
     //State
@@ -245,7 +244,7 @@ const DashboardFundraiser = () => {
                                 activeCampaignList.map((campaign)=>{
                                     return(
                                         <Col lg={4} className="d-flex justify-content-center mb-2">
-                                            <CardCampaignActive 
+                                            <CardCampaign
                                                 id={campaign.id}
                                                 title={campaign.title}
                                                 imageURL={campaign.image_url}

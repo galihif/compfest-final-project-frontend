@@ -19,8 +19,8 @@ import {
 
 
 //Assets
-import DonationHistoryBox from '../components/Donor/DonationHistoryBox';
-import TopUpHistoryBox from '../components/Donor/TopUpHistoryBox';
+import DonationHistoryBox from '../components/Box/DonationHistoryBox';
+import TopUpHistoryBox from '../components/Box/TopUpHistoryBox';
 import API from '../config/API';
 
 const DashboardDonor = () => {
