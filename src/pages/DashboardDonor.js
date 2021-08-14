@@ -19,9 +19,9 @@ import {
 
 
 //Assets
-import DonationHistoryBox from '../components/Box/DonationHistoryBox';
-import TopUpHistoryBox from '../components/Box/TopUpHistoryBox';
 import API from '../config/API';
+import DonorDonationHistory from '../containers/DonorDonationHistory';
+import DonorTopupHistory from '../containers/DonorTopupHistory';
 
 const DashboardDonor = () => {
     //State
@@ -47,8 +47,6 @@ const DashboardDonor = () => {
     const [bankAccountNumber, setBankAccountNumber] = useState("")
     const [amount, setAmount] = useState()
 
-    const [topUpHistoryList, setTopUpHistoryList] = useState([])
-    const [donationHistoryList, setDonationHistoryList] = useState([])
 
 
     const headers = {
@@ -59,9 +57,6 @@ const DashboardDonor = () => {
     //Method
     useEffect(() => {
         getUserData()
-        getTopUpHistory()
-        getDonationHistory()
-        console.log(donationHistoryList,"use")
     }, [show]);
 
     const toggleDialog = () => setShow(!show)
@@ -112,26 +107,6 @@ const DashboardDonor = () => {
                     }
                 })
         }
-    }
-
-    const getDonationHistory = useCallback((e)=>{
-        API.getDonateHistoryDonor(headers)
-            .then((res)=>{
-                setDonationHistoryList(res.data)
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-    },[donationHistoryList])
-
-    const getTopUpHistory = () => {
-        API.getUserTopUpList(headers)
-            .then((res) => {
-                setTopUpHistoryList(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     }
 
     const handleLogout = () => {
@@ -217,29 +192,10 @@ const DashboardDonor = () => {
                 </Container>
                 <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
                     <Tab eventKey="home" title="Donation History">
-                        {
-                            donationHistoryList.map((donation)=>{
-                                return(
-                                    <DonationHistoryBox 
-                                        campaign={donation.campaign}
-                                        amount={donation.amount}
-                                        date={donation.date}
-                                        />
-                                )
-                            })
-                        }
+                        <DonorDonationHistory/>
                     </Tab>
                     <Tab eventKey="profile" title="Top Up History">
-                        {
-                            topUpHistoryList.map((topup) => {
-                                return(
-                                    <TopUpHistoryBox
-                                        amount={topup.amount}
-                                        date={topup.date}
-                                        status={topup.status} />
-                                )
-                            })
-                        }
+                        <DonorTopupHistory/>
                     </Tab>
                 </Tabs>
             </div>
