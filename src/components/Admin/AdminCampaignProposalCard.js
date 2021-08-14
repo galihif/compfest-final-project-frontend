@@ -2,23 +2,26 @@
 import React from 'react'
 
 //Styles
-import './Card.scss'
+import '../Card.scss'
 import {
     Button,
     Row,
     Col,
     Card
 } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const AdminCampaignProposalCard = (props) => {
     const normalFont = { fontSize: "12px" };
     const { title,
             email,
             target,
-            name } = props;
+            name,
+            imageLink} = props;
+    const history = useHistory();
     return(
         <Card className="campaign-card" style={{ width: "20em" }}>
-            <Card.Img variant="top" src="https://www.islamic-relief.org/wp-content/uploads/2021/04/original--1024x683.jpg" style={{ height: "10em", objectFit: "cover" }} />
+            <Card.Img variant="top" src={imageLink} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Row>

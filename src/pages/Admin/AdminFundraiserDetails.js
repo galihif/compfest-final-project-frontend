@@ -34,59 +34,22 @@ const AdminFundraiserDetails = () => {
         setShow(!show)
     }
 
-    const handleChange = (e) => {
-        switch(e.target.id){
-            case "donateAmount":
-                setDonateAmount(e.target.value)
-                break
-            default:
-                break
-        }
+    const handleAccept = () =>{
+        
+    }
+    const handleReject = () =>{
+        
     }
 
-    const handleClickPay = () => {
-        if (donateAmount <= walletAmount){
-            alert("Donate Successful")
-        } else{
-            alert("E-waller ga cukup bos")
-        }
-    }
+    //Component
     const acceptButton = 
-        <Button variant="primary" type="submit" className="w-50" onClick={() => {
-            toggleDialog();
-            }}>
+        <Button variant="primary" type="submit" className="w-50" onClick={() => handleAccept()}>
             Accept
         </Button>
     const rejectButton = 
-        <Button variant="danger" type="submit" className="w-50" onClick={() => {
-            toggleDialog();
-        }}>
+        <Button variant="danger" type="submit" className="w-50" onClick={() => handleReject()}>
             Reject
         </Button>
-    //Component
-    const dialogLogged =
-        <Modal show={show}>
-            <Modal.Header>
-                <Modal.Title>Donate To This Campaign</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Modal.Title>Jokowidodo</Modal.Title>
-                <p>
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled it to make a type
-                    specimen book. It has survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged. It was popularised in th.
-                </p>
-            </Modal.Body>
-            <Modal.Footer>
-                    <Col>
-                        <Button variant="secondary" onClick={toggleDialog}>
-                            Cancel
-                        </Button>
-                        
-                    </Col>
-            </Modal.Footer>
-        </Modal>
 
     if(!isAdmin)
         history.push('/');
