@@ -1,8 +1,8 @@
 
 //Component
-import FeaturedCard from "../components/FeaturedCard"
+// import FeaturedCard from "../components/FeaturedCard"
 import Header from "../components/Header"
-import CampaignCard from "../components/CampaignCard"
+// import CampaignCard from "../components/CampaignCard"
 import FeaturedCampaign from "../components/FeaturedCampaign"
 // import AdminFundraiserCard from "../components/AdminFundraiserCard"
 // import AdminWithdrawCard from "../components/AdminWithdrawCard"

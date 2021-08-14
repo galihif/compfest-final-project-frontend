@@ -14,7 +14,7 @@ import {
     Row,
     Col
 } from 'react-bootstrap';
-import API from '../config/API';
+import API from '../../config/API';
 import './NavbarM.scss'
 
 // //Images

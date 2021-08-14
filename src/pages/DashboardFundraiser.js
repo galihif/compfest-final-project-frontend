@@ -25,9 +25,9 @@ import {
 
 
 //Assets
-import CardCampaignActive from '../components/CardCampaignActive';
-import CardCampaignRequest from '../components/CardCampaignRequest';
-import BoxWithdrawRequest from '../components/BoxWithdrawRequest';
+import CardCampaignActive from '../components/Fundraiser/CardCampaignActive';
+import CardCampaignRequest from '../components/Fundraiser/CardCampaignRequest';
+import BoxWithdrawRequest from '../components/Fundraiser/BoxWithdrawRequest';
 import axios from 'axios';
 
 const DashboardFundraiser = () => {

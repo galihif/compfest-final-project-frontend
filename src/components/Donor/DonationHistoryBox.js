@@ -2,7 +2,6 @@
 import React from 'react'
 
 //Styles
-import './Header.scss'//Styles
 import { 
     Button,
     Image,

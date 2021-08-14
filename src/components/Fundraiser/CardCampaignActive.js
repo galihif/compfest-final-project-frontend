@@ -3,7 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 //Styles
-import './Card.scss'
+import '../Card.scss'
 import {
     ProgressBar,
     Row,

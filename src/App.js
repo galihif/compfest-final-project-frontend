@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //component
 import Home from './pages/Home'
-import NavbarM from "./components/NavbarM";
+import NavbarM from "./components/Navbar/NavbarM";
 import Footer from "./components/Footer";
 import RegisterDonor from "./pages/RegisterDonor";
 import RegisterFundraiser from "./pages/RegisterFundraiser";

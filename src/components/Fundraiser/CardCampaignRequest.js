@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 //Styles
-import './Card.scss'
+import '../Card.scss'
 import {
     Button,
     ProgressBar,
