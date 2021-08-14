@@ -14,17 +14,17 @@ import {
 //Assets
 
 
-const DonationHistoryBox = () => {
+const DonationHistoryBox = (props) => {
     return (
         <Container className="donation-history-box  p-3 my-2" style={{ backgroundColor: "white", borderRadius: "0.8em", border: "1px solid #DFDFDF" }}>
             <Container>
                 <Row>
                     <Col lg={6}>
-                        <h6>Help Poor People in India</h6>
-                        <p className="m-0">22/02/2022</p>
+                        <h6>{props.campaign}</h6>
+                        <p className="m-0">{props.date}</p>
                     </Col>
                     <Col lg={6}>
-                        <p className="text-success text-end">Rp. 290.000</p>
+                        <p className="text-success text-end">Rp. {props.amount}</p>
                     </Col>
                 </Row>
             </Container>

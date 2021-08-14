@@ -48,6 +48,7 @@ const DashboardDonor = () => {
     const [amount, setAmount] = useState()
 
     const [topUpHistoryList, setTopUpHistoryList] = useState([])
+    const [donationHistoryList, setDonationHistoryList] = useState([])
 
 
     const headers = {
@@ -59,6 +60,8 @@ const DashboardDonor = () => {
     useEffect(() => {
         getUserData()
         getTopUpHistory()
+        getDonationHistory()
+        console.log(donationHistoryList,"use")
     }, [show]);
 
     const toggleDialog = () => setShow(!show)
@@ -103,20 +106,28 @@ const DashboardDonor = () => {
                     alert("Top Up Request Success. Check Your Top Up History")
                 })
                 .catch((err) => {
-                    console.log(err)
+                    console.log(err.response.status)
+                    if(err.response.status === 401){
+                        refreshUserToken()
+                    }
                 })
         }
     }
 
+    const getDonationHistory = useCallback((e)=>{
+        API.getDonateHistoryDonor(headers)
+            .then((res)=>{
+                setDonationHistoryList(res.data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    },[donationHistoryList])
+
     const getTopUpHistory = () => {
         API.getUserTopUpList(headers)
             .then((res) => {
-                const snapshot = res.data
-                const items = []
-                snapshot.forEach((data) => {
-                    items.push(data)
-                })
-                setTopUpHistoryList(items)
+                setTopUpHistoryList(res.data)
             })
             .catch((err) => {
                 console.log(err)
@@ -140,8 +151,11 @@ const DashboardDonor = () => {
                 dispatch({type:"SETUSERDATA", userData:userData})
             })
             .catch((err) => {
-                console.log(err,"get")
-                refreshUserToken()
+                console.log(err, "get")
+                console.log(err.response.status)
+                if (err.response.status===401) {
+                    refreshUserToken()
+                }
             })
     }
 
@@ -203,9 +217,17 @@ const DashboardDonor = () => {
                 </Container>
                 <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
                     <Tab eventKey="home" title="Donation History">
-                        <DonationHistoryBox />
-                        <DonationHistoryBox />
-                        <DonationHistoryBox />
+                        {
+                            donationHistoryList.map((donation)=>{
+                                return(
+                                    <DonationHistoryBox 
+                                        campaign={donation.campaign}
+                                        amount={donation.amount}
+                                        date={donation.date}
+                                        />
+                                )
+                            })
+                        }
                     </Tab>
                     <Tab eventKey="profile" title="Top Up History">
                         {

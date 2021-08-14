@@ -16,8 +16,8 @@ const getCurrentUser = (headers) => Get('me', headers)
 const getUserTopUpList = (headers) => Get('topup', headers)
 const getUserCampaignList = (headers) => Get('fundraiser/campaigns', headers)
 const getAllCampaign = (headers) => Get('campaigns', headers)
-const getCampaignProposal = () => Get('admin/proposals')
-
+// const getCampaignProposal = () => Get('admin/proposals')
+const getDonateHistoryDonor = (headers) => Get('donate',headers)
 const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${id}`,headers)
 const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
 
@@ -34,7 +34,8 @@ const API = {
     getAllCampaign,
     getCampaignByIdFundraiser,
     getCampaignByIdDonor,
-    getCampaignProposal,
+    // getCampaignProposal,
+    getDonateHistoryDonor,
     topUp,
     getUserTopUpList,
     getUserCampaignList,
