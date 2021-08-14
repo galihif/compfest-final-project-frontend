@@ -25,9 +25,10 @@ import {
 
 
 //Assets
-import CardCampaign from '../components/Card/CardCampaign';
-import CardCampaignRequest from '../components/Card/CardCampaignRequest';
 import BoxWithdrawRequest from '../components/Box/BoxWithdrawRequest';
+import FundraiserActiveCampaign from '../containers/FundraiserActiveCampaign';
+import FundraiserCampaignRequest from '../containers/FundraiserCampaignRequest';
+import FundraiserWithdrawRequest from '../containers/FundraiserWithdrawRequest';
 
 const DashboardFundraiser = () => {
     //State
@@ -54,9 +55,6 @@ const DashboardFundraiser = () => {
     const [targetAmount, setTargetAmount] = useState("")
     const [imageURL, setImageURL] = useState("")
 
-    const [activeCampaignList,setActiveCampaignList] = useState([])
-    const [requestedCampaignList,setRequestedCampaignList] = useState([])
-
     const headers = {
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`
@@ -65,7 +63,6 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-        getCampaignList()
     }, [show])
 
     const toggleDialog = () => setShow(!show)
@@ -109,28 +106,6 @@ const DashboardFundraiser = () => {
         }
     }
 
-    const getCampaignList = useCallback((e) => {
-        API.getUserCampaignList(headers)
-            .then((res) => {
-                const snapshot = res.data
-                const activeCampaigns = []
-                const requestedCampaigns = []
-                snapshot.forEach((campaign) => {
-                    if(campaign.status === "VERIFIED"){
-                        activeCampaigns.push(campaign)
-                    } else {
-                        requestedCampaigns.push(campaign)
-                    }
-                })
-                setActiveCampaignList(activeCampaigns)
-                setRequestedCampaignList(requestedCampaigns)
-            })
-            .catch((err) => {
-                console.log(err)
-                refreshUserToken()
-            })
-    }, [activeCampaignList,requestedCampaignList])
-
     const getUserData = useCallback((e) => {
         API.getCurrentUser(headers)
             .then((res) => {
@@ -143,7 +118,6 @@ const DashboardFundraiser = () => {
                 setId(userData.id)
             })
             .catch((err) => {
-                console.log(err,"getuser")
                 refreshUserToken()
             })
     },[firstName,lastName,email,walletAmount,verified,id])
@@ -239,58 +213,13 @@ const DashboardFundraiser = () => {
                 </Container>
                 <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
                     <Tab eventKey="home" title="Active Campaign">
-                        <Row className="d-flex justify-content-start px-2">
-                            {
-                                activeCampaignList.map((campaign)=>{
-                                    return(
-                                        <Col lg={4} className="d-flex justify-content-center mb-2">
-                                            <CardCampaign
-                                                id={campaign.id}
-                                                title={campaign.title}
-                                                imageURL={campaign.image_url}
-                                                amount={campaign.amount}
-                                                targetAmount={campaign.target_amount}
-                                                />
-                                        </Col>
-                                    )
-                                })
-                            }
-                        </Row>
+                        <FundraiserActiveCampaign/>
                     </Tab>
                     <Tab eventKey="campaignRequest" title="Campaign Request">
-                        <Row className="d-flex justify-content-start px-2">
-                            {
-                                requestedCampaignList.map((campaign)=>{
-                                    return(
-                                        <Col lg={4} className="d-flex justify-content-center mb-4">
-                                            <CardCampaignRequest
-                                                id={campaign.id}
-                                                title={campaign.title}
-                                                imageURL={campaign.image_url}
-                                                targetAmount={campaign.target_amount}
-                                                status={campaign.status} 
-                                                />
-                                        </Col>
-                                    )
-                                })
-                            }
-                        </Row>
+                        <FundraiserCampaignRequest/>
                     </Tab>
                     <Tab eventKey="withdrawRequest" title="Withdrawal Request">
-                        <Row className="d-flex justify-content-start px-2">
-                            <Col lg={3} className="d-flex justify-content-center mb-2">
-                                <BoxWithdrawRequest/>
-                            </Col>
-                            <Col lg={3} className="d-flex justify-content-center mb-2">
-                                <BoxWithdrawRequest/>
-                            </Col>
-                            <Col lg={3} className="d-flex justify-content-center mb-2">
-                                <BoxWithdrawRequest/>
-                            </Col>
-                            <Col lg={3} className="d-flex justify-content-center mb-2">
-                                <BoxWithdrawRequest/>
-                            </Col>
-                        </Row>
+                        <FundraiserWithdrawRequest/>
                     </Tab>
                 </Tabs>
             </div>
