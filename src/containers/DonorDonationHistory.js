@@ -4,7 +4,9 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
-
+import emptyState from '../assets/emptyDonationHistory.svg'
+import { Image, Row, Col } from 'react-bootstrap'
+import { Button } from 'bootstrap'
 
 const DonorDonationHistory = () => {
     //State
@@ -55,6 +57,22 @@ const DonorDonationHistory = () => {
 
     return(
         <div>
+            {
+                donationHistoryList.length === 0 ? (
+                    <div>
+                        <Row>
+                            <Col className="d-flex justify-content-center">
+                                <Image src={emptyState} />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="d-flex justify-content-center ">
+                                <p>You Have No Donation History</p>
+                            </Col>
+                        </Row>
+                    </div>
+                ):null
+            }
             {
                 donationHistoryList.map((donation) => {
                     return (

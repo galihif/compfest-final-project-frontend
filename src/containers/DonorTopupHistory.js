@@ -3,8 +3,10 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
-import DonationHistoryBox from '../components/Box/DonationHistoryBox'
 import TopUpHistoryBox from '../components/Box/TopUpHistoryBox'
+
+import emptyState from '../assets/emptyTopupHistory.svg'
+import { Image, Row, Col } from 'react-bootstrap'
 
 
 const DonorTopupHistory = (props) => {
@@ -56,6 +58,22 @@ const DonorTopupHistory = (props) => {
 
     return(
         <div>
+            {
+                topUpHistoryList.length === 0 ? (
+                    <div>
+                        <Row>
+                            <Col className="d-flex justify-content-center px-5 my-5">
+                                <Image src={emptyState} />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="d-flex justify-content-center px-5 ">
+                                <p>You Have No Top Up Transaction</p>
+                            </Col>
+                        </Row>
+                    </div>
+                ) :null
+            }
             {
                 topUpHistoryList.map((topup) => {
                     return (
