@@ -67,7 +67,7 @@ const FundraiserCampaignRequest = (props) => {
                 {
                     requestedCampaignList.map((campaign) => {
                         return (
-                            <Col lg={4} className="d-flex justify-content-center mb-4">
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
                                 <CardCampaignRequest
                                     id={campaign.id}
                                     title={campaign.title}

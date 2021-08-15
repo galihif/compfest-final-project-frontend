@@ -66,7 +66,7 @@ const FundraiserActiveCampaign = () => {
                 {
                     activeCampaignList.map((campaign) => {
                         return (
-                            <Col lg={3} className="d-flex justify-content-center mb-2">
+                            <Col lg={4} className="d-flex justify-content-center mb-2">
                                 <CardCampaign
                                     id={campaign.id}
                                     title={campaign.title}
