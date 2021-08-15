@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Image, Row } from 'react-bootstrap'
 import CardCampaign from '../components/Card/CardCampaign'
+import emptyState from '../assets/emptyCampaignActive.svg'
 
 
 const FundraiserActiveCampaign = () => {
@@ -32,6 +33,7 @@ const FundraiserActiveCampaign = () => {
         API.getUserCampaignList(headers)
             .then((res) => {
                 const snapshot = res.data
+                console.log(snapshot)
                 const activeCampaigns = []
                 snapshot.forEach((campaign) => {
                     if (campaign.status === "VERIFIED") {
@@ -63,6 +65,18 @@ const FundraiserActiveCampaign = () => {
     return(
         <div>
             <Row className="d-flex justify-content-start px-2">
+                {
+                    activeCampaignList.length === 0 ? (
+                        <div>
+                            <Col lg className="d-flex justify-content-center" >
+                                <Image src={emptyState} />
+                            </Col>
+                            <Col lg className="d-flex justify-content-center" >
+                                <p>You have no Active Campaign</p>
+                            </Col>
+                        </div>
+                    ) : null
+                }
                 {
                     activeCampaignList.map((campaign) => {
                         return (

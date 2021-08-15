@@ -4,9 +4,11 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Image, Row } from 'react-bootstrap'
 import CardCampaign from '../components/Card/CardCampaign'
 import CardCampaignRequest from '../components/Card/CardCampaignRequest'
+
+import emptyState from '../assets/emptyCampaignRequest.svg'
 
 
 const FundraiserCampaignRequest = (props) => {
@@ -64,6 +66,18 @@ const FundraiserCampaignRequest = (props) => {
     return(
         <div>
             <Row className="d-flex justify-content-start px-2">
+                {
+                    requestedCampaignList.length === 0 ? (
+                        <div>
+                            <Col lg className="d-flex justify-content-center" >
+                                <Image src={emptyState} />
+                            </Col>
+                            <Col lg className="d-flex justify-content-center" >
+                                <p>You have no Requested Campaign</p>
+                            </Col>
+                        </div>
+                    ) : null
+                }
                 {
                     requestedCampaignList.map((campaign) => {
                         return (

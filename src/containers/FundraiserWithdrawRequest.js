@@ -4,10 +4,11 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Image, Row } from 'react-bootstrap'
 import CardCampaign from '../components/Card/CardCampaign'
 import CardCampaignRequest from '../components/Card/CardCampaignRequest'
 import BoxWithdrawRequest from '../components/Box/BoxWithdrawRequest'
+import emptyState from '../assets/emptyWithdrawRequest.svg'
 
 
 const FundraiserWithdrawRequest = () => {
@@ -27,7 +28,7 @@ const FundraiserWithdrawRequest = () => {
     }
 
     useEffect(() => {
-        getWithdrawList()
+        // getWithdrawList()
     },[])
 
     const getWithdrawList = useCallback((e) => {
@@ -58,18 +59,28 @@ const FundraiserWithdrawRequest = () => {
     return(
         <div>
             <Row className="d-flex justify-content-start px-2">
-                <Col lg={3} className="d-flex justify-content-center mb-2">
-                    <BoxWithdrawRequest />
-                </Col>
-                <Col lg={3} className="d-flex justify-content-center mb-2">
-                    <BoxWithdrawRequest />
-                </Col>
-                <Col lg={3} className="d-flex justify-content-center mb-2">
-                    <BoxWithdrawRequest />
-                </Col>
-                <Col lg={3} className="d-flex justify-content-center mb-2">
-                    <BoxWithdrawRequest />
-                </Col>
+                {
+                    WithdrawRequestList.length === 0 ? (
+                        <div>
+                            <Col lg className="d-flex justify-content-center" >
+                                <Image src={emptyState} />
+                            </Col>
+                            <Col lg className="d-flex justify-content-center" >
+                                <p>You have no Withdraw Requested. Click Your Active Campaign to withdraw</p>
+                            </Col>
+                        </div>
+                    ) : null
+                }
+                {
+                    WithdrawRequestList.map((withdraw)=>{
+                        console.log(withdraw)
+                        return (
+                            <Col lg={3} className="d-flex justify-content-center mb-2">
+                                <BoxWithdrawRequest />
+                            </Col>
+                        )
+                    })
+                }
             </Row>
         </div>
     )
