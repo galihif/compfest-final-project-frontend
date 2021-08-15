@@ -24,7 +24,7 @@ const DonorDonationHistory = () => {
 
     useEffect(()=>{
         getDonationHistory()
-    })
+    },[])
 
     const getDonationHistory = useCallback((e) => {
         API.getDonateHistoryDonor(headers)

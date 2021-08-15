@@ -102,7 +102,12 @@ const DashboardFundraiser = () => {
                     toggleDialog()
                     alert("Campaign Proposal Requested. Check Your Campaign Request Tab")
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    if (err.response.status === 401) {
+                        refreshUserToken()
+                    }
+                    console.log(err)
+                })
         }
     }
 
@@ -118,7 +123,10 @@ const DashboardFundraiser = () => {
                 setId(userData.id)
             })
             .catch((err) => {
-                refreshUserToken()
+                if (err.response.status === 401) {
+                    refreshUserToken()
+                }
+                console.log(err)
             })
     },[firstName,lastName,email,walletAmount,verified,id])
 

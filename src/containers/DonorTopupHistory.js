@@ -25,7 +25,7 @@ const DonorTopupHistory = () => {
 
     useEffect(() => {
         getTopUpHistory()
-    })
+    },[])
 
     const getTopUpHistory = () => {
         API.getUserTopUpList(headers)

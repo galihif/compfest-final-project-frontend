@@ -101,10 +101,10 @@ const DashboardDonor = () => {
                     alert("Top Up Request Success. Check Your Top Up History")
                 })
                 .catch((err) => {
-                    console.log(err.response.status)
-                    if(err.response.status === 401){
+                    if (err.response.status === 401) {
                         refreshUserToken()
                     }
+                    console.log(err)
                 })
         }
     }
@@ -126,11 +126,10 @@ const DashboardDonor = () => {
                 dispatch({type:"SETUSERDATA", userData:userData})
             })
             .catch((err) => {
-                console.log(err, "get")
-                console.log(err.response.status)
                 if (err.response.status===401) {
                     refreshUserToken()
                 }
+                console.log(err)
             })
     }
 
