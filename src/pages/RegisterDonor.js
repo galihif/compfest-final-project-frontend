@@ -28,6 +28,7 @@ const RegisterDonor = () => {
     const history = useHistory()
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
     const [email, setEmail] = useState()
@@ -54,6 +55,7 @@ const RegisterDonor = () => {
     }
 
     const handleRegisterDonor = () => {
+        setLoading(true)
         const body = {
             first_name: firstName,
             last_name: lastName,
@@ -83,9 +85,11 @@ const RegisterDonor = () => {
             .then((res) => {
                 dispatch({ type: 'SETUSERDATA', userData: res.data })
                 history.push('/dashboarddonor')
+                setLoading(false)
             })
             .catch((err) => {
                 console.log(err)
+                setLoading(false)
             })
     }
 
@@ -114,8 +118,18 @@ const RegisterDonor = () => {
                                 <Form.Control type="password" placeholder="Password" />
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="" onClick={handleRegisterDonor}>
-                                    Register as Donor
+                                <Button variant="primary" type="" onClick={handleRegisterDonor} disable={loading}>
+                                    {
+                                        loading ? (
+                                            <div>
+                                                Loading...
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                Register as Donor
+                                            </div>
+                                        )
+                                    }
                                 </Button>
                                 <Nav.Link className="text-center" href="/login">Login</Nav.Link>
                             </div>
