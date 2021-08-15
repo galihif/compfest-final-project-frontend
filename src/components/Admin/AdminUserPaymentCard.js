@@ -5,20 +5,20 @@ import React from "react";
 //Styles
 import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
-import profileImage from "../assets/profileImage.svg";
+import Gravatar from "react-gravatar";
 
-const AdminUserCard = () => {
+const AdminUserPaymentCard = (props) => {
     const normalFont = { fontSize: "12px" };
+    const { name, 
+            email,
+            amount,
+            bankName,
+            accountNumber} = props;
     return (
         <Card className="campaign-card" style={{ width: "20em" }}>
-            <Card.Img
-                className="m-auto mt-3 mb-1"
-                variant="top"
-                src={profileImage}
-                style={{  width: "7em", objectFit: "cover" }}
-            />
+            <Gravatar email={email} size={100} className="m-auto mt-2" style={{ borderRadius: "20em" }} />
             <Card.Body>
-                <Card.Title className="text-center">Joko Widodo</Card.Title>
+                <Card.Title className="text-center">{name}</Card.Title>
                 <Row>
                     <Col lg={5}>
                         <p className="text-start fw-bold" style={normalFont}>
@@ -33,13 +33,13 @@ const AdminUserCard = () => {
                     </Col>
                     <Col lg={7}>
                         <p className="text-start" style={normalFont}>
-                            Rp.100.000
+                            Rp.{amount}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            BCA
+                            {bankName}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            4390821948291
+                            {accountNumber}
                         </p>
 
                     </Col>
@@ -63,4 +63,4 @@ const AdminUserCard = () => {
     );
 };
 
-export default AdminUserCard;
+export default AdminUserPaymentCard;

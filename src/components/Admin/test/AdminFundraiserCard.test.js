@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import {shallow, configure} from "enzyme";
 import AdminFundraiserCard from "../AdminFundraiserCard";
 import Gravatar from "react-gravatar";
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 
 configure({adapter: new Adapter()});
 describe("<AdminFundraserCard />", () => {

@@ -4,7 +4,6 @@ import React from 'react'
 //Styles
 import '../Card.scss'
 import {
-    Button,
     Row,
     Col,
     Card
@@ -12,13 +11,13 @@ import {
 import { useHistory } from 'react-router-dom';
 
 const AdminCampaignProposalCard = (props) => {
-    const normalFont = { fontSize: "12px" };
     const { title,
             email,
             target,
             name,
             imageLink} = props;
     const history = useHistory();
+
     return(
         <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push('/adminproposal')}>
             <Card.Img variant="top" src={imageLink} style={{ height: "10em", objectFit: "cover" }} />
