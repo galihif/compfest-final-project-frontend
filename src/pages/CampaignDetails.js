@@ -40,13 +40,14 @@ const CampaignDetails = (props) => {
     const [walletAmount, setWalletAmount] = useState(props.userData.wallet_amount)
     const [donateAmount, setDonateAmount] = useState(0)
     const [password, setPassword] = useState("")
-    const [withdrawAmount, setWithdrawAmount] = useState(0)
+    const [toWithdrawAmount, setToWithdrawAmount] = useState(0)
 
     const [title, setTitle] = useState("Loading")
     const [description, setDescription] = useState("")
     const [imageURL, setImage] = useState("")
     const [amount, setAmount] = useState("")
     const [targetAmount, setTargetAmount] = useState("")
+    const [withdrawAmount, setWithdrawAmount] = useState("")
     const [fundraiserName, setFundraiserName] = useState("")
     const [fundraiserEmail, setFundraiserEmail] = useState("")
 
@@ -70,8 +71,10 @@ const CampaignDetails = (props) => {
                     setImage(campaign.image_url)
                     setAmount(campaign.amount)
                     setTargetAmount(campaign.target_amount)
+                    setWithdrawAmount(campaign.withdraw_amount)
                     setFundraiserName(campaign.fundraiser.full_name)
                     setFundraiserEmail(campaign.fundraiser.email)
+                    console.log(campaign)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -117,8 +120,8 @@ const CampaignDetails = (props) => {
             case "donateAmount":
                 setDonateAmount(e.target.value)
                 break
-            case "withdrawAmount":
-                setWithdrawAmount(e.target.value)
+            case "toWithdrawAmount":
+                setToWithdrawAmount(e.target.value)
                 break
             case "password":
                 setPassword(e.target.value)
@@ -153,13 +156,16 @@ const CampaignDetails = (props) => {
 
     const handleClickWithdraw = () => {
         const body = {
-            amount: parseInt(withdrawAmount)
+            amount: parseInt(toWithdrawAmount)
         }
-        if (withdrawAmount <= amount && withdrawAmount !== 0) {
-           //TODO withdraw
-        } else if (withdrawAmount>amount){
+        if (toWithdrawAmount <= withdrawAmount && toWithdrawAmount !== 0) {
+        //    API.withdrawCampaignById(id,body,headers)
+        //     .then((res)=> {
+        //         console.log(res.data)
+        //     })
+        } else if (toWithdrawAmount > withdrawAmount){
             alert("amount is too high")
-        } else if (withdrawAmount === "undefined") {
+        } else if (toWithdrawAmount === "undefined") {
             alert("Fill the amount")
         }
     }
@@ -215,7 +221,7 @@ const CampaignDetails = (props) => {
                 <Modal.Title>Withdraw This Campaign</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form.Group className="mb-3" controlId="withdrawAmount" onChange={handleChange}>
+                <Form.Group className="mb-3" controlId="toWithdrawAmount" onChange={handleChange}>
                     <Form.Label>Amount</Form.Label>
                     <Form.Control type="number" placeholder="Enter Amount (Rp)" />
                 </Form.Group>
@@ -246,6 +252,7 @@ const CampaignDetails = (props) => {
                         <Row className="my-3">
                             <Col lg={6}>
                                 <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{amount}</p>
+                                <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{withdrawAmount}</p>
                                 <p className="text-start fw-bold" style={{ fontSize: "12px" }}>Raised</p>
                             </Col>
                             <Col lg={6}>

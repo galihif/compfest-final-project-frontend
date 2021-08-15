@@ -47,8 +47,6 @@ const NavbarM = (props) => {
 
     //Method
     useEffect(() => {
-        console.log(props.userData, "nav")
-        console.log(state.userData, "nav2")
     })
 
     const navLogged = 

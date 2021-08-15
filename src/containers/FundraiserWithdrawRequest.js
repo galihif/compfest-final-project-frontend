@@ -19,7 +19,7 @@ const FundraiserWithdrawRequest = () => {
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
 
-    const [requestedCampaignList, setRequestedCampaignList] = useState([])
+    const [WithdrawRequestList, setWithdrawRequestList] = useState([])
 
     const headers = {
         Accept: "application/json",
@@ -27,26 +27,19 @@ const FundraiserWithdrawRequest = () => {
     }
 
     useEffect(() => {
-        getCampaignList()
+        getWithdrawList()
     },[])
 
-    const getCampaignList = useCallback((e) => {
+    const getWithdrawList = useCallback((e) => {
         API.getUserCampaignList(headers)
             .then((res) => {
-                const snapshot = res.data
-                const requestedCampaign = []
-                snapshot.forEach((campaign) => {
-                    if (campaign.status !== "VERIFIED") {
-                        requestedCampaign.push(campaign)
-                    }
-                })
-                setRequestedCampaignList(requestedCampaign)
+                setWithdrawRequestList(res.data)
             })
             .catch((err) => {
                 console.log(err)
                 refreshUserToken()
             })
-    }, [requestedCampaignList])
+    }, [WithdrawRequestList])
 
     const refreshUserToken = () => {
         const body = {

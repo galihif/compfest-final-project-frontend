@@ -63,7 +63,7 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-    }, [show])
+    })
 
     const toggleDialog = () => setShow(!show)
 
