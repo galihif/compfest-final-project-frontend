@@ -25,6 +25,7 @@ const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,header
 // PUT
 
 // DELETE
+const deleteCampaignById = (id,headers) => Delete(`fundraiser/campaigns/${id}`,headers)
 
 const API = {
     createCampaign,
@@ -42,6 +43,7 @@ const API = {
     getUserCampaignList,
     donateCampaignById,
     withdrawCampaignById,
+    deleteCampaignById
 }
 
 export default API;
