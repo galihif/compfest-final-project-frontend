@@ -194,7 +194,7 @@ const DashboardDonor = () => {
                         <DonorDonationHistory/>
                     </Tab>
                     <Tab eventKey="profile" title="Top Up History">
-                        <DonorTopupHistory/>
+                        <DonorTopupHistory render={show}/>
                     </Tab>
                 </Tabs>
             </div>

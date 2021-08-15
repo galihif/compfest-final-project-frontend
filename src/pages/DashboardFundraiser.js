@@ -224,10 +224,10 @@ const DashboardFundraiser = () => {
                         <FundraiserActiveCampaign/>
                     </Tab>
                     <Tab eventKey="campaignRequest" title="Campaign Request">
-                        <FundraiserCampaignRequest/>
+                        <FundraiserCampaignRequest render={show}/>
                     </Tab>
                     <Tab eventKey="withdrawRequest" title="Withdrawal Request">
-                        <FundraiserWithdrawRequest/>
+                        <FundraiserWithdrawRequest />
                     </Tab>
                 </Tabs>
             </div>
@@ -242,7 +242,7 @@ const DashboardFundraiser = () => {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="description" onChange={handleChange}>
                         <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" placeholder="Add Description" />
+                        <Form.Control as="textarea" placeholder="Add Description" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="targetAmount" onChange={handleChange}>
                         <Form.Label>Target</Form.Label>

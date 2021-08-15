@@ -26,7 +26,7 @@ const FundraiserActiveCampaign = () => {
 
     useEffect(() => {
         getCampaignList()
-    })
+    },[])
 
     const getCampaignList = useCallback((e) => {
         API.getUserCampaignList(headers)

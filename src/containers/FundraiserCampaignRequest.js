@@ -9,7 +9,7 @@ import CardCampaign from '../components/Card/CardCampaign'
 import CardCampaignRequest from '../components/Card/CardCampaignRequest'
 
 
-const FundraiserCampaignRequest = () => {
+const FundraiserCampaignRequest = (props) => {
     //State
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
@@ -27,7 +27,7 @@ const FundraiserCampaignRequest = () => {
 
     useEffect(() => {
         getCampaignList()
-    })
+    },[props.render])
 
     const getCampaignList = useCallback((e) => {
         API.getUserCampaignList(headers)

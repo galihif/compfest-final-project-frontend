@@ -7,7 +7,7 @@ import DonationHistoryBox from '../components/Box/DonationHistoryBox'
 import TopUpHistoryBox from '../components/Box/TopUpHistoryBox'
 
 
-const DonorTopupHistory = () => {
+const DonorTopupHistory = (props) => {
     //State
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const DonorTopupHistory = () => {
 
     useEffect(() => {
         getTopUpHistory()
-    },[])
+    },[props.render])
 
     const getTopUpHistory = () => {
         API.getUserTopUpList(headers)
