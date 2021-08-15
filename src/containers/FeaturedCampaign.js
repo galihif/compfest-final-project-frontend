@@ -23,7 +23,7 @@ const FeaturedCampaign = (props) => {
     //Method
     useEffect(() => {
         getCampaignList()
-    })
+    },[])
 
     const getCampaignList = useCallback((e) => {
         API.getAllCampaign(headers)
