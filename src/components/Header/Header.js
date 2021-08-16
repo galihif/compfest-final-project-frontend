@@ -22,7 +22,7 @@ const Header = () => {
                 <Col lg={6} className="d-flex align-items-center">
                     <div>
                         <h3 className="">Help Others With Sharing</h3>
-                        <p>Lorem Ipsuasdjsakdjsakdjskdjsajdkdjksjadpusing</p>
+                        <p>Donate will never make you poor</p>
                         <Button variant="primary me-3" href="/registerdonor">Be a Donor</Button>
                         <Button variant="outline-primary" href="/registerfundraiser">Be a Fundraiser</Button>
                     </div>

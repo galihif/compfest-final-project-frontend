@@ -25,7 +25,6 @@ import {
 
 
 //Assets
-import BoxWithdrawRequest from '../components/Box/BoxWithdrawRequest';
 import FundraiserActiveCampaign from '../containers/FundraiserActiveCampaign';
 import FundraiserCampaignRequest from '../containers/FundraiserCampaignRequest';
 import FundraiserWithdrawRequest from '../containers/FundraiserWithdrawRequest';
@@ -151,11 +150,6 @@ const DashboardFundraiser = () => {
             .catch((err) => {
                 console.log(err,"ref")
             })
-    }
-
-    const handleLogout = () => {
-        dispatch({ type: "LOGOUT" })
-        history.push("/login")
     }
 
     const renderTooltip = (props) => (
