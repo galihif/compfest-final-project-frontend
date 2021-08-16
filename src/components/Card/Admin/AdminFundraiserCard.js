@@ -34,7 +34,7 @@ const AdminFundraiserCard = (props) => {
             )
         }
     return (
-        <Card className="campaign-card" style={{ width: "20em" }} onClick={()=> history.push('/adminfundraiser')}>
+        <Card className="campaign-card m-2" style={{ width: "20em" }} onClick={()=> history.push('/adminfundraiser')}>
             
             <Gravatar email={email} size={100} className="m-auto mt-2" style={{ borderRadius: "20em" }} />
             

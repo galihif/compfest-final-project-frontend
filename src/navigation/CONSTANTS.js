@@ -5,3 +5,7 @@ export const REGDONOR = "/registerdonor";
 export const CAMPAIGN = "/campaign/:id";
 export const DASHFUND = "/dashboardfundraiser";
 export const DASHDONOR = "/dashboarddonor";
+export const ADMIN = "/admin";
+export const FUNDRAISERREQUEST = `${ADMIN}/fundraiser`;
+
+
