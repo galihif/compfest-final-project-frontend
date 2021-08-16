@@ -76,7 +76,11 @@ const FundraiserWithdrawRequest = () => {
                     WithdrawRequestList.map((withdraw)=>{
                         return (
                             <Col lg={3} className="d-flex justify-content-center mb-2">
-                                <BoxWithdrawRequest />
+                                <BoxWithdrawRequest 
+                                    title={withdraw.campaign}
+                                    amount={withdraw.amount}
+                                    date={withdraw.request_date}
+                                    status={withdraw.status}/>
                             </Col>
                         )
                     })
