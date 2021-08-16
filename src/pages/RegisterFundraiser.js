@@ -26,11 +26,11 @@ const RegisterFundraiser = () => {
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const [firstName, setFirstName] = useState()
-    const [lastName, setLastName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const [proposalText, setProposalText] = useState()
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [proposalText, setProposalText] = useState("")
 
     //Method
     const handleChange = (e) => {
@@ -68,14 +68,20 @@ const RegisterFundraiser = () => {
         const headers = {
             Accept: "application/json",
         }
-        API.register(body,headers)
-            .then((res) => {
-                dispatch({ type: 'LOGIN', userToken: res.data })
-                getUserData(res.data.access)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        if(firstName === "" || lastName === "" || password === "" || email === ""||proposalText===""){
+            alert("Please fill all the form")
+        } else {
+            API.register(body, headers)
+                .then((res) => {
+                    dispatch({ type: 'LOGIN', userToken: res.data })
+                    getUserData(res.data.access)
+                })
+                .catch((err) => {
+                    setLoading(false)
+                    const message = err.response.data[Object.keys(err.response.data)[0]]
+                    alert(message)
+                })
+        }
     }
 
     const getUserData = (accessToken) => {
@@ -90,8 +96,9 @@ const RegisterFundraiser = () => {
                 setLoading(false)
             })
             .catch((err) => {
-                console.log(err)
                 setLoading(false)
+                const message = err.response.data[Object.keys(err.response.data)[0]]
+                alert(message)
             })
     }
 
@@ -125,7 +132,7 @@ const RegisterFundraiser = () => {
                                 <Form.Control type="text" as="textarea" placeholder="Add Reason" />
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="" onClick={handleRegisterFundraiser} disable={loading} >
+                                <Button variant="primary" type="submit" onClick={handleRegisterFundraiser} disable={loading} >
                                     {
                                         loading ? (
                                             <div>

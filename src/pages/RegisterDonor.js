@@ -29,10 +29,10 @@ const RegisterDonor = () => {
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const [firstName, setFirstName] = useState()
-    const [lastName, setLastName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     //Method
     const handleChange = (e) => {
@@ -55,7 +55,6 @@ const RegisterDonor = () => {
     }
 
     const handleRegisterDonor = () => {
-        setLoading(true)
         const body = {
             first_name: firstName,
             last_name: lastName,
@@ -66,14 +65,21 @@ const RegisterDonor = () => {
         const headers = {
             Accept: "application/json",
         }
-        API.register(body, headers)
-            .then((res) => {
-                dispatch({ type: 'LOGIN', userToken: res.data })
-                getUserData(res.data.access)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        if(firstName===""||lastName===""||password===""||email===""){
+            alert("Please fill all the form")
+        } else {
+            setLoading(true)
+            API.register(body, headers)
+                .then((res) => {
+                    dispatch({ type: 'LOGIN', userToken: res.data })
+                    getUserData(res.data.access)
+                })
+                .catch((err) => {
+                    setLoading(false)
+                    const message = err.response.data[Object.keys(err.response.data)[0]]
+                    alert(message)
+                })
+        }
     }
 
     const getUserData = (accessToken) => {
@@ -88,8 +94,9 @@ const RegisterDonor = () => {
                 setLoading(false)
             })
             .catch((err) => {
-                console.log(err)
                 setLoading(false)
+                const message = err.response.data[Object.keys(err.response.data)[0]]
+                alert(message)
             })
     }
 
