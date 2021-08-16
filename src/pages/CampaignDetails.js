@@ -311,9 +311,19 @@ const CampaignDetails = (props) => {
                                                     DONATE
                                                 </Button>
                                             ) : (
-                                                <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
-                                                    WITHDRAW
-                                                </Button>
+                                                <div>
+                                                    <Row>
+                                                        <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
+                                                            WITHDRAW
+                                                        </Button>
+                                                    </Row>
+                                                    <Row>
+                                                        <Button variant="outline-danger my-3" type="submit" onClick={() => toggleDialog()}>
+                                                            STOP THIS CAMPAIGN
+                                                        </Button>
+                                                    </Row>
+                                                    
+                                                </div>
                                             )
                                         }
                                     </Row>
