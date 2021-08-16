@@ -2,9 +2,9 @@ import axios from 'axios'
 import { root } from './Root'
 
 
-const Delete = (path, data) => {
+const Delete = (path, headers) => {
     const promise = new Promise((resolve, reject) => {
-        axios.delete(`${root}/${path}/${data}`)
+        axios.delete(`${root}/${path}`, {headers:headers})
             .then((result) => {
                 resolve(result.data)
             }, (error) => {

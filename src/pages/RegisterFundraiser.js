@@ -25,6 +25,7 @@ const RegisterFundraiser = () => {
     const history = useHistory()
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
     const [email, setEmail] = useState()
@@ -55,6 +56,7 @@ const RegisterFundraiser = () => {
     }
 
     const handleRegisterFundraiser = () => {
+        setLoading(true)
         const body = {
             first_name: firstName,
             last_name: lastName,
@@ -69,10 +71,27 @@ const RegisterFundraiser = () => {
         API.register(body,headers)
             .then((res) => {
                 dispatch({ type: 'LOGIN', userToken: res.data })
-                history.push('/dashboardfundraiser')
+                getUserData(res.data.access)
             })
             .catch((err) => {
                 console.log(err)
+            })
+    }
+
+    const getUserData = (accessToken) => {
+        const headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`
+        }
+        API.getCurrentUser(headers)
+            .then((res) => {
+                dispatch({ type: 'SETUSERDATA', userData: res.data })
+                history.push('/dashboardfundraiser')
+                setLoading(false)
+            })
+            .catch((err) => {
+                console.log(err)
+                setLoading(false)
             })
     }
 
@@ -106,8 +125,18 @@ const RegisterFundraiser = () => {
                                 <Form.Control type="text" as="textarea" placeholder="Add Reason" />
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="" onClick={handleRegisterFundraiser}>
-                                    Register as Fundraiser
+                                <Button variant="primary" type="" onClick={handleRegisterFundraiser} disable={loading} >
+                                    {
+                                        loading ? (
+                                            <div>
+                                                Loading...
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                Register as Fundraiser
+                                            </div>
+                                        )
+                                    }
                                 </Button>
                                 <Nav.Link className="text-center" href="/login">Login</Nav.Link>
                             </div>

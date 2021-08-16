@@ -54,3 +54,7 @@ nav.path a{
   background-color: #F5F5F5 !important;
   border-bottom-color: #F5F5F5 !important;
 }
+
+.spinner-grow{
+  background: #0673A1 !important;
+}

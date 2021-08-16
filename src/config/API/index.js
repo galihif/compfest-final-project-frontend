@@ -1,5 +1,5 @@
 import Post from './Post'
-import { GetHeadersOnly, GetWithData } from './Get'
+import { Get } from './Get'
 import Put from './Put'
 import Delete from './Delete'
 
@@ -8,18 +8,26 @@ const register = (body, headers) => Post("register", body, headers)
 const topUp = (body, headers) => Post("topup", body, headers)
 const login = (body, headers) => Post("login", body)
 const refresh = (data) => Post("refresh", data)
-const createCampaign = (data, headers) => Post('campaigns', data, headers)
+const createCampaign = (body, headers) => Post('fundraiser/campaigns', body, headers)
+const donateCampaignById = (id,body, headers) => Post(`donor/campaigns/${id}`, body, headers)
+const withdrawCampaignById = (id,body, headers) => Post(`fundraiser/campaigns/${id}`, body, headers)
 
 // GET
-const getCurrentUser = (headers) => GetHeadersOnly('me', headers)
-const getUserTopUpList = (headers) => GetHeadersOnly('topup', headers)
-const getAllCampaign = () => GetHeadersOnly('campaigns')
-const getCampaignById = (data) => GetWithData('campaigns', data)
-const getCampaignProposal = () => GetHeadersOnly('admin/proposals')
+const getCurrentUser = (headers) => Get('me', headers)
+const getUserTopUpList = (headers) => Get('topup', headers)
+const getUserCampaignList = (headers) => Get('fundraiser/campaigns', headers)
+const getWithdrawRequestList = (headers) => Get('withdraw', headers)
+const getAllCampaign = (headers) => Get('campaigns', headers)
+// const getCampaignProposal = () => Get('admin/proposals')
+const getDonateHistoryDonor = (headers) => Get('donate',headers)
+const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${id}`,headers)
+const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
 
 // PUT
 
 // DELETE
+const deleteCampaignById = (id,headers) => Delete(`fundraiser/campaigns/${id}`,headers)
+
 const API = {
     createCampaign,
     register,
@@ -27,10 +35,17 @@ const API = {
     refresh,
     getCurrentUser,
     getAllCampaign,
-    getCampaignById,
-    getCampaignProposal,
+    getCampaignByIdFundraiser,
+    getCampaignByIdDonor,
+    // getCampaignProposal,
+    getDonateHistoryDonor,
     topUp,
-    getUserTopUpList
+    getUserTopUpList,
+    getWithdrawRequestList,
+    getUserCampaignList,
+    donateCampaignById,
+    withdrawCampaignById,
+    deleteCampaignById
 }
 
 export default API;

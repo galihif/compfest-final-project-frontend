@@ -27,6 +27,9 @@ const Login = () => {
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const [loading, setLoading] = useState(false)
+
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
@@ -47,6 +50,7 @@ const Login = () => {
     }
 
     const handleLogin = () => {
+        setLoading(true)
         const body = {
             email: email,
             password: password
@@ -68,8 +72,10 @@ const Login = () => {
         }
         API.getCurrentUser(headers)
             .then((res) => {
+                dispatch({ type: 'SETUSERDATA', userData: res.data })
                 const role = res.data.role
                 const isStaff = res.data.isStaff
+                setLoading(false)
                 if(isStaff){
                     //TODO
                 } else {
@@ -86,7 +92,8 @@ const Login = () => {
                 }
             })
             .catch((err) => {
-                console.log(err)
+                alert(err)
+                setLoading(false)
             })
     }
 
@@ -109,8 +116,10 @@ const Login = () => {
                                 </Form.Text>
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="" onClick={handleLogin}>
-                                    Login
+                                <Button variant="primary" type="" onClick={handleLogin} disabled={loading}>
+                                    {
+                                        loading ? <div>Loading...</div> : <div>Login</div> 
+                                    }
                                 </Button>
                                 <Nav.Link className="text-center" href="/registerdonor">Register</Nav.Link>
                             </div>
