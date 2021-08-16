@@ -144,6 +144,7 @@ const DashboardDonor = () => {
             .then((res) => {
                 console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                getUserData()
             })
             .catch((err) => {
                 console.log(err,"ref")
