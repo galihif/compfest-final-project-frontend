@@ -7,12 +7,8 @@ import FeaturedCampaign from "../containers/FeaturedCampaign"
 // import AdminFundraiserCard from "../components/AdminFundraiserCard"
 // import AdminWithdrawCard from "../components/AdminWithdrawCard"
 // import AdminUserCard from "../components/AdminUserPaymentCard"
-import AdminWithdrawCard from "../components/Admin/AdminWithdrawCard"
-import AdminUserPaymentCard from "../components/Admin/AdminUserPaymentCard"
 
 const Home = () => {
-    const state = useSelector(state => state);    
-    const isLogged = state.isLogged;
     return (
         <div>
             <Header/>
