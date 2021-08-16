@@ -1,7 +1,7 @@
 //Library
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
 import Gravatar from 'react-gravatar'
 
 //Styles
@@ -25,12 +25,12 @@ import DonorDonationHistory from '../containers/DonorDonationHistory';
 import DonorTopupHistory from '../containers/DonorTopupHistory';
 import ButtonLogout from '../components/Button/ButtonLogout';
 
-const DashboardDonor = () => {
+const DashboardDonor = (props) => {
     //State
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const history = useHistory()
-    const userToken = state.userToken
+    const userToken = props.userToken
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
 
@@ -144,7 +144,7 @@ const DashboardDonor = () => {
             .then((res) => {
                 console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
-                // getUserData()
+                // forceUpdate()
             })
             .catch((err) => {
                 console.log(err,"ref")
@@ -245,5 +245,11 @@ const DashboardDonor = () => {
         </div>
     )
 }
-
-export default DashboardDonor
+function mapStateToProps(state, ownProps) {
+    return {
+        isLogged: state.isLogged,
+        userData: state.userData,
+        userToken: state.userToken
+    };
+}
+export default connect(mapStateToProps)(DashboardDonor)
