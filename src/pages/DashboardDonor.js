@@ -142,9 +142,8 @@ const DashboardDonor = (props) => {
         }
         API.refresh(body)
             .then((res) => {
-                console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
-                // forceUpdate()
+                window.location.reload()
             })
             .catch((err) => {
                 console.log(err,"ref")

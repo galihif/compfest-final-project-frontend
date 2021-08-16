@@ -40,6 +40,9 @@ const DashboardFundraiser = () => {
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
 
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+
     const [show, setShow] = useState(false)
     const [render, setRender] = useState(false)
     const [loadingProfile, setLoadingProfile] = useState(true)
@@ -146,6 +149,8 @@ const DashboardFundraiser = () => {
         API.refresh(body)
             .then((res) => {
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                window.location.reload()
+                
             })
             .catch((err) => {
                 console.log(err,"ref")
