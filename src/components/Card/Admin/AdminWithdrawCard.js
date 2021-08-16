@@ -5,20 +5,21 @@ import React from "react";
 //Styles
 import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
-import profileImage from "../assets/profileImage.svg";
+import Gravatar from 'react-gravatar';
 
-const AdminWithdrawCard = () => {
+
+const AdminWithdrawCard = (props) => {
     const normalFont = { fontSize: "12px" };
+    const { name, 
+            amount,
+            email,
+            bankName,
+            accountNumber} = props;
     return (
-        <Card className="card-campaign" style={{ width: "20em" }}>
-            <Card.Img
-                className="m-auto mt-3 mb-1"
-                variant="top"
-                src={profileImage}
-                style={{  width: "7em", objectFit: "cover" }}
-            />
+        <Card className="campaign-card" style={{ width: "20em" }}>
+            <Gravatar email={email} size={100} className="m-auto mt-2" style={{ borderRadius: "20em" }} />
             <Card.Body>
-                <Card.Title className="text-center">Joko Widodo</Card.Title>
+                <Card.Title className="text-center">{name}</Card.Title>
                 <Row>
                     <Col lg={5}>
                         <p className="text-start fw-bold" style={normalFont}>
@@ -36,16 +37,16 @@ const AdminWithdrawCard = () => {
                     </Col>
                     <Col lg={7}>
                         <p className="text-start" style={normalFont}>
-                            Rp.100.000
+                            Rp.{amount}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            lrore@gmail.com
+                            {email}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            BCA
+                            {bankName}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            4390821948291
+                            {accountNumber}
                         </p>
 
                     </Col>
