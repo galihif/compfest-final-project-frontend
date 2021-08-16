@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { root } from './Root'
 
-const Put = (path, data) => {
+const Put = (path, headers) => {
     const promise = new Promise((resolve, reject) => {
-        axios.put(`${root}/${path}/${data.id}`, data)
+        axios.put(`${root}/${path}/`, {headers:headers})
             .then((result) => {
-                resolve(result.data)
+                resolve(result)
             }, (error) => {
                 reject(error)
             })

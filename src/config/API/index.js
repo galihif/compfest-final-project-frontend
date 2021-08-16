@@ -24,6 +24,8 @@ const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${i
 const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
 
 // PUT
+const stopCampaignById = (id, headers) => Put(`fundraiser/campaigns/${id}`, headers)
+
 
 // DELETE
 const deleteCampaignById = (id,headers) => Delete(`fundraiser/campaigns/${id}`,headers)
@@ -45,7 +47,8 @@ const API = {
     getUserCampaignList,
     donateCampaignById,
     withdrawCampaignById,
-    deleteCampaignById
+    deleteCampaignById,
+    stopCampaignById
 }
 
 export default API;

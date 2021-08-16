@@ -29,6 +29,7 @@ import FundraiserActiveCampaign from '../containers/FundraiserActiveCampaign';
 import FundraiserCampaignRequest from '../containers/FundraiserCampaignRequest';
 import FundraiserWithdrawRequest from '../containers/FundraiserWithdrawRequest';
 import ButtonLogout from '../components/Button/ButtonLogout';
+import FundraiserFinishedCampaign from '../containers/FundraiserFinishedCampaign';
 
 const DashboardFundraiser = () => {
     //State
@@ -228,9 +229,12 @@ const DashboardFundraiser = () => {
                         }
                     </Container>
                 </Container>
-                <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
-                    <Tab eventKey="home" title="Active Campaign">
+                <Tabs defaultActiveKey="campaignActive" id="uncontrolled-tab-example" className="my-3">
+                    <Tab eventKey="campaignActive" title="Active Campaign">
                         <FundraiserActiveCampaign/>
+                    </Tab>
+                    <Tab eventKey="campaignFinished" title="Finished Campaign">
+                        <FundraiserFinishedCampaign render={render}/>
                     </Tab>
                     <Tab eventKey="campaignRequest" title="Campaign Request">
                         <FundraiserCampaignRequest render={render}/>
