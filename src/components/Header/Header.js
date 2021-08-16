@@ -1,5 +1,6 @@
 //Library
 import React from 'react'
+import { useSelector, useDispatch, connect } from 'react-redux'
 
 //Styles
 import './Header.scss'//Styles
@@ -15,7 +16,7 @@ import {
 import headerImage from '../../assets/headerImage.svg'
 
 
-const Header = () => {
+const Header = (props) => {
     return (
         <Container className="header-container m-0" fluid>
             <Row className="p-5">
@@ -23,8 +24,14 @@ const Header = () => {
                     <div>
                         <h3 className="">Help Others With Sharing</h3>
                         <p>Donate will never make you poor</p>
-                        <Button variant="primary me-3" href="/registerdonor">Be a Donor</Button>
-                        <Button variant="outline-primary" href="/registerfundraiser">Be a Fundraiser</Button>
+                        {
+                            !props.isLogged ? (
+                                <div>
+                                    <Button variant="primary me-3" href="/registerdonor">Be a Donor</Button>
+                                    <Button variant="outline-primary" href="/registerfundraiser">Be a Fundraiser</Button>
+                                </div>
+                            ) : null
+                        }
                     </div>
                 </Col>
                 <Col lg={6}>
@@ -35,4 +42,12 @@ const Header = () => {
     )
 }
 
-export default Header
+
+function mapStateToProps(state, ownProps) {
+    return {
+        isLogged: state.isLogged,
+        userData: state.userData
+    };
+}
+
+export default connect(mapStateToProps)(Header)
