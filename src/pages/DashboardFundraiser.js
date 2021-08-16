@@ -66,7 +66,7 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-    })
+    },[])
 
     const toggleDialog = () => setShow(!show)
 
@@ -87,7 +87,7 @@ const DashboardFundraiser = () => {
             default:
                 break
         }
-    })
+    },[title,description,targetAmount,imageURL])
 
     const handleCreateCampaign = () => {
         setLoadingMakeCam(true)
