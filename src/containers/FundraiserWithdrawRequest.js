@@ -28,17 +28,19 @@ const FundraiserWithdrawRequest = () => {
     }
 
     useEffect(() => {
-        // getWithdrawList()
+        getWithdrawList()
     },[])
 
     const getWithdrawList = useCallback((e) => {
-        API.getUserCampaignList(headers)
-            .then((res) => {
+        API.getWithdrawRequestList(headers)
+            .then((res)=>{
                 setWithdrawRequestList(res.data)
+                console.log(res)
             })
-            .catch((err) => {
-                console.log(err)
-                refreshUserToken()
+            .catch((err)=>{
+                if(err.response.status = 401){
+                    refreshUserToken()
+                }
             })
     }, [WithdrawRequestList])
 
@@ -48,7 +50,6 @@ const FundraiserWithdrawRequest = () => {
         }
         API.refresh(body)
             .then((res) => {
-                console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
             })
             .catch((err) => {
@@ -73,7 +74,6 @@ const FundraiserWithdrawRequest = () => {
                 }
                 {
                     WithdrawRequestList.map((withdraw)=>{
-                        console.log(withdraw)
                         return (
                             <Col lg={3} className="d-flex justify-content-center mb-2">
                                 <BoxWithdrawRequest />

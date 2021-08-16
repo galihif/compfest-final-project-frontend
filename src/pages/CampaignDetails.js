@@ -36,6 +36,7 @@ const CampaignDetails = (props) => {
 
     const [show, setShow] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [loadingWithdraw, setLoadingWithdraw] = useState(false)
     const [isLogged, setLogged] = useState(props.isLogged)
 
     const [userRole, setUserRole] = useState(props.userData.role)
@@ -52,6 +53,8 @@ const CampaignDetails = (props) => {
     const [withdrawAmount, setWithdrawAmount] = useState("")
     const [fundraiserName, setFundraiserName] = useState("")
     const [fundraiserEmail, setFundraiserEmail] = useState("")
+
+    const remainingAmount = amount - withdrawAmount
 
     const headers = {
         Accept: "application/json",
@@ -159,15 +162,23 @@ const CampaignDetails = (props) => {
     }
 
     const handleClickWithdraw = () => {
+        setLoadingWithdraw(true)
         const body = {
             amount: parseInt(toWithdrawAmount)
         }
-        if (toWithdrawAmount <= withdrawAmount && toWithdrawAmount !== 0) {
-        //    API.withdrawCampaignById(id,body,headers)
-        //     .then((res)=> {
-        //         console.log(res.data)
-        //     })
-        } else if (toWithdrawAmount > withdrawAmount){
+        if (toWithdrawAmount <= remainingAmount && toWithdrawAmount !== 0) {
+           API.withdrawCampaignById(id,body,headers)
+            .then((res)=> {
+                console.log(res.data)
+                alert("Withdraw Requested")
+                setLoadingWithdraw(false)
+                history.push('/dashboardfundraiser')
+            })
+            .catch((err) => {
+                console.log(err)
+                setLoadingWithdraw(false)
+            })
+        } else if (toWithdrawAmount > remainingAmount){
             alert("amount is too high")
         } else if (toWithdrawAmount === "undefined") {
             alert("Fill the amount")
@@ -234,8 +245,10 @@ const CampaignDetails = (props) => {
                 <Button variant="secondary" onClick={toggleDialog}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleClickWithdraw}>
-                    Make Request
+                <Button variant="primary" onClick={handleClickWithdraw} disable={loadingWithdraw} >
+                    {
+                        loadingWithdraw ? <div>Loading...</div> : <div>Make Request</div>
+                    }
                 </Button>
             </Modal.Footer>
         </Modal>
@@ -266,7 +279,7 @@ const CampaignDetails = (props) => {
                                             <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{amount}</p>
                                             {
                                                 props.userData.role === "FUNDRAISER" ? (
-                                                    <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{withdrawAmount}</p>
+                                                    <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{withdrawAmount} Withdrawn </p>
                                                 ) : null
                                             }
                                             <p className="text-start fw-bold" style={{ fontSize: "12px" }}>Raised</p>

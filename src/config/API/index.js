@@ -16,6 +16,7 @@ const withdrawCampaignById = (id,body, headers) => Post(`fundraiser/campaigns/${
 const getCurrentUser = (headers) => Get('me', headers)
 const getUserTopUpList = (headers) => Get('topup', headers)
 const getUserCampaignList = (headers) => Get('fundraiser/campaigns', headers)
+const getWithdrawRequestList = (headers) => Get('withdraw', headers)
 const getAllCampaign = (headers) => Get('campaigns', headers)
 // const getCampaignProposal = () => Get('admin/proposals')
 const getDonateHistoryDonor = (headers) => Get('donate',headers)
@@ -40,6 +41,7 @@ const API = {
     getDonateHistoryDonor,
     topUp,
     getUserTopUpList,
+    getWithdrawRequestList,
     getUserCampaignList,
     donateCampaignById,
     withdrawCampaignById,

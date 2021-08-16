@@ -33,7 +33,6 @@ const FundraiserActiveCampaign = () => {
         API.getUserCampaignList(headers)
             .then((res) => {
                 const snapshot = res.data
-                console.log(snapshot)
                 const activeCampaigns = []
                 snapshot.forEach((campaign) => {
                     if (campaign.status === "VERIFIED") {
