@@ -20,7 +20,7 @@ import {
 
 //Assets
 
-const CampaignDetails = () => {
+const AdminProposalCampaignDetails = () => {
     //State
     
     const history = useHistory()
@@ -51,7 +51,7 @@ const CampaignDetails = () => {
     }
 
     //Component
-    const dialogLogged =
+    const rejectHandler =
         <Modal show={show}>
             <Modal.Header >
                 <Modal.Title>Donate To This Campaign</Modal.Title>
@@ -72,7 +72,7 @@ const CampaignDetails = () => {
             </Modal.Footer>
         </Modal>
 
-    const dialogNotLogged = 
+    const acceptHandler = 
         <Modal show={show}>
             <Modal.Header >
                 <Modal.Title>Donate To This Campaign</Modal.Title>
@@ -100,19 +100,16 @@ const CampaignDetails = () => {
                     <Image src="https://www.islamic-relief.org/wp-content/uploads/2021/04/original--1024x683.jpg" rounded style={{ width: "100%" }} />
                     <Container>
                         <h4 className="my-3">Help Poor People in India</h4>
-                        <ProgressBar now={10} />
                         <Row className="my-3">
                             <Col lg={6}>
-                                <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp. 10.000.000</p>
-                                <p className="text-start fw-bold" style={{ fontSize: "12px" }}>Raised</p>
+                                <p className="fw-bold" style={{ fontSize: "16px" }}>Target</p>
                             </Col>
                             <Col lg={6}>
-                                <p className="text-end m-0" style={{ fontSize: "16px" }}>Rp.100.000.000</p>
-                                <p className="text-end fw-bold" style={{ fontSize: "12px" }}>Target</p>
+                                <p style={{ fontSize: "16px" }}>Rp.100.000.000</p>
                             </Col>
                         </Row>
                         <Row className="mb-3">
-                            <p>Fundraiser</p>
+                            <p className="fw-bold">Fundraiser</p>
                             <Col lg={1}>
                                 <Gravatar email="jokowi@pdip.com" size="30" style={{ borderRadius: "20em" }} />
                             </Col>
@@ -129,19 +126,26 @@ const CampaignDetails = () => {
                             specimen book. It has survived not only five centuries, but also the leap into
                             electronic typesetting, remaining essentially unchanged. It was popularised in th.
                         </p>
-                        <Row className="d-grid my-2">
-                            <Button variant="primary" type="submit" onClick={() => toggleDialog()}>
-                                DONATE
-                            </Button>
+                        <Row >
+                            <Col lg={6}>
+                                <Button className="w-100" variant="primary" type="submit" onClick={() => toggleDialog()}>
+                                    Accept
+                                </Button>
+                            </Col>
+                            <Col lg={6}>
+                                <Button className="w-100" variant="danger" type="submit" onClick={() => toggleDialog()}>
+                                    Reject
+                                </Button>
+                            </Col>
                         </Row>
                     </Container>
                 </Container>
-                {
-                    isLogged ? dialogLogged : dialogNotLogged
-                }
+                {/* {
+                    isLogged ? rejectHandler : acceptHandler
+                } */}
             </div>
         </div>
     )
 }
 
-export default CampaignDetails
+export default AdminProposalCampaignDetails

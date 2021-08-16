@@ -23,6 +23,9 @@ import Login from "./pages/Login";
 import CampaignDetails from "./pages/CampaignDetails";
 import DashboardDonor from "./pages/DashboardDonor";
 import DashboardFundraiser from "./pages/DashboardFundraiser";
+import AdminFundraiserCard from "./components/Admin/AdminFundraiserCard";
+import AdminFundraiserDetails from "./pages/Admin/AdminFundraiserDetails";
+import AdminProposalCampaignDetails from "./pages/Admin/AdminProposalCampaignDetails";
 
 
 
@@ -39,6 +42,12 @@ function App() {
               </Route>
               <Route path="/dashboarddonor">
                 <DashboardDonor/>
+              </Route>
+              <Route path="/adminfundraiser">
+                <AdminFundraiserDetails />
+              </Route>
+              <Route path="/adminproposal">
+                <AdminProposalCampaignDetails/>
               </Route>
               <Route path="/campaign">
                 <CampaignDetails/>
