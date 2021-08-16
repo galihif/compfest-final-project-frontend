@@ -63,6 +63,11 @@ const Login = () => {
                 dispatch({ type: 'LOGIN', userToken: res.data })
                 getUserRole(res.data.access)
             })
+            .catch((err)=>{
+                setLoading(false)
+                const message = err.response.data[Object.keys(err.response.data)[0]]
+                alert(message)
+            })
     }
 
     const getUserRole = (accessToken) => {
@@ -111,12 +116,12 @@ const Login = () => {
                             <Form.Group className="mb-3" controlId="password" onChange={handleChange}>
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Password"/>
-                                <Form.Text className="text-primary">
+                                {/* <Form.Text className="text-primary">
                                     <Nav.Link className="p-0" href="/">Forgot Password?</Nav.Link>
-                                </Form.Text>
+                                </Form.Text> */}
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="" onClick={handleLogin} disabled={loading}>
+                                <Button variant="primary" type="submit" onClick={handleLogin} disabled={loading}>
                                     {
                                         loading ? <div>Loading...</div> : <div>Login</div> 
                                     }
