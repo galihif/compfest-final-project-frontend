@@ -14,6 +14,9 @@ import {
 
 
 const BoxWithdrawRequest = (props) => {
+
+    let d = new Date(props.date)
+    d = d.toLocaleDateString("id")
     return (
         <Container className="topup-history-box  p-3 my-2" style={{backgroundColor: "white", borderRadius: "0.8em", border: "1px solid #DFDFDF" }}>
             <Row>
@@ -24,7 +27,7 @@ const BoxWithdrawRequest = (props) => {
             </Row>
             <Row>
                 <Col lg="6">
-                    <p className="m-0" >{props.date}</p>
+                    <p className="m-0" >{d}</p>
                 </Col>
                 <Col lg="6" className="d-flex justify-content-end">
                     {
