@@ -85,6 +85,7 @@ const CampaignDetails = (props) => {
             .then((res) => {
                 console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                window.location.reload()
             })
             .catch((err) => {
                 console.log(err, "ref")

@@ -65,8 +65,8 @@ const Login = () => {
             })
             .catch((err)=>{
                 setLoading(false)
-                // const message = err.response.data[Object.keys(err.response.data)[0]]
-                // alert(message)
+                const message = err.response.data[Object.keys(err.response.data)[0]]
+                alert(message)
             })
     }
 
