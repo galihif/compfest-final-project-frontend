@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch, connect } from 'react-redux'
 import { Button, Modal, Form, Row } from 'react-bootstrap'
 import API from '../../config/API'
+import axios from 'axios'
 
 const ButtonWithdrawStop = (props) => {
 
@@ -43,17 +44,25 @@ const ButtonWithdrawStop = (props) => {
 
     const handleStopCampaign = () => {
         setLoading(true)
-        API.stopCampaignById(campaign.id, headers)
-            .then((res) => {
+        // API.stopCampaignById(campaign.id, headers)
+        //     .then((res) => {
+        //         console.log(res.data)
+        //         setLoading(false)
+        //         toggleDialogStop()
+        //     })
+        //     .catch((err)=> {
+        //         if (err.response.status === 401){
+        //             // refreshUserToken(false)
+        //         }
+        //         console.log(err)
+        //     })
+        axios.put(`https://donatur.herokuapp.com/api/fundraiser/campaigns/${campaign.id}/`,{headers:headers})
+            .then((res)=>{
                 console.log(res.data)
-                setLoading(false)
-                toggleDialogStop()
             })
-            .catch((err)=> {
-                if (err.response.status === 401){
-                    // refreshUserToken(false)
-                }
+            .catch((err)=>{
                 console.log(err)
+                setLoading(false)
             })
     }
     
