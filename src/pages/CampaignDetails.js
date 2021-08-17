@@ -17,6 +17,7 @@ import API from '../config/API';
 import SkeletonCampaignDetails from '../components/Skeletons/SkeletonCampaignDetails';
 import ButtonDonate from '../components/Button/ButtonDonate';
 import ButtonWithdrawStop from '../components/Button/ButtonWithdrawStop';
+import NotFound from './NotFound';
 
 
 //Assets
@@ -112,6 +113,10 @@ const CampaignDetails = (props) => {
     //             </Button>
     //         </Modal.Footer>
     //     </Modal>
+
+    if (!props.isLogged) {
+        return <NotFound/>
+    }
 
     return (
         <div className="d-flex justify-content-center align-items-center">

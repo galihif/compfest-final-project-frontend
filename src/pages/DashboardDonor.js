@@ -24,6 +24,7 @@ import API from '../config/API';
 import DonorDonationHistory from '../containers/DonorDonationHistory';
 import DonorTopupHistory from '../containers/DonorTopupHistory';
 import ButtonLogout from '../components/Button/ButtonLogout';
+import NotFound from './NotFound';
 
 const DashboardDonor = (props) => {
     //State
@@ -149,6 +150,11 @@ const DashboardDonor = (props) => {
                 console.log(err,"ref")
             })
     }
+
+    if(!props.isLogged){
+        return <NotFound/>
+    }
+
     return (
         <div className="d-flex justify-content-center align-items-center">
             <div className="m-5">

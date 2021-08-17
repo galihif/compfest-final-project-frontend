@@ -30,6 +30,7 @@ import FundraiserCampaignRequest from '../containers/FundraiserCampaignRequest';
 import FundraiserWithdrawRequest from '../containers/FundraiserWithdrawRequest';
 import ButtonLogout from '../components/Button/ButtonLogout';
 import FundraiserFinishedCampaign from '../containers/FundraiserFinishedCampaign';
+import NotFound from './NotFound';
 
 const DashboardFundraiser = () => {
     //State
@@ -167,6 +168,10 @@ const DashboardFundraiser = () => {
             }
         </Tooltip>
     );
+
+    if (!state.isLogged) {
+        return <NotFound />
+    }
 
     return (
         <div className="d-flex justify-content-center align-items-center">

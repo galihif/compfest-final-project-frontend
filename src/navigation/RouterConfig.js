@@ -22,6 +22,7 @@ import NavbarM from "../components/Navbar/NavbarM";
 import Footer from "../components/Footer/Footer";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
+import NotFound from "../pages/NotFound";
 
 export const RouterConfig = () => {
     return (
@@ -49,9 +50,9 @@ export const RouterConfig = () => {
                 <Route exact path={ROOT}>
                     <Home />
                 </Route>
-                {/* <Route path="*">
-                    <NotFound />
-                </Route> */}
+                <Route path="*">
+                    <NotFound/>
+                </Route>
             </Switch>
             <Footer/>
         </div>
