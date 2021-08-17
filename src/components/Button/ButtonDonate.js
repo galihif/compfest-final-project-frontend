@@ -8,11 +8,14 @@ import API from '../../config/API'
 const ButtonDonate = (props) => {
 
     const history = useHistory()
+    const dispatch = useDispatch()
 
     const userToken = props.userToken
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
 
+    const [loading, setLoading] = useState(false)    
+    
     const [showDonate, setShowDonate] = useState(false)    
     const [userRole, setUserRole] = useState(props.userData.role)
     const [walletAmount, setWalletAmount] = useState(props.userData.wallet_amount)
@@ -42,6 +45,7 @@ const ButtonDonate = (props) => {
     }
     
     const handleClickPay = () => {
+        setLoading(true)
         const body = {
             amount: parseInt(donateAmount),
             password: password
@@ -52,17 +56,35 @@ const ButtonDonate = (props) => {
                     console.log(res)
                     toggleDialog()
                     alert(res.data.status)
-                    window.location.reload()
+                    setLoading(false)
+                    history.push('/dashboarddonor')
                 })
                 .catch((err) => {
-                    console.log(err.response)
-                    alert(err.response.data)
+                    if(err.response.status===401){
+                        refreshUserToken()
+                    }
                 })
         } else if (walletAmount <= donateAmount) {
             alert("Your E-wallet balance is not enough")
         } else if (parseInt(donateAmount) < 5000) {
             alert("Minimum amount is Rp 5000")
         }
+    }
+
+    const refreshUserToken = () => {
+        const body = {
+            refresh: refreshToken
+        }
+        API.refresh(body)
+            .then((res) => {
+                console.log(res.data)
+                dispatch({ type: 'REFRESH', userToken: res.data })
+                handleClickPay()
+            })
+            .catch((err) => {
+                console.log(err, "ref")
+                setLoading(false)
+            })
     }
 
     return (
@@ -88,8 +110,10 @@ const ButtonDonate = (props) => {
                     <Button variant="secondary" onClick={toggleDialog}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleClickPay}>
-                        Pay with E-Wallet
+                    <Button variant="primary" onClick={handleClickPay} disabled={loading} >
+                        {
+                            loading ? <div>Loading...</div> : <div>Pay with E-Wallet</div>
+                        }
                     </Button>
                 </Modal.Footer>
             </Modal>
