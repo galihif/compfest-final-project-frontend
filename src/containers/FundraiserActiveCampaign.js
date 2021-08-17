@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
-import { Col, Image, Row } from 'react-bootstrap'
+import { Col, Container, Image, Row } from 'react-bootstrap'
 import CardCampaign from '../components/Card/CardCampaign'
 import emptyState from '../assets/emptyCampaignActive.svg'
+import PaginationM from '../components/Pagination/PaginationM'
 
 
 const FundraiserActiveCampaign = () => {
@@ -19,6 +20,19 @@ const FundraiserActiveCampaign = () => {
     const refreshToken = userToken.refresh
 
     const [activeCampaignList, setActiveCampaignList] = useState([])
+
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(3);
+
+    // Get current posts
+    const indexOfLastPost = currentPage * itemsPerPage;
+    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+    const currentItems = activeCampaignList.slice(indexOfFirstPost, indexOfLastPost);
+    const totalItems = activeCampaignList.length
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const headers = {
         Accept: "application/json",
@@ -64,6 +78,7 @@ const FundraiserActiveCampaign = () => {
     return(
         <div>
             <Row className="d-flex justify-content-start px-2">
+                
                 {
                     activeCampaignList.length === 0 ? (
                         <div>
@@ -74,10 +89,21 @@ const FundraiserActiveCampaign = () => {
                                 <p>You have no Active Campaign</p>
                             </Col>
                         </div>
-                    ) : null
+                    ) : (
+                        <Row className="d-flex justify-content-center" >
+                            <Container fluid className="d-flex justify-content-center" >
+                                <PaginationM
+                                    currentPage={currentPage}
+                                    itemsPerPage={itemsPerPage}
+                                    totalItems={totalItems}
+                                    paginate={paginate}
+                                />
+                            </Container>
+                        </Row>
+                    )
                 }
                 {
-                    activeCampaignList.map((campaign) => {
+                    currentItems.map((campaign) => {
                         return (
                             <Col lg={4} className="d-flex justify-content-center mb-2">
                                 <CardCampaign

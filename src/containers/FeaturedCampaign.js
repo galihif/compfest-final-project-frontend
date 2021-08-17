@@ -9,12 +9,26 @@ import {
  } from 'react-bootstrap';
 import API from '../config/API';
 import CardCampaign from '../components/Card/CardCampaign';
+import PaginationM from '../components/Pagination/PaginationM';
 
 
 
 const FeaturedCampaign = (props) => {
 
     const [campaignList, setCampaignList] = useState([])
+
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(8);
+
+    // Get current posts
+    const indexOfLastPost = currentPage * itemsPerPage;
+    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+    const currentItems = campaignList.slice(indexOfFirstPost, indexOfLastPost);
+    const totalItems = campaignList.length
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const headers = {
         Accept: "application/json",
@@ -44,8 +58,16 @@ const FeaturedCampaign = (props) => {
         <Container className="m-0" fluid>
             <h4 className="text-center my-5">Featured Campaign</h4>
             <Row className="px-5 d-flex justify-content-center">
+                <Container fluid className="d-flex justify-content-center" >
+                    <PaginationM
+                        currentPage={currentPage}
+                        itemsPerPage={itemsPerPage}
+                        totalItems={totalItems}
+                        paginate={paginate}
+                    />
+                </Container>
                 {
-                    campaignList.map((campaign)=>{
+                    currentItems.map((campaign)=>{
                         return(
                             <Col lg={3} className="d-flex justify-content-center mb-3">
                                 <CardCampaign
