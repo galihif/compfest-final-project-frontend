@@ -7,6 +7,7 @@ import TopUpHistoryBox from '../components/Box/TopUpHistoryBox'
 
 import emptyState from '../assets/emptyTopupHistory.svg'
 import { Image, Row, Col } from 'react-bootstrap'
+import PaginationM from '../components/Pagination/PaginationM'
 
 
 const DonorTopupHistory = (props) => {
@@ -19,6 +20,17 @@ const DonorTopupHistory = (props) => {
     const refreshToken = userToken.refresh
 
     const [topUpHistoryList, setTopUpHistoryList] = useState([])
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
+
+    // Get current posts
+    const indexOfLastPost = currentPage * itemsPerPage;
+    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+    const currentItems = topUpHistoryList.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const headers = {
         Accept: "application/json",
@@ -58,6 +70,12 @@ const DonorTopupHistory = (props) => {
 
     return(
         <div>
+            <PaginationM 
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                totalItems={topUpHistoryList.length}
+                paginate={paginate}
+            />
             {
                 topUpHistoryList.length === 0 ? (
                     <div>
@@ -75,7 +93,7 @@ const DonorTopupHistory = (props) => {
                 ) :null
             }
             {
-                topUpHistoryList.map((topup) => {
+                currentItems.map((topup) => {
                     return (
                         <TopUpHistoryBox
                             amount={topup.amount}
