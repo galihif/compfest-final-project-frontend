@@ -66,8 +66,10 @@ const ButtonDonate = (props) => {
                 })
         } else if (walletAmount <= donateAmount) {
             alert("Your E-wallet balance is not enough")
+                setLoading(false)
         } else if (parseInt(donateAmount) < 5000) {
             alert("Minimum amount is Rp 5000")
+                setLoading(false)
         }
     }
 
