@@ -32,8 +32,8 @@ const DashboardDonor = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const userToken = props.userToken
-    const accessToken = userToken.access
-    const refreshToken = userToken.refresh
+    const [accessToken, setAccessToken] = useState(userToken.access)
+    const [refreshToken, setRefreshToken] = useState(userToken.refresh)
 
     const [loadingProfile, setLoadingProfile] = useState(true)
     const [loadingTopup, setLoadingTopup] = useState(false)

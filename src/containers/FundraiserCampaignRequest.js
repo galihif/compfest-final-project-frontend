@@ -51,7 +51,7 @@ const FundraiserCampaignRequest = (props) => {
                 const snapshot = res.data
                 const requestedCampaign = []
                 snapshot.forEach((campaign) => {
-                    if (campaign.status !== "VERIFIED") {
+                    if (campaign.status === "PENDING" || campaign.status==="REJECTED") {
                         requestedCampaign.push(campaign)
                     }
                 })

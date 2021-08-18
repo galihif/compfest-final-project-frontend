@@ -26,7 +26,7 @@ const FundraiserWithdrawRequest = () => {
 
     //Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(2);
+    const [itemsPerPage] = useState(4);
 
     // Get current posts
     const indexOfLastPost = currentPage * itemsPerPage;

@@ -39,8 +39,8 @@ const DashboardFundraiser = () => {
     const history = useHistory()
 
     const userToken = state.userToken
-    const accessToken = userToken.access
-    const refreshToken = userToken.refresh
+    const [accessToken, setAccessToken] = useState(userToken.access)
+    const [refreshToken, setRefreshToken] = useState(userToken.refresh)
 
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
