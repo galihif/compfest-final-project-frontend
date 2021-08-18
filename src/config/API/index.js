@@ -1,6 +1,5 @@
 import Post from './Post'
 import { Get } from './Get'
-import Put from './Put'
 import Delete from './Delete'
 
 // POST
@@ -23,8 +22,6 @@ const getDonateHistoryDonor = (headers) => Get('donate',headers)
 const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${id}`,headers)
 const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
 
-// PUT
-const stopCampaignById = (id, headers) => Put(`fundraiser/campaigns/${id}`, headers)
 
 
 // DELETE
@@ -48,7 +45,6 @@ const API = {
     donateCampaignById,
     withdrawCampaignById,
     deleteCampaignById,
-    stopCampaignById
 }
 
 export default API;

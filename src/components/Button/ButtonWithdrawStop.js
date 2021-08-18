@@ -12,9 +12,10 @@ const ButtonWithdrawStop = (props) => {
     const dispatch = useDispatch()
 
     const userToken = props.userToken
-    const accessToken = userToken.access
-    const refreshToken = userToken.refresh
 
+    const [accessToken, setAccessToken] = useState(userToken.access)
+    const [refreshToken, setRefreshToken] = useState(userToken.refresh)
+    
     const [showWithdraw, setShowWithdraw] = useState(false)
     const [showStop, setShowStop] = useState(false)
 
@@ -31,6 +32,10 @@ const ButtonWithdrawStop = (props) => {
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`
     }
+    
+    useEffect(()=>{
+        console.log(accessToken)
+    })
 
     const handleChange = (e) => {
         switch (e.target.id) {
@@ -44,26 +49,18 @@ const ButtonWithdrawStop = (props) => {
 
     const handleStopCampaign = () => {
         setLoading(true)
-        // API.stopCampaignById(campaign.id, headers)
-        //     .then((res) => {
-        //         console.log(res.data)
-        //         setLoading(false)
-        //         toggleDialogStop()
-        //     })
-        //     .catch((err)=> {
-        //         if (err.response.status === 401){
-        //             // refreshUserToken(false)
-        //         }
-        //         console.log(err)
-        //     })
-        axios.put(`https://donatur.herokuapp.com/api/fundraiser/campaigns/${campaign.id}/`,{headers:headers})
-            .then((res)=>{
-                console.log(res.data)
-            })
-            .catch((err)=>{
-                console.log(err)
-                setLoading(false)
-            })
+        fetch(`https://donatur.herokuapp.com/api/fundraiser/campaigns/${campaign.id}/`,{
+            method: 'PUT',
+            headers: headers
+        }).then((res)=>{
+            console.log(res)
+            setLoading(false)
+            alert("Campaign Finished Successfully")
+            history.push('/dashboardfundraiser')
+        }).catch((err)=>{
+            console.log(err)
+            setLoading(false)
+        })
     }
     
     const handleClickWithdraw = () => {
@@ -101,10 +98,11 @@ const ButtonWithdrawStop = (props) => {
             .then((res) => {
                 console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                setAccessToken(res.data.access)
                 if(isWithdraw){
                     handleClickWithdraw()
                 } else {
-                    // handleStopCampaign()
+                    handleStopCampaign()
                 }
             })
             .catch((err) => {
@@ -119,11 +117,15 @@ const ButtonWithdrawStop = (props) => {
                     WITHDRAW
                 </Button>
             </Row>
-            <Row className="d-grid">
-                <Button variant="outline-danger my-3" type="submit" onClick={toggleDialogStop}>
-                    STOP THIS CAMPAIGN
-                </Button>
-            </Row>
+            {
+                !campaign.status === "STOPPED" ? (
+                    <Row className="d-grid">
+                        <Button variant="outline-danger my-3" type="submit" onClick={toggleDialogStop}>
+                            STOP THIS CAMPAIGN
+                        </Button>
+                    </Row>
+                ):null
+            }
             <div>
                 <Modal show={showWithdraw}>
                     <Modal.Header >
