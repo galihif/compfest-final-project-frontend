@@ -53,7 +53,6 @@ const ButtonDonate = (props) => {
         if (donateAmount <= walletAmount && donateAmount >= 5000) {
             API.donateCampaignById(props.id, body, headers)
                 .then((res) => {
-                    console.log(res)
                     toggleDialog()
                     alert(res.data.status)
                     setLoading(false)
@@ -62,6 +61,10 @@ const ButtonDonate = (props) => {
                 .catch((err) => {
                     if(err.response.status===401){
                         refreshUserToken()
+                    } else {
+                        const message = err.response.data[Object.keys(err.response.data)[0]]
+                        alert(message)
+                        setLoading(false)
                     }
                 })
         } else if (walletAmount <= donateAmount) {
