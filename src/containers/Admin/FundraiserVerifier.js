@@ -8,13 +8,11 @@ import AdminFundraiserCard from '../../components/Card/Admin/AdminFundraiserCard
 
 const FundraiserVerifier = () => {
     //State
-    const state = useSelector((state) => state)
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const userToken = state.userToken
-    const accessToken = userToken.access
-    const refreshToken = userToken.refresh
-    console.log('test');
+    const state = useSelector((state) => state);
+    const dispatch = useDispatch();
+    const userToken = state.userToken;
+    const accessToken = userToken.access;
+    const refreshToken = userToken.refresh;
 
     const [fundraiserRequest, setFundraiserRequest] = useState([]);
 
@@ -64,6 +62,7 @@ const FundraiserVerifier = () => {
 
                         return (
                             <AdminFundraiserCard 
+                                id={proposal.id}
                                 email={proposal.email}
                                 title={proposal.first_name}
                                 description={proposal.proposal_text}

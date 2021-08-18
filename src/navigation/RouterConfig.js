@@ -11,7 +11,8 @@ import {
     DASHFUND,
     DASHDONOR,
     ADMIN,
-    FUNDRAISERREQUEST
+    FUNDRAISERREQUEST,
+    FUNDRAISERREQUESTBYID
 } from './CONSTANTS'
 
 //Pages
@@ -26,11 +27,15 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import FundraiserVerifier from "../containers/Admin/FundraiserVerifier";
 import CheckAdmin from "../containers/Admin/CheckAdmin";
+import AdminFundraiserDetails from "../pages/Admin/AdminFundraiserDetails";
 
 export const RouterConfig = () => {
     return (
         <div>
             <NavbarM/>
+            <Route path={ADMIN}>
+                <CheckAdmin/>
+            </Route>
             <Switch>
                 <Route path={DASHFUND}>
                     <DashboardFundraiser />
@@ -53,12 +58,11 @@ export const RouterConfig = () => {
                 <Route exact path={ROOT}>
                     <Home />
                 </Route>
-                <Route path={ADMIN}>
-                    <CheckAdmin/>
-                </Route>
-                <Route path={FUNDRAISERREQUEST}>
-                    <CheckAdmin/>
+                <Route exact path={FUNDRAISERREQUEST}>
                     <FundraiserVerifier />
+                </Route>
+                <Route exact path={FUNDRAISERREQUESTBYID}>
+                    <AdminFundraiserDetails/>
                 </Route>
                 {/* <Route path="*">
                     <NotFound />

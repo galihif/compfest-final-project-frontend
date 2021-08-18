@@ -24,8 +24,10 @@ const getListFundraiser = (headers) => Get('admin/fundraiser-requests', headers)
 const getDonateHistoryDonor = (headers) => Get('donate',headers)
 const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${id}`,headers)
 const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
+const getFundraiserByIdAdmin= (id, headers) => Get(`admin/fundraiser-requests/${id}`,headers)
 
 // PUT
+const putAcceptFundraiser = (body, headers) => Put(`admin/fundraiser-requests`,body,headers);
 
 // DELETE
 const deleteCampaignById = (id,headers) => Delete(`fundraiser/campaigns/${id}`,headers)
@@ -40,6 +42,8 @@ const API = {
     getCampaignByIdFundraiser,
     getCampaignByIdDonor,
     getListFundraiser,
+    getFundraiserByIdAdmin,
+    putAcceptFundraiser,
     // getCampaignProposal,
     getDonateHistoryDonor,
     topUp,
