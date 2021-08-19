@@ -11,3 +11,4 @@ export const FUNDRAISERREQUESTBYID = `${FUNDRAISERREQUEST}/:id`;
 export const CAMPAIGNPROPOSALS = `${ADMIN}/campaign`;
 export const CAMPAIGNPROPOSALSBYID = `${CAMPAIGNPROPOSALS}/:id`;
 export const WITHDRAWREQUEST = `${ADMIN}/withdraw`;
+export const TOPUPREQUEST = `${ADMIN}/topup`;
