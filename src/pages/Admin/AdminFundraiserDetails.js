@@ -10,7 +10,7 @@ import {
     Col,
     Breadcrumb,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import API from '../../config/API';
 import { useCallback } from 'react';
@@ -34,13 +34,13 @@ const AdminFundraiserDetails = () => {
     const userToken = state.userToken;
     const accessToken = userToken.access;
     const refreshToken = userToken.refresh;
+    const history = useHistory();
 
 
     const headers = {
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`
     }
-    console.log(headers)
 
     useEffect(()=>{
         getFundraiserRequest()
@@ -81,7 +81,8 @@ const AdminFundraiserDetails = () => {
         }
         API.putAcceptFundraiser(body,headers)
             .then((res) => {
-                console.log(res);
+                alert(res);
+                history.push('/fundraiser');
             })
             .catch((err) => {
                 console.log(err)

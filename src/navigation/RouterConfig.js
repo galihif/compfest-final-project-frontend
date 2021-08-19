@@ -12,7 +12,9 @@ import {
     DASHDONOR,
     ADMIN,
     FUNDRAISERREQUEST,
-    FUNDRAISERREQUESTBYID
+    FUNDRAISERREQUESTBYID,
+    CAMPAIGNPROPOSALS,
+    CAMPAIGNPROPOSALSBYID
 } from './CONSTANTS'
 
 //Pages
@@ -28,6 +30,8 @@ import Home from "../pages/Home";
 import FundraiserVerifier from "../containers/Admin/FundraiserVerifier";
 import CheckAdmin from "../containers/Admin/CheckAdmin";
 import AdminFundraiserDetails from "../pages/Admin/AdminFundraiserDetails";
+import CampaignProposals from "../containers/Admin/CampaignProposals";
+import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDetails";
 
 export const RouterConfig = () => {
     return (
@@ -58,11 +62,18 @@ export const RouterConfig = () => {
                 <Route exact path={ROOT}>
                     <Home />
                 </Route>
+                {/* Admin */}
                 <Route exact path={FUNDRAISERREQUEST}>
                     <FundraiserVerifier />
                 </Route>
                 <Route exact path={FUNDRAISERREQUESTBYID}>
                     <AdminFundraiserDetails/>
+                </Route>
+                <Route exact path={CAMPAIGNPROPOSALS}>
+                    <CampaignProposals />
+                </Route>
+                <Route exact path={CAMPAIGNPROPOSALSBYID}>
+                    <AdminProposalCampaignDetails />
                 </Route>
                 {/* <Route path="*">
                     <NotFound />

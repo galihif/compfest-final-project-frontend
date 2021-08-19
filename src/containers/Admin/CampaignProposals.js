@@ -1,18 +1,18 @@
 //Library
 import React, { useState, useEffect, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Row, Col, Container} from 'react-bootstrap'
+import { Row, Container} from 'react-bootstrap'
 import API from '../../config/API'
-import AdminFundraiserCard from '../../components/Card/Admin/AdminFundraiserCard';
+import AdminCampaignProposalCard from '../../components/Card/Admin/AdminCampaignProposalCard';
 
-const FundraiserVerifier = () => {
+const CampaignProposals = () => {
     //State
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
     const userToken = state.userToken;
     const accessToken = userToken.access;
     const refreshToken = userToken.refresh;
+    
 
     const [fundraiserRequest, setFundraiserRequest] = useState([]);
 
@@ -22,14 +22,14 @@ const FundraiserVerifier = () => {
     }
 
     useEffect(()=>{
-        getFundraiserRequest()
+        getCampaignProposals()
     },[])
 
-    const getFundraiserRequest = useCallback((e) => {
+    const getCampaignProposals = useCallback((e) => {
 
-        API.getListFundraiser(headers)
+        API.getListCampaignProposal(headers)
             .then((res) => {
-                setFundraiserRequest(res.data)
+                setFundraiserRequest(res.data);
             })
             .catch((err) => {
                 console.log(err)
@@ -57,15 +57,17 @@ const FundraiserVerifier = () => {
         <Container className="m-0" fluid>
             <Row className="px-5 d-flex justify-content-center">
                 {
-                    fundraiserRequest.map((proposal) => {
+                    fundraiserRequest.map((proposal,index) => {
                         console.log(proposal);
-
                         return (
-                            <AdminFundraiserCard 
+                            <AdminCampaignProposalCard 
+                                key={index}
                                 id={proposal.id}
-                                email={proposal.email}
-                                title={proposal.first_name}
-                                description={proposal.proposal_text}
+                                title={proposal.title}
+                                email={proposal.fundraiser.email}
+                                target={proposal.target_amount}
+                                name={proposal.fundraiser.full_name}
+                                imageLink={proposal.image_url}
                             />
                         )
                     })
@@ -75,4 +77,4 @@ const FundraiserVerifier = () => {
     )
 }
 
-export default FundraiserVerifier
+export default CampaignProposals

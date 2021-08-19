@@ -19,15 +19,18 @@ const getUserCampaignList = (headers) => Get('fundraiser/campaigns', headers)
 const getWithdrawRequestList = (headers) => Get('withdraw', headers)
 const getAllCampaign = (headers) => Get('campaigns', headers)
 const getListFundraiser = (headers) => Get('admin/fundraiser-requests', headers)
+const getListCampaignProposal = (headers) => Get('admin/proposals', headers)
 
 // const getCampaignProposal = () => Get('admin/proposals')
 const getDonateHistoryDonor = (headers) => Get('donate',headers)
 const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${id}`,headers)
 const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
-const getFundraiserByIdAdmin= (id, headers) => Get(`admin/fundraiser-requests/${id}`,headers)
+const getFundraiserByIdAdmin = (id, headers) => Get(`admin/fundraiser-requests/${id}`,headers)
+const getCampaignProposalById = (id, headers) => Get(`admin/proposals/${id}`,headers)
 
 // PUT
 const putAcceptFundraiser = (body, headers) => Put(`admin/fundraiser-requests`,body,headers);
+const putAcceptCampaign = (id,body, headers) => Put(`admin/proposals/${id}`,body,headers);
 
 // DELETE
 const deleteCampaignById = (id,headers) => Delete(`fundraiser/campaigns/${id}`,headers)
@@ -44,6 +47,9 @@ const API = {
     getListFundraiser,
     getFundraiserByIdAdmin,
     putAcceptFundraiser,
+    getListCampaignProposal,
+    getCampaignProposalById,
+    putAcceptCampaign,
     // getCampaignProposal,
     getDonateHistoryDonor,
     topUp,
