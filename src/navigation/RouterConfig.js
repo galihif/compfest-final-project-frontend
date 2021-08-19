@@ -14,7 +14,8 @@ import {
     FUNDRAISERREQUEST,
     FUNDRAISERREQUESTBYID,
     CAMPAIGNPROPOSALS,
-    CAMPAIGNPROPOSALSBYID
+    CAMPAIGNPROPOSALSBYID,
+    WITHDRAWREQUEST
 } from './CONSTANTS'
 
 //Pages
@@ -32,6 +33,7 @@ import CheckAdmin from "../containers/Admin/CheckAdmin";
 import AdminFundraiserDetails from "../pages/Admin/AdminFundraiserDetails";
 import CampaignProposals from "../containers/Admin/CampaignProposals";
 import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDetails";
+import UserPayments from "../containers/Admin/UserPayments";
 
 export const RouterConfig = () => {
     return (
@@ -74,6 +76,9 @@ export const RouterConfig = () => {
                 </Route>
                 <Route exact path={CAMPAIGNPROPOSALSBYID}>
                     <AdminProposalCampaignDetails />
+                </Route>
+                <Route exact path={WITHDRAWREQUEST}>
+                    <UserPayments />                    
                 </Route>
                 {/* <Route path="*">
                     <NotFound />
