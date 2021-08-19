@@ -34,7 +34,7 @@ const ButtonWithdrawStop = (props) => {
     }
     
     useEffect(()=>{
-        console.log(accessToken)
+        console.log(campaign)
     })
 
     const handleChange = (e) => {
@@ -118,7 +118,7 @@ const ButtonWithdrawStop = (props) => {
                 </Button>
             </Row>
             {
-                !campaign.status === "STOPPED" ? (
+                campaign.status === "VERIFIED" ? (
                     <Row className="d-grid">
                         <Button variant="outline-danger my-3" type="submit" onClick={toggleDialogStop}>
                             STOP THIS CAMPAIGN
