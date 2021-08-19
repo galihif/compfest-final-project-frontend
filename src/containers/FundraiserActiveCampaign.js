@@ -8,6 +8,7 @@ import { Col, Container, Image, Row } from 'react-bootstrap'
 import CardCampaign from '../components/Card/CardCampaign'
 import emptyState from '../assets/emptyCampaignActive.svg'
 import PaginationM from '../components/Pagination/PaginationM'
+import SkeletonCard from '../components/Skeletons/SkeletonCard'
 
 
 const FundraiserActiveCampaign = () => {
@@ -18,6 +19,9 @@ const FundraiserActiveCampaign = () => {
     const userToken = state.userToken
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
+
+    const [loading, setLoading] = useState(true)
+    const [skeletonItem,] = useState([1, 2, 3, 4])
 
     const [activeCampaignList, setActiveCampaignList] = useState([])
 
@@ -54,6 +58,7 @@ const FundraiserActiveCampaign = () => {
                     }
                 })
                 setActiveCampaignList(activeCampaigns)
+                setLoading(false)
             })
             .catch((err) => {
                 console.log(err)
@@ -80,7 +85,7 @@ const FundraiserActiveCampaign = () => {
             <Row className="d-flex justify-content-start px-2">
                 
                 {
-                    activeCampaignList.length === 0 ? (
+                    !loading && activeCampaignList.length === 0 ? (
                         <div>
                             <Col lg className="d-flex justify-content-center" >
                                 <Image src={emptyState} />
@@ -113,6 +118,15 @@ const FundraiserActiveCampaign = () => {
                                     amount={campaign.amount}
                                     targetAmount={campaign.target_amount}
                                 />
+                            </Col>
+                        )
+                    })
+                }
+                {
+                    loading && skeletonItem.map((skel) => {
+                        return (
+                            <Col lg={3} className="d-flex justify-content-center mb-3">
+                                <SkeletonCard />
                             </Col>
                         )
                     })

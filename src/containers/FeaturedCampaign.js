@@ -10,10 +10,14 @@ import {
 import API from '../config/API';
 import CardCampaign from '../components/Card/CardCampaign';
 import PaginationM from '../components/Pagination/PaginationM';
+import SkeletonCard from '../components/Skeletons/SkeletonCard';
 
 
 
 const FeaturedCampaign = (props) => {
+
+    const [loading, setLoading] = useState(true)
+    const [skeletonItem, ] = useState([1,2,3,4])
 
     const [campaignList, setCampaignList] = useState([])
 
@@ -40,6 +44,7 @@ const FeaturedCampaign = (props) => {
     },[])
 
     const getCampaignList = useCallback((e) => {
+        setLoading(true)
         API.getAllCampaign(headers)
             .then((res) => {
                 const snapshot = res.data
@@ -48,6 +53,7 @@ const FeaturedCampaign = (props) => {
                     items.push(campaign)
                 })
                 setCampaignList(items)
+                setLoading(false)
             })
             .catch((err) => {
                 console.log(err)
@@ -77,6 +83,15 @@ const FeaturedCampaign = (props) => {
                                     amount={campaign.amount}
                                     targetAmount={campaign.target_amount}
                                 />
+                            </Col>
+                        )
+                    })
+                }
+                {
+                    loading && skeletonItem.map((skel)=>{
+                        return(
+                            <Col lg={3} className="d-flex justify-content-center mb-3">
+                                <SkeletonCard />
                             </Col>
                         )
                     })
