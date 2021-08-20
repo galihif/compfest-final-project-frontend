@@ -66,7 +66,7 @@ const NavbarM = (props) => {
         <div>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light fixed-top">
                 <Container>
-                    <Navbar.Brand href="/">Website Name</Navbar.Brand>
+                    <Navbar.Brand href="/">NagaPeduli</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
