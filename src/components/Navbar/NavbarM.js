@@ -52,7 +52,7 @@ const NavbarM = (props) => {
     const navLogged = 
     <Row>
         <Col className="d-flex nav-user" onClick={() => history.push(dashboardPath)}>
-            <Gravatar email={props.userData.email} size="30" style={{ borderRadius: "20em" }} />
+            <Gravatar email={props.userData.email} size={30} style={{ borderRadius: "20em" }} />
             <p className="my-0 ms-2 fs-5" >{props.userData.first_name} {props.userData.last_name}</p>
         </Col>
     </Row>

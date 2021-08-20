@@ -1,22 +1,90 @@
 
 //Library
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //Styles
 import "../Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import Gravatar from 'react-gravatar';
 
+import API from "../../../config/API";
 
 const AdminWithdrawCard = (props) => {
     const normalFont = { fontSize: "12px" };
-    const { name, 
+    const { id,
+            change,
+            setChange,
+            name, 
             amount,
             email,
-            bankName,
-            accountNumber} = props;
+            bankName } = props;
+    const state = useSelector((state) => state);
+    const dispatch = useDispatch();
+    const userToken = state.userToken;
+    const accessToken = userToken.access;
+    const refreshToken = userToken.refresh;
+
+    const headers = {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`
+    }
+
+    const acceptHandler = () => {
+        const body = {
+            id:id,
+            status: "VERIFIED"
+        }
+        sendApiRequest(body)
+    }
+
+    const rejectHandler = () => {
+        const body = {
+            id:id,
+            status: "REJECTED"
+        }
+        sendApiRequest(body)
+    }
+
+    const sendApiRequest = (body) =>{
+        API.putAcceptWithdraw(body,headers)
+            .then((res) => {
+                if(res.status === 204){
+                    alert('withdraw successfully ' + body.status)
+                }
+                else
+                    alert('something went wrong')
+            })
+            .catch((err) => {
+                console.log(err)
+                if(err.response.status = 401){
+                    refreshUserToken();
+                }
+                else
+                    alert('something went wrong')
+            })
+            .finally(() => {
+                setChange(!change);
+                console.log(change);
+            })
+    }
+
+    const refreshUserToken = () => {
+        const body = {
+            refresh: refreshToken
+        }
+        API.refresh(body)
+            .then((res) => {
+                console.log(res.data)
+                dispatch({ type: 'REFRESH', userToken: res.data })
+            })
+            .catch((err) => {
+                console.log(err, "ref")
+            })
+    }
+
     return (
-        <Card className="campaign-card" style={{ width: "20em" }}>
+        <Card className="campaign-card m-2" style={{ width: "20em" }}>
             <Gravatar email={email} size={100} className="m-auto mt-2" style={{ borderRadius: "20em" }} />
             <Card.Body>
                 <Card.Title className="text-center">{name}</Card.Title>
@@ -27,12 +95,6 @@ const AdminWithdrawCard = (props) => {
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
                             Email
-                        </p>
-                        <p className="text-start fw-bold" style={normalFont}>
-                            Bank Name
-                        </p>
-                        <p className="text-start fw-bold" style={normalFont}>
-                            Account Number
                         </p>
                     </Col>
                     <Col lg={7}>
@@ -45,31 +107,17 @@ const AdminWithdrawCard = (props) => {
                         <p className="text-start" style={normalFont}>
                             {bankName}
                         </p>
-                        <p className="text-start" style={normalFont}>
-                            {accountNumber}
-                        </p>
-
-                    </Col>
-
-                    <Col lg={5}>
-                        <p className="text-start fw-bold" style={normalFont}>
-                            Campaign
-                        </p>
-                    </Col>
-
-                    <Col sm={7}>
-                        <a href='/'>tets</a>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={4}>
-                        <Button variant="primary" style={normalFont}>
+                        <Button variant="primary" style={normalFont} onClick={()=>acceptHandler()}>
                             Accept
                         </Button>
                     </Col>
                     <Col lg={4}/>
                     <Col lg={4}>
-                        <Button variant="danger" style={normalFont}>
+                        <Button variant="danger" style={normalFont} onClick={()=>rejectHandler()}>
                             Reject
                         </Button>
                     </Col>
