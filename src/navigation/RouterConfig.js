@@ -37,6 +37,7 @@ import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDe
 import UserPayments from "../containers/Admin/UserPayments";
 import WihtdrawVerifier from "../containers/Admin/WithdrawVerifier";
 
+import NotFound from "../pages/NotFound";
 
 export const RouterConfig = () => {
     return (
@@ -86,9 +87,9 @@ export const RouterConfig = () => {
                 <Route exact path={WITHDRAWREQUEST}>
                     <WihtdrawVerifier/>
                 </Route>
-                {/* <Route path="*">
+                <Route path="*">
                     <NotFound />
-                </Route> */}
+                </Route>
             </Switch>
             <Footer/>
         </div>

@@ -121,7 +121,7 @@ const Login = () => {
                                 </Form.Text> */}
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="submit" onClick={handleLogin} disabled={loading}>
+                                <Button variant="primary" type="" onClick={handleLogin} disabled={loading}>
                                     {
                                         loading ? <div>Loading...</div> : <div>Login</div> 
                                     }

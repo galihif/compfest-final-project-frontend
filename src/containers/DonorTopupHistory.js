@@ -6,7 +6,8 @@ import API from '../config/API'
 import TopUpHistoryBox from '../components/Box/TopUpHistoryBox'
 
 import emptyState from '../assets/emptyTopupHistory.svg'
-import { Image, Row, Col } from 'react-bootstrap'
+import { Image, Row, Col, Container } from 'react-bootstrap'
+import PaginationM from '../components/Pagination/PaginationM'
 
 
 const DonorTopupHistory = (props) => {
@@ -19,6 +20,19 @@ const DonorTopupHistory = (props) => {
     const refreshToken = userToken.refresh
 
     const [topUpHistoryList, setTopUpHistoryList] = useState([])
+
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
+
+    // Get current posts
+    const indexOfLastPost = currentPage * itemsPerPage;
+    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+    const currentItems = topUpHistoryList.slice(indexOfFirstPost, indexOfLastPost);
+    const totalItems = topUpHistoryList.length
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const headers = {
         Accept: "application/json",
@@ -72,10 +86,21 @@ const DonorTopupHistory = (props) => {
                             </Col>
                         </Row>
                     </div>
-                ) :null
+                ) : (
+                    <Row className="d-flex justify-content-center" >
+                        <Container fluid className="d-flex justify-content-center" >
+                            <PaginationM
+                                currentPage={currentPage}
+                                itemsPerPage={itemsPerPage}
+                                totalItems={totalItems}
+                                paginate={paginate}
+                            />
+                        </Container>
+                    </Row>
+                )
             }
             {
-                topUpHistoryList.map((topup) => {
+                currentItems.map((topup) => {
                     return (
                         <TopUpHistoryBox
                             amount={topup.amount}

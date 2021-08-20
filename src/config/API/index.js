@@ -1,6 +1,5 @@
 import Post from './Post'
 import { Get } from './Get'
-import Put from './Put'
 import Delete from './Delete'
 
 // POST
@@ -35,6 +34,7 @@ const putAcceptFundraiser = (body, headers) => Put(`admin/fundraiser-requests`,b
 const putAcceptCampaign = (id,body, headers) => Put(`admin/proposals/${id}`,body,headers);
 const putAcceptUserPayment = (body,headers) => Put('topup/requests',body, headers)
 const putAcceptWithdraw = (body,headers) => Put('withdraw/requests',body, headers)
+
 
 // DELETE
 const deleteCampaignById = (id,headers) => Delete(`fundraiser/campaigns/${id}`,headers)

@@ -132,7 +132,7 @@ const RegisterFundraiser = () => {
                                 <Form.Control type="text" as="textarea" placeholder="Add Reason" />
                             </Form.Group>
                             <div className="d-grid">
-                                <Button variant="primary" type="submit" onClick={handleRegisterFundraiser} disable={loading} >
+                                <Button variant="primary" type="" onClick={handleRegisterFundraiser} disable={loading} >
                                     {
                                         loading ? (
                                             <div>

@@ -8,10 +8,9 @@ import { Col, Container, Image, Row } from 'react-bootstrap'
 import CardCampaign from '../components/Card/CardCampaign'
 import emptyState from '../assets/emptyCampaignActive.svg'
 import PaginationM from '../components/Pagination/PaginationM'
-import SkeletonCard from '../components/Skeletons/SkeletonCard'
 
 
-const FundraiserActiveCampaign = () => {
+const FundraiserFinishedCampaign = () => {
     //State
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
@@ -20,10 +19,7 @@ const FundraiserActiveCampaign = () => {
     const accessToken = userToken.access
     const refreshToken = userToken.refresh
 
-    const [loading, setLoading] = useState(true)
-    const [skeletonItem,] = useState([1, 2, 3, 4])
-
-    const [activeCampaignList, setActiveCampaignList] = useState([])
+    const [finishedCampaignList, setFinishedCampaignList] = useState([])
 
     //Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,8 +28,8 @@ const FundraiserActiveCampaign = () => {
     // Get current posts
     const indexOfLastPost = currentPage * itemsPerPage;
     const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-    const currentItems = activeCampaignList.slice(indexOfFirstPost, indexOfLastPost);
-    const totalItems = activeCampaignList.length
+    const currentItems = finishedCampaignList.slice(indexOfFirstPost, indexOfLastPost);
+    const totalItems = finishedCampaignList.length
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -51,20 +47,19 @@ const FundraiserActiveCampaign = () => {
         API.getUserCampaignList(headers)
             .then((res) => {
                 const snapshot = res.data
-                const activeCampaigns = []
+                const finishedCampaign = []
                 snapshot.forEach((campaign) => {
-                    if (campaign.status === "VERIFIED") {
-                        activeCampaigns.push(campaign)
+                    if (campaign.status === "STOPPED") {
+                        finishedCampaign.push(campaign)
                     }
                 })
-                setActiveCampaignList(activeCampaigns)
-                setLoading(false)
+                setFinishedCampaignList(finishedCampaign)
             })
             .catch((err) => {
                 console.log(err)
                 refreshUserToken()
             })
-    }, [activeCampaignList])
+    }, [finishedCampaignList])
 
     const refreshUserToken = () => {
         const body = {
@@ -83,15 +78,14 @@ const FundraiserActiveCampaign = () => {
     return(
         <div>
             <Row className="d-flex justify-content-start px-2">
-                
                 {
-                    !loading && activeCampaignList.length === 0 ? (
+                    finishedCampaignList.length === 0 ? (
                         <div>
                             <Col lg className="d-flex justify-content-center" >
                                 <Image src={emptyState} />
                             </Col>
                             <Col lg className="d-flex justify-content-center" >
-                                <p>You have no Active Campaign</p>
+                                <p>You have no Finished Campaign</p>
                             </Col>
                         </div>
                     ) : (
@@ -122,18 +116,9 @@ const FundraiserActiveCampaign = () => {
                         )
                     })
                 }
-                {
-                    loading && skeletonItem.map((skel) => {
-                        return (
-                            <Col lg={3} className="d-flex justify-content-center mb-3">
-                                <SkeletonCard />
-                            </Col>
-                        )
-                    })
-                }
             </Row>
         </div>
     )
 }
 
-export default FundraiserActiveCampaign
+export default FundraiserFinishedCampaign

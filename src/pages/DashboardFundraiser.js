@@ -25,11 +25,12 @@ import {
 
 
 //Assets
-import BoxWithdrawRequest from '../components/Box/BoxWithdrawRequest';
 import FundraiserActiveCampaign from '../containers/FundraiserActiveCampaign';
 import FundraiserCampaignRequest from '../containers/FundraiserCampaignRequest';
 import FundraiserWithdrawRequest from '../containers/FundraiserWithdrawRequest';
 import ButtonLogout from '../components/Button/ButtonLogout';
+import FundraiserFinishedCampaign from '../containers/FundraiserFinishedCampaign';
+import NotFound from './NotFound';
 
 const DashboardFundraiser = () => {
     //State
@@ -38,8 +39,11 @@ const DashboardFundraiser = () => {
     const history = useHistory()
 
     const userToken = state.userToken
-    const accessToken = userToken.access
-    const refreshToken = userToken.refresh
+    const [accessToken, setAccessToken] = useState(userToken.access)
+    const [refreshToken, setRefreshToken] = useState(userToken.refresh)
+
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     const [show, setShow] = useState(false)
     const [render, setRender] = useState(false)
@@ -66,7 +70,7 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
-    })
+    },[])
 
     const toggleDialog = () => setShow(!show)
 
@@ -87,7 +91,7 @@ const DashboardFundraiser = () => {
             default:
                 break
         }
-    })
+    },[title,description,targetAmount,imageURL])
 
     const handleCreateCampaign = () => {
         setLoadingMakeCam(true)
@@ -147,15 +151,12 @@ const DashboardFundraiser = () => {
         API.refresh(body)
             .then((res) => {
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                window.location.reload()
+                
             })
             .catch((err) => {
                 console.log(err,"ref")
             })
-    }
-
-    const handleLogout = () => {
-        dispatch({ type: "LOGOUT" })
-        history.push("/login")
     }
 
     const renderTooltip = (props) => (
@@ -167,6 +168,10 @@ const DashboardFundraiser = () => {
             }
         </Tooltip>
     );
+
+    if (!state.isLogged) {
+        return <NotFound />
+    }
 
     return (
         <div className="d-flex justify-content-center align-items-center">
@@ -229,9 +234,12 @@ const DashboardFundraiser = () => {
                         }
                     </Container>
                 </Container>
-                <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="my-3">
-                    <Tab eventKey="home" title="Active Campaign">
+                <Tabs defaultActiveKey="campaignActive" id="uncontrolled-tab-example" className="my-3">
+                    <Tab eventKey="campaignActive" title="Active Campaign">
                         <FundraiserActiveCampaign/>
+                    </Tab>
+                    <Tab eventKey="campaignFinished" title="Finished Campaign">
+                        <FundraiserFinishedCampaign render={render}/>
                     </Tab>
                     <Tab eventKey="campaignRequest" title="Campaign Request">
                         <FundraiserCampaignRequest render={render}/>

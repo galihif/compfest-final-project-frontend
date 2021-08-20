@@ -1,7 +1,7 @@
 //Library
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
 import Gravatar from 'react-gravatar'
 
 //Styles
@@ -24,15 +24,16 @@ import API from '../config/API';
 import DonorDonationHistory from '../containers/DonorDonationHistory';
 import DonorTopupHistory from '../containers/DonorTopupHistory';
 import ButtonLogout from '../components/Button/ButtonLogout';
+import NotFound from './NotFound';
 
-const DashboardDonor = () => {
+const DashboardDonor = (props) => {
     //State
     const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const history = useHistory()
-    const userToken = state.userToken
-    const accessToken = userToken.access
-    const refreshToken = userToken.refresh
+    const userToken = props.userToken
+    const [accessToken, setAccessToken] = useState(userToken.access)
+    const [refreshToken, setRefreshToken] = useState(userToken.refresh)
 
     const [loadingProfile, setLoadingProfile] = useState(true)
     const [loadingTopup, setLoadingTopup] = useState(false)
@@ -142,13 +143,18 @@ const DashboardDonor = () => {
         }
         API.refresh(body)
             .then((res) => {
-                console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                window.location.reload()
             })
             .catch((err) => {
                 console.log(err,"ref")
             })
     }
+
+    if(!props.isLogged){
+        return <NotFound/>
+    }
+
     return (
         <div className="d-flex justify-content-center align-items-center">
             <div className="m-5">
@@ -244,5 +250,11 @@ const DashboardDonor = () => {
         </div>
     )
 }
-
-export default DashboardDonor
+function mapStateToProps(state, ownProps) {
+    return {
+        isLogged: state.isLogged,
+        userData: state.userData,
+        userToken: state.userToken
+    };
+}
+export default connect(mapStateToProps)(DashboardDonor)

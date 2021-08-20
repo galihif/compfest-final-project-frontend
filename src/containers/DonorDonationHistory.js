@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
 import emptyState from '../assets/emptyDonationHistory.svg'
-import { Image, Row, Col } from 'react-bootstrap'
+import { Image, Row, Col, Container } from 'react-bootstrap'
 import { Button } from 'bootstrap'
+import PaginationM from '../components/Pagination/PaginationM'
 
 const DonorDonationHistory = () => {
     //State
@@ -18,6 +19,19 @@ const DonorDonationHistory = () => {
     const refreshToken = userToken.refresh
 
     const [donationHistoryList, setDonationHistoryList] = useState([])
+
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
+
+    // Get current posts
+    const indexOfLastPost = currentPage * itemsPerPage;
+    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+    const currentItems = donationHistoryList.slice(indexOfFirstPost, indexOfLastPost);
+    const totalItems = donationHistoryList.length
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const headers = {
         Accept: "application/json",
@@ -71,10 +85,21 @@ const DonorDonationHistory = () => {
                             </Col>
                         </Row>
                     </div>
-                ):null
+                ) : (
+                    <Row className="d-flex justify-content-center" >
+                        <Container fluid className="d-flex justify-content-center" >
+                            <PaginationM
+                                currentPage={currentPage}
+                                itemsPerPage={itemsPerPage}
+                                totalItems={totalItems}
+                                paginate={paginate}
+                            />
+                        </Container>
+                    </Row>
+                )
             }
             {
-                donationHistoryList.map((donation) => {
+                currentItems.map((donation) => {
                     return (
                         <DonationHistoryBox
                             campaign={donation.campaign}
