@@ -18,7 +18,7 @@ import API from '../../config/API';
 import './NavbarM.scss'
 
 // //Images
-// import navbar_logo from '../assets/navbar_logo.png'
+import logo from "../../assets/logo.svg"
 
 const NavbarM = (props) => {
     //State
@@ -52,7 +52,7 @@ const NavbarM = (props) => {
     const navLogged = 
     <Row>
         <Col className="d-flex nav-user" onClick={() => history.push(dashboardPath)}>
-            <Gravatar email={props.userData.email} size={30} style={{ borderRadius: "20em" }} />
+            <Gravatar email={props.userData.email} size="30" style={{ borderRadius: "20em" }} />
             <p className="my-0 ms-2 fs-5" >{props.userData.first_name} {props.userData.last_name}</p>
         </Col>
     </Row>
@@ -66,7 +66,16 @@ const NavbarM = (props) => {
         <div>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light fixed-top">
                 <Container>
-                    <Navbar.Brand href="/">Website Name</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <img
+                            alt=""
+                            src={logo}
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                        />{' '}
+                        NagaPeduli
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">

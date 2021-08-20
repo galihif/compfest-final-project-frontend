@@ -70,6 +70,7 @@ const DashboardFundraiser = () => {
     //Method
     useEffect(() => {
         getUserData()
+        document.title = "Fundraiser Dashboard"
     },[])
 
     const toggleDialog = () => setShow(!show)

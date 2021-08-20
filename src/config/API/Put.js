@@ -2,7 +2,7 @@ import axios from 'axios'
 import { root } from './Root'
 
 
-const Put = (path, body, headers) => {
+const Post = (path, body, headers) => {
     const promise = new Promise((resolve, reject) => {
         axios.put(`${root}/${path}/`, body, { headers: headers })
             .then((result) => {
@@ -13,5 +13,4 @@ const Put = (path, body, headers) => {
     })
     return promise
 }
-
 export default Put;

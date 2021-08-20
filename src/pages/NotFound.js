@@ -1,9 +1,14 @@
 import { Col, Container, Image, Row, Button } from "react-bootstrap"
-
+import React, { useState, useEffect } from 'react'
 
 import emptyState from '../assets/404Page.svg'
 
 const NotFound = () => {
+
+    useEffect(() => {
+        document.title = "404 Not Found"
+    })
+
     return (
         <div className="d-flex justify-content-center align-items-center">
             <Container className="m-5 p-5 d-flex align-items-center justify-content-center" style={{ width: "40em",height:"30em"}}>

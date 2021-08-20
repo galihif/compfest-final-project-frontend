@@ -64,6 +64,7 @@ const DashboardDonor = (props) => {
     //Method
     useEffect(() => {
         getUserData()
+        document.title="Donor Dashboard"
     }, [show]);
 
     const toggleDialog = () => setShow(!show)

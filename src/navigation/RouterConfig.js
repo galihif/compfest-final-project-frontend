@@ -15,8 +15,8 @@ import {
     FUNDRAISERREQUESTBYID,
     CAMPAIGNPROPOSALS,
     CAMPAIGNPROPOSALSBYID,
-    WITHDRAWREQUEST,
-    TOPUPREQUEST
+    TOPUPREQUEST,
+    WITHDRAWREQUEST
 } from './CONSTANTS'
 
 //Pages
@@ -90,7 +90,7 @@ export const RouterConfig = () => {
                     <WihtdrawVerifier/>
                 </Route>
                 <Route path="*">
-                    <NotFound />
+                    <NotFound/>
                 </Route>
             </Switch>
             <Footer/>

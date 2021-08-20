@@ -35,7 +35,7 @@ const Header = (props) => {
                     </div>
                 </Col>
                 <Col lg={6}>
-                    <Image src={headerImage} />
+                    <Image src={headerImage} className="header-image" fluid />
                 </Col>
             </Row>
         </Container>

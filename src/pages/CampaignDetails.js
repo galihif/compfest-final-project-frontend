@@ -52,6 +52,14 @@ const CampaignDetails = (props) => {
         getCampaignData()
     }, [show]);
 
+    useEffect(()=>{
+        if(!loading){
+            document.title = campaign.title
+        } else {
+            document.title = "Campaign Details"
+        }
+    })
+
     const getCampaignData = useCallback((e) => {
         if (userRole === "FUNDRAISER") {
             API.getCampaignByIdFundraiser(id, headers)

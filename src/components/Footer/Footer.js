@@ -11,7 +11,7 @@ const Footer = () => {
         <div style={{ height: "12em", backgroundColor: "#0673A1" }} className="p-5">
             <div className="d-flex justify-content-center align-items-center">
                 <h3 className="text-white">
-                    WebsiteName
+                    NagaPeduli
                 </h3>
             </div>
             <p className="text-center text-white">© 2021 - NAGA Team COMPFEST 13</p>
