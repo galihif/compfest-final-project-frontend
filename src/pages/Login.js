@@ -1,5 +1,5 @@
 //Library
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -33,6 +33,9 @@ const Login = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+    useEffect(() => {
+        document.title = "Login"
+    })
 
 
     //Method

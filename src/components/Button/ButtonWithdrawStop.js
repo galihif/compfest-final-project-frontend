@@ -134,7 +134,7 @@ const ButtonWithdrawStop = (props) => {
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="toWithdrawAmount" onChange={handleChange}>
                             <Form.Label>Amount</Form.Label>
-                            <Form.Control type="number" placeholder="Enter Amount (Rp)" />
+                            <Form.Control type="number" placeholder="Enter Amount (Minimum Rp 5000)" />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>

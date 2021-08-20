@@ -1,5 +1,5 @@
 //Library
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -31,6 +31,11 @@ const RegisterFundraiser = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [proposalText, setProposalText] = useState("")
+
+    useEffect(() => {
+        document.title = "Fundraiser Register"
+    })
+
 
     //Method
     const handleChange = (e) => {

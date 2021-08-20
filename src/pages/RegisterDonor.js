@@ -1,5 +1,5 @@
 //Library
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -33,6 +33,10 @@ const RegisterDonor = () => {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(()=>{
+        document.title = "Donor Register"
+    })
 
     //Method
     const handleChange = (e) => {
