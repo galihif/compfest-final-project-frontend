@@ -36,6 +36,7 @@ import CampaignProposals from "../containers/Admin/CampaignProposals";
 import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDetails";
 import UserPayments from "../containers/Admin/UserPayments";
 import WihtdrawVerifier from "../containers/Admin/WithdrawVerifier";
+import AdminHeader from "../components/Header/AdminHeader";
 
 import NotFound from "../pages/NotFound";
 
@@ -45,6 +46,7 @@ export const RouterConfig = () => {
             <NavbarM/>
             <Route path={ADMIN}>
                 <CheckAdmin/>
+                <AdminHeader/>
             </Route>
             <Switch>
                 <Route path={DASHFUND}>
@@ -82,7 +84,7 @@ export const RouterConfig = () => {
                     <AdminProposalCampaignDetails />
                 </Route>
                 <Route exact path={TOPUPREQUEST}>
-                    <UserPayments />                    
+                    <UserPayments /> 
                 </Route>
                 <Route exact path={WITHDRAWREQUEST}>
                     <WihtdrawVerifier/>

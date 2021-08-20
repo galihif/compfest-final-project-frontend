@@ -12,17 +12,13 @@ configure({adapter: new Adapter()});
 describe("<AdminFundraserCard />", () => {
 	const name = "jokowiddod";
 	const email = "jokowiddo@gmail.com";
-	const bankName = "BCA"
 	const amount=10000000;
-	const accountNumber= "1293048231";
 
 	const component = 
 		<AdminWithdrawCard
 			name={name}
 			email={email}
 			amount={amount}
-			bankName={bankName}
-			accountNumber={accountNumber}
 		/>
 	const card = shallow(
 		component
@@ -49,8 +45,6 @@ describe("<AdminFundraserCard />", () => {
 	it('contains props', () => {
 		expect(card.text()).toMatch(new RegExp(name));
 		expect(card.text()).toMatch(new RegExp(amount.toString()));
-		expect(card.text()).toMatch(new RegExp(bankName));
-		expect(card.text()).toMatch(new RegExp(accountNumber));
 	});
 
 });
