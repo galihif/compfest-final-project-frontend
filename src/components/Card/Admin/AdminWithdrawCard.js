@@ -18,7 +18,10 @@ const AdminWithdrawCard = (props) => {
             name, 
             amount,
             email,
-            bankName } = props;
+            date } = props;
+    const dateObject = new Date(date);
+    const dateFormat = `${dateObject.getDay()}-${dateObject.getMonth()}-${dateObject.getFullYear()}`;
+
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
     const userToken = state.userToken;
@@ -96,6 +99,9 @@ const AdminWithdrawCard = (props) => {
                         <p className="text-start fw-bold" style={normalFont}>
                             Email
                         </p>
+                        <p className="text-start fw-bold" style={normalFont}>
+                            Date
+                        </p>
                     </Col>
                     <Col lg={7}>
                         <p className="text-start" style={normalFont}>
@@ -105,7 +111,7 @@ const AdminWithdrawCard = (props) => {
                             {email}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            {bankName}
+                            {dateFormat}
                         </p>
                     </Col>
                 </Row>

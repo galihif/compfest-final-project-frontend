@@ -27,7 +27,8 @@ const AdminFundraiserDetails = () => {
         first_name:"",
         last_name:"",
         email:"",
-        proposal_text:""
+        proposal_text:"",
+        date_joined:""
     });
 
     const state = useSelector((state) => state);
@@ -111,8 +112,8 @@ const AdminFundraiserDetails = () => {
         <div className="d-flex justify-content-center align-items-center">
             <div className="m-5">
                 <Breadcrumb className="px-2 path">
-                    <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Campaign</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/admin">Admin</Breadcrumb.Item>
+                    <Breadcrumb.Item active>Fundraiser Details</Breadcrumb.Item>
                 </Breadcrumb>
                 <Container className="login-container  p-3" style={{ width: "32em", backgroundColor: "white", borderRadius: "1em" }}>
                     <Row>

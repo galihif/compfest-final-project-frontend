@@ -79,6 +79,7 @@ const TopupUser = () => {
                                 email={withdraw.user_email}
                                 name={withdraw.user}
                                 amount={withdraw.amount}
+                                date={withdraw.request_date}
                             />
                         )
                     })

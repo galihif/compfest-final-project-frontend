@@ -76,6 +76,7 @@ const CampaignProposals = () => {
                                 email={proposal.fundraiser.email}
                                 target={proposal.target_amount}
                                 name={proposal.fundraiser.full_name}
+                                date={proposal.created_at}
                                 imageLink={proposal.image_url}
                             />
                         )
