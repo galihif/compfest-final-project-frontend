@@ -67,15 +67,17 @@ const FundraiserVerifier = () => {
                 ""
                 }
                 {
-                    fundraiserRequest.map((proposal) => {
+                    fundraiserRequest.map((proposal,index) => {
                         console.log(proposal);
 
                         return (
-                            <AdminFundraiserCard 
+                            <AdminFundraiserCard
+                                key={index}
                                 id={proposal.id}
                                 email={proposal.email}
                                 title={proposal.first_name}
                                 description={proposal.proposal_text}
+                                date={proposal.date_joined}
                             />
                         )
                     })

@@ -2,8 +2,8 @@
 import React from "react";
 
 //Styles
-import "../Card.scss";
-import { Button, Row, Col, Card } from "react-bootstrap";
+import "./Card.scss";
+import {  Row, Col, Card } from "react-bootstrap";
 import Gravatar from "react-gravatar";
 import { useHistory } from "react-router-dom";
 
@@ -14,7 +14,10 @@ const AdminFundraiserCard = (props) => {
     const { email, 
             title, 
             description,
-            id } = props;
+            id,
+            date } = props;
+    const dateObject = new Date(date);
+    const dateFormat = `${dateObject.getDay()}-${dateObject.getMonth()}-${dateObject.getFullYear()}`;
 
     // Component
     const CardRow = (props) =>{
@@ -48,6 +51,10 @@ const AdminFundraiserCard = (props) => {
                 <CardRow 
                     title='Description'
                     data={description}
+                />
+                <CardRow 
+                    title='Date'
+                    data={dateFormat}
                 />
             </Card.Body>
         </Card>
