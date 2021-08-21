@@ -30,12 +30,12 @@ import Footer from "../components/Footer/Footer";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import FundraiserVerifier from "../containers/Admin/FundraiserVerifier";
-import CheckAdmin from "../containers/Admin/CheckAdmin";
+// import CheckAdmin from "../containers/Admin/CheckAdmin";
 import AdminFundraiserDetails from "../pages/Admin/AdminFundraiserDetails";
 import CampaignProposals from "../containers/Admin/CampaignProposals";
-import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDetails";
-import UserPayments from "../containers/Admin/UserPayments";
-import WihtdrawVerifier from "../containers/Admin/WithdrawVerifier";
+// import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDetails";
+// import UserPayments from "../containers/Admin/UserPayments";
+// import WihtdrawVerifier from "../containers/Admin/WithdrawVerifier";
 import AdminHeader from "../components/Header/AdminHeader";
 
 import NotFound from "../pages/NotFound";
@@ -45,7 +45,7 @@ export const RouterConfig = () => {
         <div>
             <NavbarM/>
             <Route path={ADMIN}>
-                <CheckAdmin/>
+                {/* <CheckAdmin/> */}
                 <AdminHeader/>
             </Route>
             <Switch>
@@ -80,7 +80,7 @@ export const RouterConfig = () => {
                 <Route exact path={CAMPAIGNPROPOSALS}>
                     <CampaignProposals />
                 </Route>
-                <Route exact path={CAMPAIGNPROPOSALSBYID}>
+                {/* <Route exact path={CAMPAIGNPROPOSALSBYID}>
                     <AdminProposalCampaignDetails />
                 </Route>
                 <Route exact path={TOPUPREQUEST}>
@@ -88,7 +88,7 @@ export const RouterConfig = () => {
                 </Route>
                 <Route exact path={WITHDRAWREQUEST}>
                     <WihtdrawVerifier/>
-                </Route>
+                </Route> */}
                 <Route path="*">
                     <NotFound/>
                 </Route>
