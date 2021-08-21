@@ -63,7 +63,7 @@ const FeaturedCampaign = (props) => {
     return (
         <Container className="m-0" fluid>
             <h4 className="text-center my-5">Featured Campaign</h4>
-            <Row className="px-5 d-flex justify-content-center">
+            <Row className="px-5 d-flex justify-content-center my-5">
                 <Container fluid className="d-flex justify-content-center" >
                     <PaginationM
                         currentPage={currentPage}
