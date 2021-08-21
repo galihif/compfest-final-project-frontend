@@ -17,7 +17,12 @@ const CampaignCard = (props) => {
     const percentage = (props.amount / props.targetAmount) * 100
 
     const handleCardClicked = () => {
-        history.push(`/campaign/${props.id}`)
+        if(!props.isLogged){
+            alert("You have to login as donor to see this campaign details")
+            history.push(`/login`)
+        } else {
+            history.push(`/campaign/${props.id}`)
+        }
     }
     return(
         <Card className="card-campaign" style={{ width: "20em" }} onClick={handleCardClicked} >
