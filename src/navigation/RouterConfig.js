@@ -44,10 +44,6 @@ export const RouterConfig = () => {
     return (
         <div>
             <NavbarM/>
-            <Route path={ADMIN}>
-                <CheckAdmin/>
-                <AdminHeader/>
-            </Route>
             <Switch>
                 <Route path={DASHFUND}>
                     <DashboardFundraiser />
@@ -71,24 +67,31 @@ export const RouterConfig = () => {
                     <Home />
                 </Route>
                 {/* Admin */}
-                <Route exact path={FUNDRAISERREQUEST}>
-                    <FundraiserVerifier />
-                </Route>
-                <Route exact path={FUNDRAISERREQUESTBYID}>
-                    <AdminFundraiserDetails/>
-                </Route>
-                <Route exact path={CAMPAIGNPROPOSALS}>
-                    <CampaignProposals />
-                </Route>
-                <Route exact path={CAMPAIGNPROPOSALSBYID}>
-                    <AdminProposalCampaignDetails />
-                </Route>
-                <Route exact path={TOPUPREQUEST}>
-                    <UserPayments /> 
-                </Route>
-                <Route exact path={WITHDRAWREQUEST}>
-                    <WihtdrawVerifier/>
-                </Route>
+                <Route path={ADMIN}>
+                    <CheckAdmin/>
+                    <AdminHeader/>
+                    <Switch>
+                        <Route exact path={FUNDRAISERREQUEST}>
+                            <FundraiserVerifier />
+                        </Route>
+                        <Route exact path={FUNDRAISERREQUESTBYID}>
+                            <AdminFundraiserDetails/>
+                        </Route>
+                        <Route exact path={CAMPAIGNPROPOSALS}>
+                            <CampaignProposals />
+                        </Route>
+                        <Route exact path={CAMPAIGNPROPOSALSBYID}>
+                            <AdminProposalCampaignDetails />
+                        </Route>
+                        <Route exact path={TOPUPREQUEST}>
+                            <UserPayments /> 
+                        </Route>
+                        <Route exact path={WITHDRAWREQUEST}>
+                            <WihtdrawVerifier/>
+                        </Route>
+                            </Switch>
+                        </Route>
+                        
                 <Route path="*">
                     <NotFound/>
                 </Route>

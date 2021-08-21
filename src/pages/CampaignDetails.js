@@ -1,6 +1,6 @@
 //Library
 import React, { useState, useEffect, useCallback } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { Redirect, useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch, connect } from 'react-redux'
 import Gravatar from 'react-gravatar'
 
@@ -104,6 +104,11 @@ const CampaignDetails = (props) => {
 
     if (!props.isLogged) {
         return <NotFound/>
+    }
+    if(props.userData.is_staff){
+        return <Redirect 
+                to="/admin"/>
+                
     }
 
     return (

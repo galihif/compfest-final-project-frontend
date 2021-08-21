@@ -101,7 +101,7 @@ const Header = () => {
     return (
         <Container className="header-container m-0" fluid>
             <Row className="p-5">
-                <Col lg={6} className="d-flex align-items-center">
+                <Col lg={6} className="d-flex align-items-center justify-content-center">
                     <div>
                         <h3 className="">Help Others</h3>
                         <p>double check to verified/rejecting something</p>
@@ -130,14 +130,6 @@ const Header = () => {
                             manyNotification={notification.fundraiser_request}
                          />
 
-                        <Col lg={12} className="d-flex align-items-center mt-2" >
-                            <DropdownButton id="dropdown-basic-button" title="Notification">
-                                <Dropdown.Item href="#/action-1" onClick={() => routeHandler('campaign')}>Campaign Proposal: {notification.new_campaign} </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2" onClick={() => routeHandler('topup')}>User Topup: {notification.top_up}</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={() => routeHandler('withdraw')}>Fundraiser Withdraw: {notification.withdraw_request}</Dropdown.Item>
-                                <Dropdown.Item href="#/action-4" onClick={() => routeHandler('fundraiser')}>Fundraiser Proposal: {notification.fundraiser_request}</Dropdown.Item>
-                            </DropdownButton>
-                        </Col>
                     
                     </div>
                 </Col>

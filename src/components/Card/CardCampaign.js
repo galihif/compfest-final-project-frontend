@@ -24,6 +24,8 @@ const CampaignCard = (props) => {
         } else if (props.userData.role === "FUNDRAISER"){
             alert("You can see campaign details in dashboard")
             history.push(`/dashboardfundraiser`)
+        } else if(props.userData.is_staff){
+            alert("Admin Cannot see campaign detail")
         }
         else {
             history.push(`/campaign/${props.id}`)
