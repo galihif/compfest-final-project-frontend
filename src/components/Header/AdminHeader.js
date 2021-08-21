@@ -11,7 +11,8 @@ import {
     Col,
     Container,
     DropdownButton,
-    Dropdown
+    Dropdown,
+    Badge
  } from 'react-bootstrap';
 
 //Assets
@@ -21,7 +22,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import API from '../../config/API';
-
 
 const Header = () => {
     const history = useHistory();
@@ -79,6 +79,25 @@ const Header = () => {
                 console.log(err, "ref")
             })
     }
+    const ButtonRouter = (props) => {
+        const { url,
+                title,
+                manyNotification } = props;
+        return (
+            <Col lg={12} className="d-flex align-items-center mt-2">
+                <Button variant="outline-primary" className='w-100' onClick={() => routeHandler(url)}>
+                    <p className="m-0 d-flex">
+                        <p style={{marginLeft:"auto"}}>
+                            {title}
+                        </p>
+                        <p style={{marginLeft:"auto"}}>
+                            <Badge bg="warning">{manyNotification}</Badge>
+                        </p>
+                    </p>
+                </Button>
+            </Col>
+        )
+    }
     return (
         <Container className="header-container m-0" fluid>
             <Row className="p-5">
@@ -87,19 +106,30 @@ const Header = () => {
                         <h3 className="">Help Others</h3>
                         <p>double check to verified/rejecting something</p>
                         <p>Where do you want to go?</p>
-    
-                        <Col lg={12} className="d-flex align-items-center">
-                            <Button variant="outline-primary" className='w-100' onClick={() => routeHandler('campaign')}>Campaign Proposal</Button>
-                        </Col>
-                        <Col lg={12} className="d-flex align-items-center mt-2" >
-                            <Button variant="outline-primary" className='w-100' onClick={() => routeHandler('topup')}>User Topup</Button>
-                        </Col>
-                        <Col lg={12} className="d-flex align-items-center mt-2" >
-                            <Button variant="outline-primary" className='w-100' onClick={() => routeHandler('withdraw')}>Fundraiser Withdraw</Button>
-                        </Col>
-                        <Col lg={12} className="d-flex align-items-center mt-2" >
-                            <Button variant="outline-primary" className='w-100' onClick={() => routeHandler('fundraiser')}>Fundraiser Proposal</Button>
-                        </Col>
+                         <ButtonRouter 
+                            url='campaign'
+                            title='Campaign Proposal'
+                            manyNotification={notification.new_campaign}
+                         />
+
+                         <ButtonRouter 
+                            url='topup'
+                            title='User Topup'
+                            manyNotification={notification.top_up}
+                         />
+
+                         <ButtonRouter 
+                            url='withdraw'
+                            title='Fundraiser Withdraw'
+                            manyNotification={notification.withdraw_request}
+                         />
+
+                         <ButtonRouter 
+                            url='fundraiser'
+                            title='Fundraiser Proposal'
+                            manyNotification={notification.fundraiser_request}
+                         />
+
                         <Col lg={12} className="d-flex align-items-center mt-2" >
                             <DropdownButton id="dropdown-basic-button" title="Notification">
                                 <Dropdown.Item href="#/action-1" onClick={() => routeHandler('campaign')}>Campaign Proposal: {notification.new_campaign} </Dropdown.Item>

@@ -36,7 +36,7 @@ const NavbarM = (props) => {
     const [lastName, setLastName] = useState(userData.last_name)
     const [email, setEmail] = useState(userData.email)
     const [role, setRole] = useState(userData.role)
-    const dashboardPath = role === 'DONATUR' ? "/dashboarddonor" : "/dashboardfundraiser"
+    const dashboardPath = (role === 'DONATUR') ? "/dashboarddonor" : (role === null? "/admin":"/dashboardfundraiser")
 
     const headers = {
         Accept: "application/json",
