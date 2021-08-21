@@ -31,6 +31,7 @@ const CardCampaignRequest = (props) => {
         Authorization: `Bearer ${accessToken}`
     }
 
+    const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false)
 
     const toggleDialog =()=> setShow(!show)
@@ -43,24 +44,30 @@ const CardCampaignRequest = (props) => {
             .then((res) => {
                 console.log(res.data)
                 dispatch({ type: 'REFRESH', userToken: res.data })
+                handleDelete()
             })
             .catch((err) => {
+                setLoading(false)
                 console.log(err, "ref")
             })
     }
 
 
     const handleDelete = () => {
+        setLoading(true)
         API.deleteCampaignById(id, headers)
             .then((res)=>{
                 console.log(res)
                 alert("Campaign Deleted Successfully")
+                setLoading(false)
                 toggleDialog()
                 window.location.reload()
             })
             .catch((err)=>{
                 if(err.response.status === 401){
                     refreshUserToken()
+                } else {
+                    setLoading(false)
                 }
             })
     }
@@ -103,8 +110,10 @@ const CardCampaignRequest = (props) => {
                     <Button variant="secondary" onClick={toggleDialog}>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleDelete}>
-                        Delete
+                    <Button variant="danger" onClick={handleDelete} disable={loading} >
+                        {
+                            loading ? <>Loading</> : <>Delete</>
+                        }
                     </Button>
                 </Modal.Footer>
             </Modal>

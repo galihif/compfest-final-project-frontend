@@ -58,8 +58,11 @@ const ButtonWithdrawStop = (props) => {
             alert("Campaign Finished Successfully")
             history.push('/dashboardfundraiser')
         }).catch((err)=>{
-            console.log(err)
-            setLoading(false)
+            if (err.response.status === 401) {
+                refreshUserToken(false)
+            } else {
+                setLoading(false)
+            }
         })
     }
     
@@ -73,7 +76,7 @@ const ButtonWithdrawStop = (props) => {
                 .then((res) => {
                     alert("Withdraw Requested")
                     setLoading(false)
-                    // history.push('/dashboardfundraiser')
+                    history.push('/dashboardfundraiser')
                     toggleDialogWithdraw()
                 })
                 .catch((err) => {
@@ -134,7 +137,7 @@ const ButtonWithdrawStop = (props) => {
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="toWithdrawAmount" onChange={handleChange}>
                             <Form.Label>Amount</Form.Label>
-                            <Form.Control type="number" placeholder="Enter Amount (Minimum Rp 5000)" />
+                            <Form.Control type="number" placeholder="Enter Amount" />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
