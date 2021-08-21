@@ -1,6 +1,6 @@
 //Library
 import React from 'react'
-import { useSelector, useDispatch, connect } from 'react-redux'
+import {  connect } from 'react-redux'
 //Styles
 import './Header.scss'//Styles
 import { 
@@ -13,10 +13,6 @@ import {
 
 //Assets
 import headerImage from '../../assets/headerImage.svg'
-import { useEffect } from 'react';
-import { useCallback } from 'react';
-import API from '../../config/API';
-import { useState } from 'react';
 
 
 const Header = (props) => {
