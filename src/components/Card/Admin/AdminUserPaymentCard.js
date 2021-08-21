@@ -19,12 +19,15 @@ const AdminUserPaymentCard = (props) => {
             accountNumber,
             accountName,
             change,
-            setChange } = props;
+            setChange,
+            date } = props;
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
     const userToken = state.userToken;
     const accessToken = userToken.access;
     const refreshToken = userToken.refresh;
+    const dateObject = new Date(date);
+    
 
     const headers = {
         Accept: "application/json",
@@ -94,7 +97,10 @@ const AdminUserPaymentCard = (props) => {
                             Bank Name
                         </p>
                         <p className="text-start fw-bold" style={normalFont}>
-                            Account Number
+                            Date
+                        </p>
+                        <p className="text-start fw-bold" style={normalFont}>
+                            Account Name
                         </p>
                     </Col>
                     <Col lg={7}>
@@ -105,19 +111,22 @@ const AdminUserPaymentCard = (props) => {
                             {bankName}
                         </p>
                         <p className="text-start" style={normalFont}>
-                            {accountNumber}
+                            {`${dateObject.getDay()}-${dateObject.getMonth()}-${dateObject.getFullYear()}`}
+                        </p>
+                        <p className="text-start" style={normalFont}>
+                            {accountName}
                         </p>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={5}>
                         <p className="text-start fw-bold" style={normalFont}>
-                            Account Name
+                            Account Number
                         </p>
                     </Col>
                     <Col lg={7}>
                         <p className="text-start" style={normalFont}>
-                            {accountName}
+                            {accountNumber}
                         </p>
                     </Col>
                 </Row>

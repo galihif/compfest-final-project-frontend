@@ -77,12 +77,13 @@ const UserPayments = () => {
                                 setChange={setChange}
                                 key={index}
                                 id={payment.id}
-                                email={payment.email}
+                                email={payment.user_email}
                                 name={payment.user}
                                 amount={payment.amount}
                                 bankName={payment.bank_name}
                                 accountNumber={payment.bank_account_number}
                                 accountName={payment.bank_account}
+                                date={payment.date}
                             />
                         )
                     })
