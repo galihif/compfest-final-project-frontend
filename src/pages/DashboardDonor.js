@@ -163,7 +163,7 @@ const DashboardDonor = (props) => {
                     <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
-                <Container className="dashboard-box  p-3" style={{ width: "32em", backgroundColor: "white", borderRadius: "1em" }}>
+                <Container className="dashboard-box  p-3" style={style}>
                     <Container  >
                         <Row>
                             <Col className="d-flex align-items-center justify-content-center">
@@ -258,4 +258,13 @@ function mapStateToProps(state, ownProps) {
         userToken: state.userToken
     };
 }
+
+const style = {
+    boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
+    width: "32em", 
+    backgroundColor: "white", 
+    borderRadius: "1em", 
+
+}
+
 export default connect(mapStateToProps)(DashboardDonor)
