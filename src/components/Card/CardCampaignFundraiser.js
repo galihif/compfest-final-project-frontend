@@ -12,21 +12,12 @@ import {
     Card
 } from 'react-bootstrap';
 
-const CampaignCard = (props) => {
+const CardCampaignFundraiser = (props) => {
     const history = useHistory()
     const percentage = (props.amount / props.targetAmount) * 100
 
     const handleCardClicked = () => {
-        if(!props.isLogged){
-            alert("You have to login as donor to see this campaign details")
-            history.push(`/login`)
-        } else if (props.userData.role === "FUNDRAISER"){
-            alert("You can see campaign details in dashboard")
-            history.push(`/dashboardfundraiser`)
-        }
-        else {
-            history.push(`/campaign/${props.id}`)
-        }
+        history.push(`/campaign/${props.id}`)
     }
     return(
         <Card className="card-campaign" style={{ width: "20em" }} onClick={handleCardClicked} >
@@ -56,4 +47,4 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(CampaignCard)
+export default connect(mapStateToProps)(CardCampaignFundraiser)

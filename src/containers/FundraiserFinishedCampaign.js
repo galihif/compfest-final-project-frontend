@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import API from '../config/API'
 import DonationHistoryBox from '../components/Box/DonationHistoryBox'
 import { Col, Container, Image, Row } from 'react-bootstrap'
-import CardCampaign from '../components/Card/CardCampaign'
+import CardCampaignFundraiser from '../components/Card/CardCampaignFundraiser'
 import emptyState from '../assets/emptyCampaignActive.svg'
 import PaginationM from '../components/Pagination/PaginationM'
 
@@ -105,7 +105,7 @@ const FundraiserFinishedCampaign = () => {
                     currentItems.map((campaign) => {
                         return (
                             <Col lg={4} className="d-flex justify-content-center mb-2">
-                                <CardCampaign
+                                <CardCampaignFundraiser
                                     id={campaign.id}
                                     title={campaign.title}
                                     imageURL={campaign.image_url}
