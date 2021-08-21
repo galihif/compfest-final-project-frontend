@@ -11,6 +11,7 @@ import {
  } from 'react-bootstrap';
 
 //Assets
+import NumberFormat from '../../config/Function/NumberFormat'
 
 
 const DonationHistoryBox = (props) => {
@@ -25,7 +26,7 @@ const DonationHistoryBox = (props) => {
                         <p className="m-0">{d}</p>
                     </Col>
                     <Col lg={6}>
-                        <p className="text-success text-end">Rp. {props.amount}</p>
+                        <p className="text-success text-end">Rp {NumberFormat(props.amount)}</p>
                     </Col>
                 </Row>
             </Container>

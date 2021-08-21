@@ -10,6 +10,8 @@ import {
     Container,
  } from 'react-bootstrap';
 
+
+import NumberFormat from '../../config/Function/NumberFormat'
 //Assets
 
 
@@ -23,7 +25,7 @@ const BoxWithdrawRequest = (props) => {
                 <h6>{props.title}</h6>
             </Row>
             <Row>
-                <h6 className="text-success">+Rp {props.amount}</h6>
+                <h6 className="text-success">+Rp {NumberFormat(props.amount)}</h6>
             </Row>
             <Row>
                 <Col lg="6">

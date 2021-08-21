@@ -15,6 +15,7 @@ import {
     Modal
 } from 'react-bootstrap';
 import API from '../../config/API';
+import NumberFormat from '../../config/Function/NumberFormat';
 
 const CardCampaignRequest = (props) => {
     //State
@@ -78,7 +79,7 @@ const CardCampaignRequest = (props) => {
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Row>
-                        <p><b>Target</b> : Rp {props.targetAmount}</p>
+                        <p><b>Target</b> : Rp {NumberFormat(props.targetAmount)}</p>
                     </Row>
                     <Row>
                         <Col lg="auto">

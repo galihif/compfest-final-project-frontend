@@ -18,6 +18,7 @@ import SkeletonCampaignDetails from '../components/Skeletons/SkeletonCampaignDet
 import ButtonDonate from '../components/Button/ButtonDonate';
 import ButtonWithdrawStop from '../components/Button/ButtonWithdrawStop';
 import NotFound from './NotFound';
+import NumberFormat from '../config/Function/NumberFormat';
 
 
 //Assets
@@ -101,27 +102,6 @@ const CampaignDetails = (props) => {
             })
     }
 
-
-    //Component
-
-    // const dialogNotLogged = 
-    //     <Modal show={show}>
-    //         <Modal.Header >
-    //             <Modal.Title>Donate To This Campaign</Modal.Title>
-    //         </Modal.Header>
-    //         <Modal.Body>
-    //             <p>You have to login if you want to donate</p>
-    //         </Modal.Body>
-    //         <Modal.Footer>
-    //             <Button variant="secondary" onClick={toggleDialog}>
-    //                 Cancel
-    //             </Button>
-    //             <Button variant="primary" onClick={()=> history.push('/login')}>
-    //                 Login
-    //             </Button>
-    //         </Modal.Footer>
-    //     </Modal>
-
     if (!props.isLogged) {
         return <NotFound/>
     }
@@ -148,16 +128,16 @@ const CampaignDetails = (props) => {
                                     <ProgressBar now={(campaign.amount / campaign.target_amount) * 100} />
                                     <Row className="my-3">
                                         <Col lg={6}>
-                                            <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{campaign.amount}</p>
+                                                <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp {NumberFormat(campaign.amount)}</p>
                                             {
                                                 props.userData.role === "FUNDRAISER" ? (
-                                                    <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp.{campaign.withdraw_amount} Withdrawn </p>
+                                                        <p className="text-start m-0" style={{ fontSize: "16px" }}>Rp {NumberFormat(campaign.withdraw_amount)} Withdrawn </p>
                                                 ) : null
                                             }
                                             <p className="text-start fw-bold" style={{ fontSize: "12px" }}>Raised</p>
                                         </Col>
                                         <Col lg={6}>
-                                            <p className="text-end m-0" style={{ fontSize: "16px" }}>Rp. {campaign.target_amount}</p>
+                                                <p className="text-end m-0" style={{ fontSize: "16px" }}>Rp {NumberFormat(campaign.target_amount)}</p>
                                             <p className="text-end fw-bold" style={{ fontSize: "12px" }}>Target</p>
                                         </Col>
                                     </Row>

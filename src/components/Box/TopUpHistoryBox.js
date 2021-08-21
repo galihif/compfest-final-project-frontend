@@ -11,6 +11,7 @@ import {
  } from 'react-bootstrap';
 
 //Assets
+import NumberFormat from '../../config/Function/NumberFormat'
 
 
 const TopUpHistoryBox = (props) => {
@@ -21,7 +22,7 @@ const TopUpHistoryBox = (props) => {
             <Container>
                 <Row>
                     <Col lg={6}>
-                        <h6>+Rp {props.amount}</h6>
+                        <h6>+Rp {NumberFormat(props.amount)}</h6>
                         <p className="m-0">{d}</p>
                     </Col>
                     <Col lg={6} className="justify-content-end d-flex">

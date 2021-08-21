@@ -11,6 +11,7 @@ import {
     Col,
     Card
 } from 'react-bootstrap';
+import NumberFormat from '../../config/Function/NumberFormat';
 
 const CardCampaignFundraiser = (props) => {
     const history = useHistory()
@@ -27,11 +28,11 @@ const CardCampaignFundraiser = (props) => {
                 <ProgressBar now={percentage} style={{ height: "0.8em" }} />
                 <Row>
                     <Col lg={6}>
-                        <p className="text-start m-0" style={{ fontSize: "12px" }}>Rp. {props.amount}</p>
+                        <p className="text-start m-0" style={{ fontSize: "12px" }}>Rp {NumberFormat(props.amount)}</p>
                         <p className="text-start fw-bold" style={{ fontSize: "12px" }}>Raised</p>
                     </Col>
                     <Col lg={6}>
-                        <p className="text-end m-0" style={{ fontSize: "12px" }}>Rp.{ props.targetAmount}</p>
+                        <p className="text-end m-0" style={{ fontSize: "12px" }}>Rp {NumberFormat(props.targetAmount)}</p>
                         <p className="text-end fw-bold" style={{fontSize:"12px"}}>Target</p>
                     </Col>
                 </Row>
