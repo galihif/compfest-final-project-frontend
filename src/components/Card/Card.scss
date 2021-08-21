@@ -9,3 +9,13 @@
         border-radius: 1em 1em 0 0 !important;
     }
 }
+.card-campaign-request{
+    border-radius: 1em !important;
+    &:hover{
+        transform: scale(1.01);
+        box-shadow: 5px 5px 25px rgba(179, 179, 179, 0.4);
+    }
+    img{
+        border-radius: 1em 1em 0 0 !important;
+    }
+}
