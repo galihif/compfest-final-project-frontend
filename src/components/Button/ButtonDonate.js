@@ -104,7 +104,7 @@ const ButtonDonate = (props) => {
                 <Modal.Body>
                     <Form.Group className="mb-3" controlId="donateAmount" onChange={handleChange}>
                         <Form.Label>Amount</Form.Label>
-                        <Form.Control type="number" placeholder="Enter Amount (Rp)" />
+                        <Form.Control type="number" placeholder="Enter Amount (Minimum Rp 5000)" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="password" onChange={handleChange}>
                         <Form.Label>Password</Form.Label>
