@@ -3,7 +3,7 @@ import React from "react";
 
 //Styles
 import "./Card.scss";
-import { Button, Row, Col, Card } from "react-bootstrap";
+import {  Row, Col, Card } from "react-bootstrap";
 import Gravatar from "react-gravatar";
 import { useHistory } from "react-router-dom";
 

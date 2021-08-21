@@ -29,6 +29,7 @@ const getCampaignByIdFundraiser = (id, headers) => Get(`fundraiser/campaigns/${i
 const getCampaignByIdDonor = (id, headers) => Get(`donor/campaigns/${id}`,headers)
 const getFundraiserByIdAdmin = (id, headers) => Get(`admin/fundraiser-requests/${id}`,headers)
 const getCampaignProposalById = (id, headers) => Get(`admin/proposals/${id}`,headers)
+const getNotification = ( headers) => Get(`admin/notification`,headers)
 
 // PUT
 const putAcceptFundraiser = (body, headers) => Put(`admin/fundraiser-requests`,body,headers);
@@ -57,6 +58,7 @@ const API = {
     // getCampaignProposal,
     getDonateHistoryDonor,
     getListWithdrawsAdmin,
+    getNotification,
     putAcceptWithdraw,
     topUp,
     getUserTopUpList,
