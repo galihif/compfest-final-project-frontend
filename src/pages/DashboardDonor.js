@@ -26,6 +26,7 @@ import DonorTopupHistory from '../containers/DonorTopupHistory';
 import ButtonLogout from '../components/Button/ButtonLogout';
 import NotFound from './NotFound';
 import NumberFormat from '../config/Function/NumberFormat';
+import SkeletonProfile from '../components/Skeletons/SkeletonProfile';
 
 const DashboardDonor = (props) => {
     //State
@@ -175,9 +176,10 @@ const DashboardDonor = (props) => {
                         {
                             loadingProfile ? (
                                 <Row>
-                                    <Col className="d-flex align-items-center justify-content-center px-5" style={{ height: "16em" }}>
+                                    {/* <Col className="d-flex align-items-center justify-content-center px-5" style={{ height: "16em" }}>
                                         <Spinner animation="grow" variant="primary" />
-                                    </Col>
+                                    </Col> */}
+                                    <SkeletonProfile theme="light"/>
                                 </Row>
                             ) : (
                                 <div>

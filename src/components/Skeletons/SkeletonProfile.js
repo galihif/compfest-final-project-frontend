@@ -1,4 +1,5 @@
 import React from 'react'
+import { Col, Row } from 'react-bootstrap'
 import Shimmer from './Shimmer'
 import SkeletonElement from './SkeletonElement'
 
@@ -7,15 +8,18 @@ const SkeletonProfile = ({ theme }) => {
 
   return (
     <div className={`skeleton-wrapper ${themeClass}`}>
-      <div className="skeleton-profile">
-        <div>
+      <div >
+        <Row className="d-flex justify-content-center">
           <SkeletonElement type="avatar" />
-        </div>
-        <div>
+        </Row>
+        <Row className="d-flex justify-content-center">
           <SkeletonElement type="title" />
-          <SkeletonElement type="text" />
-          <SkeletonElement type="text" />
-        </div>
+        </Row>
+        <Row className="d-flex justify-content-center">
+          <Col lg={6}>
+            <SkeletonElement type="text" />
+          </Col>
+        </Row>
       </div>
       <Shimmer />
     </div>
