@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Styles
-import "../Card.scss";
+import "./Card.scss";
 import { Button, Row, Col, Card } from "react-bootstrap";
 import Gravatar from 'react-gravatar';
 

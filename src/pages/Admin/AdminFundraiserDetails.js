@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 const AdminFundraiserDetails = () => {
     //State
     const {id} = useParams();
+    const [loading, setLoading] = useState(true);
     const [respond, setRespond] = useState({
         first_name:"",
         last_name:"",

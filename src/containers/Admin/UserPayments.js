@@ -1,11 +1,11 @@
 //Library
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Row, Container, Button} from 'react-bootstrap'
+import { Row, Container, Spinner, Col, Image } from 'react-bootstrap'
 import API from '../../config/API'
 import AdminCampaignProposalCard from '../../components/Card/Admin/AdminCampaignProposalCard';
 import AdminUserPaymentCard from '../../components/Card/Admin/AdminUserPaymentCard';
-import { useRef } from 'react';
+import empty from '../../assets/adminEmptyArray.svg'
 
 const UserPayments = () => {
     //State
@@ -15,8 +15,7 @@ const UserPayments = () => {
     const accessToken = userToken.access;
     const refreshToken = userToken.refresh;
 
-    
-
+    const [loading, setLoading] = useState(true);
     const [userRequest, setUserRequest] = useState([]);
     const [change, setChange] = useState(true);
 
@@ -42,6 +41,9 @@ const UserPayments = () => {
                     refreshUserToken()
                 }
             })
+            .finally(()=>{
+                setLoading(!loading);
+            })
     }, [userRequest])
 
     const refreshUserToken = () => {
@@ -60,7 +62,12 @@ const UserPayments = () => {
 
     return(
         <Container className="m-0" fluid>
+            <h2 className="text-center m-5">User Payment</h2>
             <Row className="px-5 d-flex justify-content-center">
+                {loading? 
+                <Spinner animation="grow" className="m-3" style={{width:"200px", height:"200px"}}/>:
+                ""
+                }
                 {
                     userRequest.map((payment,index) => {
                         console.log(payment);
@@ -79,6 +86,15 @@ const UserPayments = () => {
                             />
                         )
                     })
+                }
+                {
+                    (!loading && userRequest.length ===0 )? 
+
+                    <Col lg={6}>
+                        <h4 className='text-center'>It Is Empty</h4>
+                        <Image src={empty} fluid/>
+                    </Col>
+                    :""
                 }
             </Row>
         </Container>
