@@ -11,7 +11,8 @@ import {
 import { useHistory } from 'react-router-dom';
 
 const AdminCampaignProposalCard = (props) => {
-    const { title,
+    const { id,
+            title,
             email,
             target,
             name,
@@ -19,7 +20,7 @@ const AdminCampaignProposalCard = (props) => {
     const history = useHistory();
 
     return(
-        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push('/adminproposal')}>
+        <Card className="campaign-card" style={{ width: "20em" }} onClick={() => history.push(`/admin/campaign/${id}`)}>
             <Card.Img variant="top" src={imageLink} style={{ height: "10em", objectFit: "cover" }} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
