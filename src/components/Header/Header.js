@@ -1,7 +1,6 @@
 //Library
 import React from 'react'
-import { useSelector, useDispatch, connect } from 'react-redux'
-
+import {  connect } from 'react-redux'
 //Styles
 import './Header.scss'//Styles
 import { 
@@ -17,6 +16,7 @@ import headerImage from '../../assets/headerImage.svg'
 
 
 const Header = (props) => {
+
     return (
         <Container className="header-container m-0" fluid>
             <Row className="p-5">

@@ -94,6 +94,9 @@ const Login = () => {
                         case "FUNDRAISER":
                             history.push('/dashboardfundraiser')
                             break
+                        case null:
+                            history.push('/admin')
+                            break
                         default:
                             break
                     }
