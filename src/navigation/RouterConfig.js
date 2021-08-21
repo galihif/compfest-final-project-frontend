@@ -30,7 +30,7 @@ import Footer from "../components/Footer/Footer";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import FundraiserVerifier from "../containers/Admin/FundraiserVerifier";
-// import CheckAdmin from "../containers/Admin/CheckAdmin";
+import CheckAdmin from "../containers/Admin/CheckAdmin";
 import AdminFundraiserDetails from "../pages/Admin/AdminFundraiserDetails";
 import CampaignProposals from "../containers/Admin/CampaignProposals";
 // import AdminProposalCampaignDetails from "../pages/Admin/AdminProposalCampaignDetails";
