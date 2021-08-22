@@ -69,7 +69,6 @@ const TopupUser = () => {
                 }
                 {
                     withdrawRequest.map((withdraw,index) => {
-                        console.log(withdraw);
                         return (
                             <AdminWithdrawCard
                                 change={change}

@@ -22,7 +22,6 @@ import { useEffect } from 'react';
 const AdminFundraiserDetails = () => {
     //State
     const {id} = useParams();
-    const [loading, setLoading] = useState(true);
     const [respond, setRespond] = useState({
         first_name:"",
         last_name:"",
@@ -83,7 +82,7 @@ const AdminFundraiserDetails = () => {
         }
         API.putAcceptFundraiser(body,headers)
             .then((res) => {
-                alert(res);
+                alert('fundraiser successfully accepted');
                 history.push('/fundraiser');
             })
             .catch((err) => {
@@ -94,18 +93,11 @@ const AdminFundraiserDetails = () => {
             })
 
     }
-    const handleReject = () =>{
-        
-    }
 
     //Component
     const acceptButton = 
         <Button variant="primary" type="submit" className="w-50" onClick={() => handleAccept()}>
             Accept
-        </Button>
-    const rejectButton = 
-        <Button variant="danger" type="submit" className="w-50" onClick={() => handleReject()}>
-            Reject
         </Button>
 
     return (
@@ -128,12 +120,8 @@ const AdminFundraiserDetails = () => {
                             {respond.proposal_text}
                         </p>
                         <Row>
-                            <Col lg={6} className="text-center">
+                            <Col lg={12} className="text-center">
                                 {acceptButton}
-                            </Col>
-                            
-                            <Col lg={6} className="text-center">
-                                {rejectButton}
                             </Col>
                         </Row>
                     </Container>

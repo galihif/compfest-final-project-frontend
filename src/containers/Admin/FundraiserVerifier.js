@@ -68,7 +68,6 @@ const FundraiserVerifier = () => {
                 }
                 {
                     fundraiserRequest.map((proposal,index) => {
-                        console.log(proposal);
 
                         return (
                             <AdminFundraiserCard
