@@ -70,7 +70,6 @@ const UserPayments = () => {
                 }
                 {
                     userRequest.map((payment,index) => {
-                        console.log(payment);
                         return (
                             <AdminUserPaymentCard 
                                 change={change}
