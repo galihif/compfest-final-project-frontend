@@ -118,7 +118,7 @@ const CampaignDetails = (props) => {
                     <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>Campaign</Breadcrumb.Item>
                 </Breadcrumb>
-                <Container className="p-3" style={{ width: "32em", backgroundColor: "white", borderRadius: "1em" }}>
+                <Container className="p-3" style={style}>
                     {
                         loading ? (
                             <Row>
@@ -176,6 +176,14 @@ const CampaignDetails = (props) => {
             </div>
         </div>
     )
+}
+
+const style = {
+    boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
+    width: "32em",
+    backgroundColor: "white",
+    borderRadius: "1em",
+
 }
 
 function mapStateToProps(state, ownProps) {
