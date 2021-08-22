@@ -67,7 +67,6 @@ const CampaignProposals = () => {
                 }
                 {
                     campaignRequest.map((proposal,index) => {
-                        console.log(proposal);
                         return (
                             <AdminCampaignProposalCard 
                                 key={index}

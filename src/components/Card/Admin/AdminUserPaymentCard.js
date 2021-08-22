@@ -54,7 +54,7 @@ const AdminUserPaymentCard = (props) => {
         API.putAcceptUserPayment(body,headers)
             .then((res) => {
                 if(res.status === 200){
-                    alert('Payment successfully transfer')
+                    alert('Payment successfully transfer ' + body.status)
                 }
             })
             .catch((err) => {
